@@ -1,5 +1,7 @@
 #include <iostream>
 
+// This was written by ChatGPT. It uses Newton's method until it reaches the desired result.
+
 int int_sqrt(int n) {
   // Base case
   if (n < 2) {
