@@ -5,6 +5,7 @@
 using namespace std;
 
 namespace min_heap{
+    // written by chatgpt
     void heapify(vector<int>& arr, int n, int i) {
         // start from the root node (i) and move to the largest (if exists)
         while (true) {
@@ -31,32 +32,41 @@ namespace min_heap{
             }
         }
     }
-
+    // written by chatgpt
     void build_heap(vector<int>& arr) {
         // start from the last internal node who has children
         for (int i = arr.size() / 2 - 1; i >= 0; --i)
             heapify(arr, arr.size(), i);
     }
 
+    // takes a vector<int> which is assumed to be an implicit binary heap, and adds an element x while satisfying heap property.
     void heappush(vector<int>& arr, int x) {
-
+        // add the element to the back (first available position in level order (bfs order))
         int pos = arr.size();
         arr.push_back(x);
 
+        // swap with parent repeatedly if its smaller
         while (pos != 0 && arr[pos] < arr[pos / 2]) {
             swap(arr[pos],arr[pos / 2]);
             pos /= 2;
         }
     }
 
+    // takes a vector<int> which is an implicit binary heap and removes the smallest element, while keeping heap property.
     int heappop(vector<int>& arr) {
+
+        // output is the first element of the heap
         int out = arr[0];
+
+        // pop out the back element (last element in level order (bfs order))
         int sift = arr.back();
         arr.pop_back();
+
+        // set the front to be the back element, and sift it down, keeping heap property.
         arr[0] = sift;
         int pos = 0;
         int n = arr.size();
-
+        
         while (true) {
             int smallest = pos;  
             int left = 2 * pos + 1; 
@@ -86,6 +96,7 @@ namespace min_heap{
 
 using namespace min_heap;
 
+// sorts elements in ascending order (not completely optimized)
 void heapSort(vector<int>& arr) {
     vector<int> heap = arr;
     build_heap(heap);
