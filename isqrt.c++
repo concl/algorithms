@@ -1,5 +1,7 @@
-#include <iostream>
+#include <bits/stdc++.h>
+#define ll long long
 
+using namespace std;
 // This was written by ChatGPT. It uses Newton's method until it reaches the desired result.
 
 int int_sqrt(int n) {
@@ -39,9 +41,9 @@ int ceil_sqrt(int n){
 }
 
 int main() {
-  std::cout << int_sqrt(16) << std::endl;  // Output: 4
-  std::cout << int_sqrt(25) << std::endl;  // Output: 5
-  std::cout << int_sqrt(36) << std::endl;  // Output: 6
-  std::cout << int_sqrt(2) << std::endl;   // Output: 1
+  cout << int_sqrt(16) << std::endl;  // Output: 4
+  cout << int_sqrt(25) << std::endl;  // Output: 5
+  cout << int_sqrt(36) << std::endl;  // Output: 6
+  cout << int_sqrt(2) << std::endl;   // Output: 1
   return 0;
 }
