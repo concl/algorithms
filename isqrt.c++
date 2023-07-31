@@ -41,9 +41,9 @@ int ceil_sqrt(int n){
 }
 
 int main() {
-  cout << int_sqrt(16) << std::endl;  // Output: 4
-  cout << int_sqrt(25) << std::endl;  // Output: 5
-  cout << int_sqrt(36) << std::endl;  // Output: 6
-  cout << int_sqrt(2) << std::endl;   // Output: 1
+  cout << int_sqrt(16) << endl;  // Output: 4
+  cout << int_sqrt(25) << endl;  // Output: 5
+  cout << int_sqrt(36) << endl;  // Output: 6
+  cout << int_sqrt(2) << endl;   // Output: 1
   return 0;
 }
