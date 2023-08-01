@@ -66,6 +66,11 @@ class AhoCorasick {
             }
             return trie[index].end;
         }
+
+        vector<int> matches(string s) {
+
+            return {};
+        }
 };
 
 void tests() {
