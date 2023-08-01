@@ -1,6 +1,7 @@
-#include <vector>
+
+// this code is incomplete
+
 #include <stdexcept>
-#include <iostream>
 #include <bits/stdc++.h>
 
 class DynamicBitset {
