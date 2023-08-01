@@ -40,7 +40,7 @@ ll pow(ll a, ll b, ll m) {
 }
 
 int main() {
-    
+    // tests work
     cout << pow(2,8) << endl;
     cout << pow(3,5) << endl;
     cout << pow((int) 5,2, 123483) << endl;
