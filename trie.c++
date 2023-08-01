@@ -4,6 +4,10 @@
 #define elif else if
 using namespace std;
 
+int cindex(char c) {
+    return c - 'a';
+}
+
 
 // Trie vertex
 struct Vertex {
@@ -52,9 +56,9 @@ class Trie {
         }
 };
 
+
 int main() {
     
-
-
+    
     return 0;
 }
