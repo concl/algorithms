@@ -45,5 +45,21 @@ int main() {
     cout << pow(3,5) << endl;
     cout << pow((int) 5,2, 123483) << endl;
 
+    // test with lists
+    vector<int> v = {1,2,3,4,5};
+    for (int i = 0; i < pow(2,5); i++) {
+        for (int j = 0; j < 5; j++) {
+            if (i & (1 << j)) {
+                cout << v[j] << " ";
+            }
+        }
+        cout << endl;
+    }
+    // asserts
+    assert(pow(2,8) == 256);
+    assert(pow(3,5) == 243);
+    assert(pow((int) 5,2, 123483) == 25);
+    
+
     return 0;
 }
