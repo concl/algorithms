@@ -4,17 +4,18 @@
 #define elif else if
 using namespace std;
 
+const int alphabet_size = 26;
+
 int cindex(char c) {
     return c - 'a';
 }
 
-
 // Trie vertex
 struct Vertex {
-    int edges[26];
+    int edges[alphabet_size];
     bool end = false;
     Vertex() {
-        fill(edges, edges + 26, -1);
+        fill(edges, edges + alphabet_size, -1);
     }
 };
 
@@ -30,12 +31,12 @@ class Trie {
 
             int index = 0;
             for (auto x : s) {
-                if (trie[index].edges[x - 'a'] == -1) {
+                if (trie[index].edges[cindex(x)] == -1) {
                     trie.push_back(Vertex());
-                    trie[index].edges[x - 'a'] = trie.size() - 1;
+                    trie[index].edges[cindex(x)] = trie.size() - 1;
                     index = trie.size() - 1;
                 } else {
-                    index = trie[index].edges[x - 'a'];
+                    index = trie[index].edges[cindex(x)];
                 }
                 trie[index].end = true;
             }
@@ -45,10 +46,10 @@ class Trie {
 
             int index = 0;
             for (auto x : s) {
-                if (trie[index].edges[x - 'a'] == -1){
+                if (trie[index].edges[cindex(x)] == -1){
                     return false;
                 } else {
-                    index = trie[index].edges[x - 'a'];
+                    index = trie[index].edges[cindex(x)];
                 }
             }
             return trie[index].end;
