@@ -1,6 +1,14 @@
+// incomplete (also dont trust ai)
+
 #include <bits/stdc++.h>
 #define ll long long
-#define uint unsigned int
+#define ld long double
+#define pb push_back
+#define mp make_pair
+#define pii pair<int, int>
+#define pll pair<ll, ll>
+#define vi vector<int>
+#define vll vector<ll>
 #define elif else if
 using namespace std;
 
@@ -10,7 +18,7 @@ int cindex(char c) {
     return c - 'a';
 }
 
-// Trie vertex
+// Aho-Corasick Vertex
 struct Vertex {
     int edges[alphabet_size];
     bool end = false;
@@ -19,11 +27,11 @@ struct Vertex {
     }
 };
 
-// Trie wrapper
-class Trie {
+// Aho-Corasick wrapper
+class AhoCorasick {
     public:
         vector<Vertex> trie;
-        Trie() {
+        AhoCorasick() {
             trie = vector<Vertex>(1);
         }
 
@@ -42,6 +50,10 @@ class Trie {
             }
         }
 
+        void construct_automaton(vector<string> strings) {
+            
+        }
+
         bool match(string s) {
 
             int index = 0;
@@ -55,6 +67,24 @@ class Trie {
             return trie[index].end;
         }
 };
+
+void tests() {
+    // asserts
+    AhoCorasick ac;
+    vector<string> test = {"he", "she", "his", "hers"};
+    ac.construct_automaton(test);
+    assert(ac.match("he") == true);
+    assert(ac.match("she") == true);
+
+    // tests
+    AhoCorasick ac2;
+    vector<string> test2 = {"he", "she", "his", "hers"};
+    ac2.construct_automaton(test2);
+    vector<int> ans = ac2.matches("ushers");
+    for (auto x : ans) {
+        cout << x << " ";
+    }
+}
 
 
 int main() {
