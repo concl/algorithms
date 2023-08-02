@@ -21,9 +21,6 @@
 			"#define all(x) (x).begin(), (x).end()",
 			"#define elif else if",
 			"#define hash_table gp_hash_table",
-			"#define safe_map<x,x> unordered_map<(x), (x), custom_hash>",
-			"#define safe_set<x> unordered_set<(x), custom_hash>",
-			"#define safe_hash_table<x,x> hash_table<(x), (x), custom_hash>",
             "using namespace std;",
 			"using namespace __gnu_pbds;",
 			"",
@@ -41,6 +38,15 @@
 			"        return splitmix64(x + FIXED_RANDOM);",
 			"    }",
 			"};",
+			"",
+			"template <typename X, typename Y>",
+			"using safe_map = unordered_map<X, Y, custom_hash>;",
+			"",
+			"template <typename X>",
+			"using safe_set = unordered_set<X, custom_hash>;",
+			"",
+			"template <typename X, typename Y>",
+			"using safe_hash_table = hash_table<X, Y, custom_hash>;",
             "",
             "int main() {",
 			"    ios_base::sync_with_stdio(false);",
@@ -50,6 +56,7 @@
 			"    ",
             "    return 0;",
             "}"
-		]
-	}
+        ],
+        "description": "C++ Competitive Programming Template"
+    }
 }
