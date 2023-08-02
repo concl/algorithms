@@ -20,9 +20,10 @@
 			"#define endl \"\\n\"",
 			"#define all(x) (x).begin(), (x).end()",
 			"#define elif else if",
-			"#define safe_map unordered_map<ll, int, custom_hash>",
-			"#define safe_set unordered_set<ll, custom_hash>",
-			"#define safe_hash_table gp_hash_table<ll, int, custom_hash>",
+			"#define hash_table gp_hash_table",
+			"#define safe_map<x,x> unordered_map<(x), (x), custom_hash>",
+			"#define safe_set<x> unordered_set<(x), custom_hash>",
+			"#define safe_hash_table<x,x> hash_table<(x), (x), custom_hash>",
             "using namespace std;",
 			"using namespace __gnu_pbds;",
 			"",
@@ -49,7 +50,6 @@
 			"    ",
             "    return 0;",
             "}"
-        ],
-        "description": "C++ Competitive Programming Template"
-    }
+		]
+	}
 }

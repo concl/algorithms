@@ -109,6 +109,7 @@ public:
         }
         return result;
     }
+
 };
 
 void tests() {
