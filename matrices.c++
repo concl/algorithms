@@ -14,6 +14,8 @@
 #define elif else if
 using namespace std;
 
+// unfinished by a long shot
+
 template <typename T>
 class Matrix {
 

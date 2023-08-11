@@ -3,7 +3,6 @@
 
 using namespace std;
 // This was written by ChatGPT. It uses Newton's method until it reaches the desired result.
-
 int int_sqrt(int n) {
   // Base case
   if (n < 2) {
@@ -21,6 +20,7 @@ int int_sqrt(int n) {
   }
   return x;
 }
+
 
 int ceil_sqrt(int n){
     // Base case
