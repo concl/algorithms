@@ -106,7 +106,7 @@ class Matrix {
             return output;
         }
 
-        Matrix row_vector(vector<T> v) {
+        static Matrix row_vector(vector<T> v) {
             Matrix output(1, v.size());
             for (int i = 0; i < v.size(); i++) {
                 output.mat[0][i] = v[i];
