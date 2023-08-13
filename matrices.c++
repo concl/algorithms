@@ -1,17 +1,7 @@
+
 #include <bits/stdc++.h>
 #define ll long long
-#define ll long long
-#define ld long double
-#define pb push_back
-#define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define vi vector<int>
-#define vll vector<ll>
-#define vvi vector<vi>
-#define vvl vector<vll>
-#define all(x) (x).begin(), (x).end()
-#define elif else if
+
 using namespace std;
 
 // unfinished by a long shot
