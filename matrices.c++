@@ -5,6 +5,74 @@
 using namespace std;
 
 // unfinished by a long shot
+const long long MOD = 1000000007;
+
+class CyclicGroup {
+private:
+    long long value;
+    long long mod;
+
+public:
+    // Default constructor
+    CyclicGroup() : value(0), mod(1000000007) {}
+
+    // Constructor with value and mod
+    CyclicGroup(long long value, long long mod = 1000000007) : value(value % mod), mod(mod) {}
+
+    // Overloaded addition operator
+    CyclicGroup operator+(const CyclicGroup& other) const {
+        return CyclicGroup((value + other.value) % mod, mod);
+    }
+
+    // Overloaded subtraction operator
+    CyclicGroup operator-(const CyclicGroup& other) const {
+        return CyclicGroup((value - other.value + mod) % mod, mod);
+    }
+
+    // Overloaded multiplication operator
+    CyclicGroup operator*(const CyclicGroup& other) const {
+        return CyclicGroup((value * other.value) % mod, mod);
+    }
+
+    // Overloaded division operator
+    CyclicGroup operator/(const CyclicGroup& other) const {
+        long long inv = 1, base = other.value;
+        long long exponent = mod - 2;
+        while (exponent > 0) {
+            if (exponent & 1) inv = (inv * base) % mod;
+            base = (base * base) % mod;
+            exponent >>= 1;
+        }
+        return CyclicGroup((value * inv) % mod, mod);
+    }
+
+    // Overloaded compound assignment operators
+    CyclicGroup& operator+=(const CyclicGroup& other) {
+        value = (value + other.value) % mod;
+        return *this;
+    }
+
+    CyclicGroup& operator-=(const CyclicGroup& other) {
+        value = (value - other.value + mod) % mod;
+        return *this;
+    }
+
+    CyclicGroup& operator*=(const CyclicGroup& other) {
+        value = (value * other.value) % mod;
+        return *this;
+    }
+
+    CyclicGroup& operator/=(const CyclicGroup& other) {
+        *this = *this / other;
+        return *this;
+    }
+
+    // Overloaded stream insertion operator for printing
+    friend std::ostream& operator<<(std::ostream& os, const CyclicGroup& group) {
+        os << group.value;
+        return os;
+    }
+};
 
 template <typename T>
 class Matrix {
@@ -57,21 +125,6 @@ class Matrix {
         }
 
         Matrix operator*(Matrix &other) {
-            // if (m != other.n)
-            //     throw invalid_argument("Matrices are not the same size");
-
-            // Matrix output(n, other.m);
-            // for (int i = 0; i < other.m; i++) {
-            //     for (int j = 0; j < n; j++) {
-            //         T item(0);
-            //         for (int k = 0; k < m; k++) {
-            //             item += mat[j][k] * other.mat[k][i];
-            //         }
-            //         output.mat[j][i] = item;
-            //     }
-            // }
-
-
             // return output;
             if (m != other.n)
                 throw invalid_argument("Matrices are not conformable for multiplication");
@@ -144,28 +197,37 @@ class Matrix {
         }
 };
 
+template <typename T>
+Matrix<T> pow(Matrix<T> &mat, ll p) {
+    if (mat.n != mat.m)
+        throw invalid_argument("Matrix is not square");
+
+    // identity matrix
+    Matrix<T> output(mat.n, mat.n);
+    for (int i = 0; i < mat.n; i++) {
+        output.mat[i][i] = 1;
+    }
+
+    while (p) {
+        if (p & 1) {
+            output = output * mat;
+        }
+        mat = mat * mat;
+        p >>= 1;
+    }
+
+    return output;
+}
+
 
 
 int main() {
 
-    Matrix<double> x(
-        3, 3,
-        vector<vector<double>> {
-            {1,2,4},
-            {2,1,53},
-            {51,2,1}
-        }
-    );
+    Matrix<CyclicGroup> mat(2, 2, {{1, 1}, {1, 0}});
 
-    Matrix<double> y = x.inverse();
+    Matrix<CyclicGroup> mat2 = pow(mat, 4);
 
-    y.print();
-    
-
-    Matrix<double> z = x * y;
-    z.print();
-
-
+    mat2.print();
     
     return 0;
 }
