@@ -4,81 +4,72 @@ using namespace std;
 
 const long long MOD = 1000000007;
 
-class IntegerMod {
+class CyclicGroup {
+
     long long value;
     long long mod;
 
     public:
-        IntegerMod(long long value, long long mod) {
-            this->value = value;
-            this->mod = mod;
+        // Default constructor
+        CyclicGroup() : value(0), mod(1000000007) {}
+
+        // Constructor with value and mod
+        CyclicGroup(long long value, long long mod = 1000000007) : value(value % mod), mod(mod) {}
+
+        // Overloaded addition operator
+        CyclicGroup operator+(const CyclicGroup& other) const {
+            return CyclicGroup((value + other.value) % mod, mod);
         }
 
-        IntegerMod(long long value) {
-            this->value = value;
-            this->mod = MOD;
+        // Overloaded subtraction operator
+        CyclicGroup operator-(const CyclicGroup& other) const {
+            return CyclicGroup((value - other.value + mod) % mod, mod);
         }
 
-        IntegerMod() {
-            this->value = 0;
-            this->mod = MOD;
+        // Overloaded multiplication operator
+        CyclicGroup operator*(const CyclicGroup& other) const {
+            return CyclicGroup((value * other.value) % mod, mod);
         }
 
-        IntegerMod operator+(IntegerMod &other) {
-            return IntegerMod((value + other.value) % mod, mod);
+        // Overloaded division operator
+        CyclicGroup operator/(const CyclicGroup& other) const {
+            long long inv = 1, base = other.value;
+            long long exponent = mod - 2;
+            while (exponent > 0) {
+                if (exponent & 1) inv = (inv * base) % mod;
+                base = (base * base) % mod;
+                exponent >>= 1;
+            }
+            return CyclicGroup((value * inv) % mod, mod);
         }
 
-        IntegerMod operator-(IntegerMod &other) {
-            return IntegerMod((value - other.value + mod) % mod, mod);
-        }
-
-        IntegerMod operator*(IntegerMod &other) {
-            return IntegerMod((value * other.value) % mod, mod);
-        }
-
-        IntegerMod operator/(IntegerMod &other) {
-            return IntegerMod((value * other.inverse().value) % mod, mod);
-        }
-
-        IntegerMod operator+=(IntegerMod &other) {
+        // Overloaded compound assignment operators
+        CyclicGroup& operator+=(const CyclicGroup& other) {
             value = (value + other.value) % mod;
             return *this;
         }
 
-        IntegerMod operator-=(IntegerMod &other) {
+        CyclicGroup& operator-=(const CyclicGroup& other) {
             value = (value - other.value + mod) % mod;
             return *this;
         }
 
-        IntegerMod operator*=(IntegerMod &other) {
+        CyclicGroup& operator*=(const CyclicGroup& other) {
             value = (value * other.value) % mod;
             return *this;
         }
 
-        IntegerMod operator/=(IntegerMod &other) {
-            value = (value * other.inverse().value) % mod;
+        CyclicGroup& operator/=(const CyclicGroup& other) {
+            *this = *this / other;
             return *this;
         }
 
-        IntegerMod inverse() {
-            long long a = value, b = mod, x = 0, y = 1, x0 = 1, y0 = 0, q, temp;
-            while (b != 0) {
-                q = a / b;
-                temp = a;
-                a = b;
-                b = temp % b;
-                temp = x;
-                x = x0;
-                x0 = temp - q * x0;
-                temp = y;
-                y = y0;
-                y0 = temp - q * y0;
-            }
-            return IntegerMod(x, mod);
+        // Overloaded stream insertion operator for printing
+        friend std::ostream& operator<<(std::ostream& os, const CyclicGroup& group) {
+            os << group.value;
+            return os;
         }
-
 };
-
 
 int main() {
 
