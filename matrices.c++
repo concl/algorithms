@@ -98,6 +98,22 @@ class Matrix {
             this->mat = mat;
         }
 
+        static Matrix column_vector(vector<T> v) {
+            Matrix output(v.size(), 1);
+            for (int i = 0; i < v.size(); i++) {
+                output.mat[i][0] = v[i];
+            }
+            return output;
+        }
+
+        Matrix row_vector(vector<T> v) {
+            Matrix output(1, v.size());
+            for (int i = 0; i < v.size(); i++) {
+                output.mat[0][i] = v[i];
+            }
+            return output;
+        }
+
         Matrix operator+(Matrix &other) {
             if (n != other.n || m != other.m)
                 throw invalid_argument("Matrices are not the same size");
@@ -141,7 +157,6 @@ class Matrix {
             }
 
             return output;
-
         }
 
         
@@ -187,6 +202,16 @@ class Matrix {
             return output;
         }
 
+        Matrix transpose() {
+            Matrix output(m, n);
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++) {
+                    output.mat[j][i] = mat[i][j];
+                }
+            }
+            return output;
+        }
+
         void print() {
             for (int i = 0; i < n; i++) {
                 for (int j = 0; j < m; j++) {
@@ -198,7 +223,7 @@ class Matrix {
 };
 
 template <typename T>
-Matrix<T> pow(Matrix<T> &mat, ll p) {
+Matrix<T> pow(Matrix<T> mat, ll p) {
     if (mat.n != mat.m)
         throw invalid_argument("Matrix is not square");
 
@@ -225,9 +250,16 @@ int main() {
 
     Matrix<CyclicGroup> mat(2, 2, {{1, 1}, {1, 0}});
 
-    Matrix<CyclicGroup> mat2 = pow(mat, 4);
+    Matrix<CyclicGroup> mat2 = mat * mat;
 
     mat2.print();
+
+    Matrix<ll> fib(2, 2, {{1, 1}, {1, 0}});
+
+    for (int i = 0; i < 250; i++) {
+        cout << i << endl;
+        pow(fib, i).print();
+    }
     
     return 0;
 }
