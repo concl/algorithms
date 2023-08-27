@@ -19,7 +19,7 @@ def verify_output(verifier_script, output):
 
 def main():
     if len(sys.argv) < 3:
-        print("Usage: python test_script.py <executable_name> <input_file> [-v <verifier_script>]")
+        print("Usage: python tester.py <executable_name> <input_file> [-v <verifier_script>]")
         return
     
     executable_name = sys.argv[1]
