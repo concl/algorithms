@@ -7,7 +7,6 @@
             "#include <bits/stdc++.h>",
 			"#include <ext/pb_ds/assoc_container.hpp>",
 			"#define ll long long",
-			"#define ll long long",
 			"#define ld long double",
 			"#define pb push_back",
 			"#define mp make_pair",
