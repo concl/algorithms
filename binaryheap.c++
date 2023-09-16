@@ -5,94 +5,96 @@
 using namespace std;
 
 namespace min_heap{
-    // written by chatgpt
-    void heapify(vector<int>& arr, int n, int i) {
-        // start from the root node (i) and move to the largest (if exists)
-        while (true) {
-            int smallest = i;  
-            int left = 2 * i + 1; 
-            int right = 2 * i + 2; 
 
-            // if left child is larger than root
-            if (left < n && arr[left] < arr[smallest])
-                smallest = left;
+// written by chatgpt
+void heapify(vector<int>& arr, int n, int i) {
+    // start from the root node (i) and move to the largest (if exists)
+    while (true) {
+        int smallest = i;  
+        int left = 2 * i + 1; 
+        int right = 2 * i + 2; 
 
-            // if right child is larger than largest so far
-            if (right < n && arr[right] < arr[smallest])
-                smallest = right;
+        // if left child is larger than root
+        if (left < n && arr[left] < arr[smallest])
+            smallest = left;
 
-            // if largest is not root
-            if (smallest != i) {
-                swap(arr[i], arr[smallest]);
+        // if right child is larger than largest so far
+        if (right < n && arr[right] < arr[smallest])
+            smallest = right;
 
-                // move to the next node
-                i = smallest;
-            } else {
-                break; // if the root is the largest, break the loop
-            }
+        // if largest is not root
+        if (smallest != i) {
+            swap(arr[i], arr[smallest]);
+
+            // move to the next node
+            i = smallest;
+        } else {
+            break; // if the root is the largest, break the loop
         }
     }
-    // written by chatgpt
-    void build_heap(vector<int>& arr) {
-        // start from the last internal node who has children
-        for (int i = arr.size() / 2 - 1; i >= 0; --i)
-            heapify(arr, arr.size(), i);
+}
+// written by chatgpt
+void build_heap(vector<int>& arr) {
+    // start from the last internal node who has children
+    for (int i = arr.size() / 2 - 1; i >= 0; --i)
+        heapify(arr, arr.size(), i);
+}
+
+// takes a vector<int> which is assumed to be an implicit binary heap, and adds an element x while satisfying heap property.
+void heappush(vector<int>& arr, int x) {
+    // add the element to the back (first available position in level order (bfs order))
+    int pos = arr.size();
+    arr.push_back(x);
+
+    // swap with parent repeatedly if its smaller
+    while (pos != 0 && arr[pos] < arr[(pos - 1) / 2]) {
+        swap(arr[pos],arr[(pos - 1) / 2]);
+        pos--;
+        pos /= 2;
     }
+}
 
-    // takes a vector<int> which is assumed to be an implicit binary heap, and adds an element x while satisfying heap property.
-    void heappush(vector<int>& arr, int x) {
-        // add the element to the back (first available position in level order (bfs order))
-        int pos = arr.size();
-        arr.push_back(x);
+// takes a vector<int> which is an implicit binary heap and removes the smallest element, while keeping heap property.
+int heappop(vector<int>& arr) {
 
-        // swap with parent repeatedly if its smaller
-        while (pos != 0 && arr[pos] < arr[(pos - 1) / 2]) {
-            swap(arr[pos],arr[(pos - 1) / 2]);
-            pos--;
-            pos /= 2;
+    // output is the first element of the heap
+    int out = arr[0];
+
+    // pop out the back element (last element in level order (bfs order))
+    int sift = arr.back();
+    arr.pop_back();
+
+    // set the front to be the back element, and sift it down, keeping heap property.
+    arr[0] = sift;
+    int pos = 0;
+    int n = arr.size();
+    
+    while (true) {
+        int smallest = pos;  
+        int left = 2 * pos + 1; 
+        int right = 2 * pos + 2; 
+
+        // if left child is larger than root
+        if (left < n && arr[left] < arr[smallest])
+            smallest = left;
+
+        // if right child is larger than largest so far
+        if (right < n && arr[right] < arr[smallest])
+            smallest = right;
+
+        // if largest is not root
+        if (smallest != pos) {
+            swap(arr[pos], arr[smallest]);
+
+            // move to the next node
+            pos = smallest;
+        } else {
+            break; // if the root is the largest, break the loop
         }
     }
+    return out;
+}
 
-    // takes a vector<int> which is an implicit binary heap and removes the smallest element, while keeping heap property.
-    int heappop(vector<int>& arr) {
-
-        // output is the first element of the heap
-        int out = arr[0];
-
-        // pop out the back element (last element in level order (bfs order))
-        int sift = arr.back();
-        arr.pop_back();
-
-        // set the front to be the back element, and sift it down, keeping heap property.
-        arr[0] = sift;
-        int pos = 0;
-        int n = arr.size();
-        
-        while (true) {
-            int smallest = pos;  
-            int left = 2 * pos + 1; 
-            int right = 2 * pos + 2; 
-
-            // if left child is larger than root
-            if (left < n && arr[left] < arr[smallest])
-                smallest = left;
-
-            // if right child is larger than largest so far
-            if (right < n && arr[right] < arr[smallest])
-                smallest = right;
-
-            // if largest is not root
-            if (smallest != pos) {
-                swap(arr[pos], arr[smallest]);
-
-                // move to the next node
-                pos = smallest;
-            } else {
-                break; // if the root is the largest, break the loop
-            }
-        }
-        return out;
-    }
 }
 
 using namespace min_heap;
