@@ -42,6 +42,9 @@ def main():
             if verification_result is not None:
                 print("Verification result:")
                 print(verification_result)
+        
+        with open("output","w") as file:
+            file.write(output)
 
 if __name__ == "__main__":
     main()

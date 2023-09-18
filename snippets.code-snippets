@@ -71,7 +71,8 @@
 			"    ",
             "    return 0;",
             "}",
-			"// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
+			"// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py",
+			"// cat input | ${TM_FILENAME_BASE} > output"
         ],
         "description": "C++ Competitive Programming Template"
     }
