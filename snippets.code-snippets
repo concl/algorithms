@@ -70,7 +70,8 @@
             "    $1",
 			"    ",
             "    return 0;",
-            "}"
+            "}",
+			"// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ],
         "description": "C++ Competitive Programming Template"
     }
