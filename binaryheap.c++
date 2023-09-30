@@ -97,6 +97,74 @@ int heappop(vector<int>& arr) {
 
 }
 
+
+namespace max_heap{
+
+void heapify(vector<int>& arr, int n, int i) {
+    // Start from the current node (i) and move to the largest (if exists)
+    while (true) {
+        int largest = i;  
+        int left = 2 * i + 1; 
+        int right = 2 * i + 2; 
+
+        // If left child is larger than root
+        if (left < n && arr[left] > arr[largest])
+            largest = left;
+
+        // If right child is larger than largest so far
+        if (right < n && arr[right] > arr[largest])
+            largest = right;
+
+        // If largest is not root
+        if (largest != i) {
+            swap(arr[i], arr[largest]);
+
+            // Move to the next node
+            i = largest;
+        } else {
+            break; // If the root is the largest, break the loop
+        }
+    }
+}
+
+void build_heap(vector<int>& arr) {
+    // Start from the last internal node who has children
+    for (int i = arr.size() / 2 - 1; i >= 0; --i)
+        heapify(arr, arr.size(), i);
+}
+
+void heappush(vector<int>& arr, int x) {
+    // Add the element to the back (first available position in level order (bfs order))
+    int pos = arr.size();
+    arr.push_back(x);
+
+    // Swap with parent repeatedly if it's larger
+    while (pos != 0 && arr[pos] > arr[(pos - 1) / 2]) {
+        swap(arr[pos], arr[(pos - 1) / 2]);
+        pos = (pos - 1) / 2;
+    }
+}
+
+int heappop(vector<int>& arr) {
+    // Output is the first element of the heap
+    int out = arr[0];
+
+    // Pop out the back element (last element in level order (bfs order))
+    int sift = arr.back();
+    arr.pop_back();
+
+    // Set the front to be the back element, and sift it down, keeping heap property.
+    if (!arr.empty()) { // Important check to avoid accessing an empty vector
+        arr[0] = sift;
+        heapify(arr, arr.size(), 0);
+    }
+
+    return out;
+}
+
+}
+
+
 using namespace min_heap;
 
 // sorts elements in ascending order (not completely optimized)
