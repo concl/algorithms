@@ -31,7 +31,7 @@ ll modpow(ll a, ll b, ll m) {
 
 }
 
-ll dp[100000];
+ll dp[100000] = {1};
 ll biggest = 0;
 ll fact(ll n) {
     if (n == 0) return 1;
