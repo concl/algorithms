@@ -47,10 +47,10 @@ void heappush(vector<int>& arr, int x) {
     arr.push_back(x);
 
     // swap with parent repeatedly if its smaller
-    while (pos != 0 && arr[pos] < arr[(pos - 1) / 2]) {
-        swap(arr[pos],arr[(pos - 1) / 2]);
+    while (pos != 0 && arr[pos] < arr[(pos - 1) >> 1]) {
+        swap(arr[pos],arr[(pos - 1) >> 1]);
         pos--;
-        pos /= 2;
+        pos >>= 1;
     }
 }
 
