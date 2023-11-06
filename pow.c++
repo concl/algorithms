@@ -2,8 +2,6 @@
 
 #include <bits/stdc++.h>
 #define ll long long
-#define uint unsigned int
-#define elif else if
 using namespace std;
 
 int pow(int a, int b) {

@@ -4,13 +4,6 @@
 
 using namespace std;
 
-template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p) {
-    return cout << "(" << p.F << ", " << p.S << ")";
-}
-template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
-}
-
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
 
