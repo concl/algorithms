@@ -32,8 +32,8 @@ public:
     struct Proxy {
         DynamicBitset& db;
         size_t index;
-        
-        Proxy(DynamicBitset& db, size_t index) : db(db), index(index) {}
+            
+            Proxy(DynamicBitset& db, size_t index) : db(db), index(index) {}
         
         operator bool() const {
             return db.get(index);
