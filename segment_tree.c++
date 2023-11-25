@@ -4,10 +4,10 @@ using namespace std;
 
 #define ll long long
 
-#include <vector>
 #include <functional>
+#include <vector>
 
-template<typename T>
+template <typename T>
 class SegmentTree {
 public:
     vector<T> tree;
@@ -72,6 +72,69 @@ public:
     }
 };
 
+class SegmentTreeAdd {
+public:
+    vector<ll> tree;
+    vector<ll> arr;
+    ll neutralValue = 0;
+    int n;
+
+    SegmentTreeAdd(const vector<ll> &array)
+        : arr(array) {
+        n = arr.size();
+        tree.resize(4 * n);
+        build(1, 0, n - 1);
+    }
+
+    void build(int node, int start, int end) {
+        if (start == end) {
+            tree[node] = arr[start];
+        } else {
+            int mid = (start + end) / 2;
+            build(2 * node, start, mid);
+            build(2 * node + 1, mid + 1, end);
+            tree[node] = tree[2 * node] + tree[2 * node + 1];
+        }
+    }
+
+    void update(int node, int start, int end, int idx, ll val) {
+        if (start == end) {
+            arr[idx] = val;
+            tree[node] = val;
+        } else {
+            int mid = (start + end) / 2;
+            if (start <= idx && idx <= mid) {
+                update(2 * node, start, mid, idx, val);
+            } else {
+                update(2 * node + 1, mid + 1, end, idx, val);
+            }
+            tree[node] = tree[2 * node] + tree[2 * node + 1];
+        }
+    }
+
+    ll query(int node, int start, int end, int l, int r) {
+        if (r < start || end < l) {
+            return neutralValue;
+        }
+        if (l <= start && end <= r) {
+            return tree[node];
+        }
+        int mid = (start + end) / 2;
+        ll p1 = query(2 * node, start, mid, l, r);
+        ll p2 = query(2 * node + 1, mid + 1, end, l, r);
+        return p1 + p2;
+    }
+
+    // User-friendly update and query methods
+    void update(int idx, ll val) {
+        update(1, 0, n - 1, idx, val);
+    }
+
+    ll query(int l, int r) {
+        return query(1, 0, n - 1, l, r);
+    }
+};
+
 // Example usage
 int main() {
     vector<int> array = {1, 2, 3, 4, 5};
@@ -82,4 +145,3 @@ int main() {
     cout << "Sum of range [1, 3] after update: " << st.query(1, 3) << endl;
     return 0;
 }
-
