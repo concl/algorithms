@@ -21,15 +21,35 @@ vector<int> topological_sort(vector<vector<int>> &graph) {
         }
     }
     
-    unordered_map<int,int> node_level;
-    vector<unordered_set<int>> levels = {roots};
-    vector<int> bread;
+    vector<pair<int,int>> stack;
+    for (int root : roots) {
+        stack.push_back({root, 0});
+    }
+    
+    unordered_set<int> visited;
+    for (int root : roots) {
+        visited.insert(root);
+    }
 
-
-
+    while (!stack.empty()) {
+        if (stack.back().second == graph[stack.back().first].size()) {
+            output.push_back(stack.back().first);
+            stack.pop_back();
+        } else {
+            stack.back().second++;
+            if (visited.find(graph[stack.back().first][stack.back().second - 1]) != visited.end()) {
+                continue;
+            }
+            visited.insert(graph[stack.back().first][stack.back().second - 1]);
+            stack.push_back({graph[stack.back().first][stack.back().second - 1], 0});
+        }
+    }
+    
+    reverse(output.begin(), output.end());
+    return output;
 }
 
-int main() {
+int main(int argc, char **argv) {
 
 
     return 0;
