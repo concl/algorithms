@@ -6,7 +6,6 @@ using namespace std;
 
 namespace min_heap{
 
-// written by chatgpt
 void heapify(vector<int>& arr, int n, int i) {
     // start from the root node (i) and move to the largest (if exists)
     while (true) {

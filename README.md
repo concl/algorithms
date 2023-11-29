@@ -9,4 +9,3 @@ numerical: Algorithms that do tasks primarily related to arithmetic.
 
 problems: Solutions to previous competitive programming problems.
 
-string:

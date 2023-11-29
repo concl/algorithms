@@ -1,3 +1,8 @@
+
+// Problem 1842D
+// Link: https://codeforces.com/problemset/problem/1842/D
+// Author: Luke Zeng
+
 // All friends who have a restriction with 1 decrease y every time they aren't used.
 // All friends who have a restriction with n decrease y every time they are used.
 
