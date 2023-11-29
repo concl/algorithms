@@ -3,6 +3,7 @@
 
 using namespace std;
 
+// Passed all tests from GFG
 vector<int> topological_sort(vector<vector<int>> &graph) {
     int n = graph.size();
     
@@ -49,8 +50,8 @@ vector<int> topological_sort(vector<vector<int>> &graph) {
     return output;
 }
 
-int main(int argc, char **argv) {
-
+int main() {
+    
 
     return 0;
 }

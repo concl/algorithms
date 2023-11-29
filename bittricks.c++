@@ -36,6 +36,13 @@ unsigned long long next_power_of_two(unsigned long long n) {
     return n + 1;
 }
 
+// Returns the floor of the base 2 logarithm of x
 int log2_floor(unsigned long long x) {
     return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
+}
+
+
+// Returns the number of 1-bits in x
+int one_bits(uint32_t x) {
+    return __builtin_popcount(x);
 }
