@@ -1,5 +1,7 @@
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
+
+/* #region cp template */
 #define ll long long
 #define ld long double
 #define pb push_back
@@ -18,39 +20,6 @@
 
 using namespace std;
 using namespace __gnu_pbds;
-
-namespace std {
-    namespace {
-        template <class T>
-        inline void hash_combine(std::size_t& seed, T const& v) {
-            seed ^= std::hash<T>()(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-        }
-
-        template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
-        struct HashValueImpl {
-            static void apply(size_t& seed, Tuple const& tuple) {
-                HashValueImpl<Tuple, Index - 1>::apply(seed, tuple);
-                hash_combine(seed, std::get<Index>(tuple));
-            }
-        };
-
-        template <class Tuple>
-        struct HashValueImpl<Tuple, 0> {
-            static void apply(size_t& seed, Tuple const& tuple) {
-                hash_combine(seed, std::get<0>(tuple));
-            }
-        };
-    }
-
-    template <typename ... TT>
-    struct hash<std::tuple<TT...>> {
-        size_t operator()(std::tuple<TT...> const& tt) const {
-            size_t seed = 0;
-            HashValueImpl<std::tuple<TT...>>::apply(seed, tt);
-            return seed;
-        }
-    };
-}
 
 
 struct custom_hash {
@@ -82,9 +51,14 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
     cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
+/* #endregion */
 
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
+const ll INF = 1e18;
+
+
+
 
 int main() {
     ios_base::sync_with_stdio(false);
@@ -94,3 +68,4 @@ int main() {
     
     return 0;
 }
+// python tester.py cp_template input -v testpy.py
