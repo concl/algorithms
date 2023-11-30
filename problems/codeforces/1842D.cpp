@@ -1,5 +1,6 @@
 
 // Problem 1842D
+// Rating: 1900
 // Link: https://codeforces.com/problemset/problem/1842/D
 // Author: Luke Zeng
 
