@@ -7,6 +7,10 @@
 // Obtaining the highest bit creates another residual bit that can be used to obtain the next highest bit
 // The smallest bit that doesn't have a pair with another bit takes 2^(i + 1) - 1 operations to obtain
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 class Solution {
 public:
     int minimumOneBitOperations(int n) {
