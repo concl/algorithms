@@ -42,6 +42,16 @@ ll comb(ll n, ll k) {
     return (fact(n) * modpow(fact(k), MOD-2, MOD) % MOD * modpow(fact(n-k), MOD-2, MOD) % MOD) % MOD;
 }
 
+ll permutations(ll n, vector<ll> split) {
+    ll start = fact(n);
+
+    for (ll x : split) {
+        start *= modpow(fact(x), MOD-2, MOD);
+        start %= MOD;
+    }
+    return start;
+}
+
 
 int main() {
     ios_base::sync_with_stdio(false);
