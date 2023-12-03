@@ -51,6 +51,48 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
     cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
+
+template<typename K, typename V>
+ostream& operator<< (ostream &cout, unordered_map<K, V> const &m) {
+    cout << "{";
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        if (it != m.begin()) cout << ", ";
+        cout << it->first << ": " << it->second;
+    }
+    return cout << "}";
+}
+
+template<typename K, typename V>
+ostream& operator<< (ostream &cout, map<K, V> const &m) {
+    cout << "{";
+    for (auto it = m.begin(); it != m.end(); ++it) {
+        if (it != m.begin()) cout << ", ";
+        cout << it->first << ": " << it->second;
+    }
+    return cout << "}";
+}
+
+template<typename A>
+ostream& operator<< (ostream &cout, unordered_set<A> const &s) {
+    cout << "{";
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        if (it != s.begin()) cout << ", ";
+        cout << *it;
+    }
+    return cout << "}";
+}
+
+
+template<typename A>
+ostream& operator<< (ostream &cout, set<A> const &s) {
+    cout << "{";
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        if (it != s.begin()) cout << ", ";
+        cout << *it;
+    }
+    return cout << "}";
+}
+
 /* #endregion */
 
 const ll MOD = 1e9+7;
@@ -68,4 +110,3 @@ int main() {
     
     return 0;
 }
-// python tester.py cp_template input -v testpy.py
