@@ -3,6 +3,7 @@
         "prefix": "cp_setup",
         "description": "C++ Competitive Programming Template",
         "body": [
+            "",
             "/* #region cp template */",
             "#include <bits/stdc++.h>",
             "#include <ext/pb_ds/assoc_container.hpp>",
