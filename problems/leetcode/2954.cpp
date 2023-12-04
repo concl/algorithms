@@ -1,3 +1,4 @@
+
 // 2954. Count the Number of Infection Sequences
 // Link: https://leetcode.com/problems/count-the-number-of-infection-sequences/
 // Combinatorics problem. Between two initially infected children with positions i and j, there are a number, n = j - i - 1, of uninfected kids.
