@@ -5,6 +5,7 @@
 
 #define ll long long
 #define ld long double
+#define ull unsigned long long
 #define pb push_back
 #define mp make_pair
 #define pii pair<int, int>
