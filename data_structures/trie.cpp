@@ -36,8 +36,8 @@ class Trie {
                 } else {
                     index = trie[index].edges[cindex(x)];
                 }
-                trie[index].end = true;
             }
+            trie[index].end = true;
         }
 
         bool match(string s) {
