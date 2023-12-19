@@ -1,17 +1,10 @@
-#include <bits/stdc++.h>
-
-using namespace std;
 
 const int alphabet_size = 26;
 
-int cindex(char c) {
-    return c - 'a';
-}
-
-// Trie vertex
 struct Vertex {
     int edges[alphabet_size];
     bool end = false;
+    int mark;
     Vertex() {
         fill(edges, edges + alphabet_size, -1);
     }
@@ -25,7 +18,7 @@ class Trie {
             trie = vector<Vertex>(1);
         }
 
-        void add_string(string s) {
+        void add_string(string s, int ind) {
 
             int index = 0;
             for (auto x : s) {
@@ -36,8 +29,10 @@ class Trie {
                 } else {
                     index = trie[index].edges[cindex(x)];
                 }
+
             }
             trie[index].end = true;
+            trie[index].mark = ind;
         }
 
         bool match(string s) {
@@ -54,8 +49,22 @@ class Trie {
         }
 };
 
+class Solution {
+public:
+    vector<vector<int>> palindromePairs(vector<string>& words) {
+        
+        int n = words.size();
+        vector<vector<int>> output;
 
-int main() {
-    
-    return 0;
-}
+        Trie bud;
+        for (int i = 0; i < n; i++) {
+            string add = words[i];
+            reverse(s.begin(),s.end());
+            bud.add_string(add, i);
+        }
+
+
+
+
+    }
+};
