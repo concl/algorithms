@@ -1,5 +1,13 @@
 
+#include <bits/stdc++.h>
+
+using namespace std;
+
 const int alphabet_size = 26;
+
+int cindex(char c) {
+    return c - 'a';
+}
 
 struct Vertex {
     int edges[alphabet_size];
@@ -59,10 +67,9 @@ public:
         Trie bud;
         for (int i = 0; i < n; i++) {
             string add = words[i];
-            reverse(s.begin(),s.end());
+            reverse(add.begin(),add.end());
             bud.add_string(add, i);
         }
-
 
 
 
