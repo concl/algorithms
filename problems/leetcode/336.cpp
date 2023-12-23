@@ -22,30 +22,32 @@ struct custom_hash {
 
 // for tuples
 namespace {
-template <class T> inline void hash_combine(std::size_t& seed, T const& v) {
-    custom_hash hasher;
-    seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
-struct HashValueImpl {
-    static void apply(size_t& seed, Tuple const& tuple) {
-        HashValueImpl<Tuple, Index - 1>::apply(seed, tuple);
-        hash_combine(seed, std::get<Index>(tuple));
+    template <class T>
+    inline void hash_combine(std::size_t &seed, T const &v) {
+        custom_hash hasher;
+        seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
-};
 
-template <class Tuple> struct HashValueImpl<Tuple, 0> {
-    static void apply(size_t& seed, Tuple const& tuple) {
-        hash_combine(seed, std::get<0>(tuple));
-    }
-};
+    template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
+    struct HashValueImpl {
+        static void apply(size_t &seed, Tuple const &tuple) {
+            HashValueImpl<Tuple, Index - 1>::apply(seed, tuple);
+            hash_combine(seed, std::get<Index>(tuple));
+        }
+    };
+
+    template <class Tuple>
+    struct HashValueImpl<Tuple, 0> {
+        static void apply(size_t &seed, Tuple const &tuple) {
+            hash_combine(seed, std::get<0>(tuple));
+        }
+    };
 } // namespace
 
 // combine hash values of all elements in tuple if all elements are numeric
 struct tuple_hash {
     template <typename... TT>
-    size_t operator()(std::tuple<TT...> const& tt) const {
+    size_t operator()(std::tuple<TT...> const &tt) const {
         size_t seed = 0;
         HashValueImpl<std::tuple<TT...>>::apply(seed, tt);
         return seed;
@@ -85,7 +87,7 @@ public:
     }
 };
 
-vector<int> kmp(string& s) {
+vector<int> kmp(string &s) {
 
     int n = s.size();
 
@@ -104,8 +106,8 @@ vector<int> kmp(string& s) {
     return output;
 }
 
-void solve(vector<vector<int>>& output, Trie& bud, string& w, int i,
-           bool reversed, unordered_set<tuple<int, int>, tuple_hash>& seen) {
+void solve(vector<vector<int>> &output, Trie &bud, string &w, int i,
+           bool reversed, unordered_set<tuple<int, int>, tuple_hash> &seen) {
     int m = w.size();
     string checker = w.substr(m / 2 + m % 2, m);
     reverse(checker.begin(), checker.end());
@@ -186,7 +188,7 @@ void solve(vector<vector<int>>& output, Trie& bud, string& w, int i,
 
 class Solution {
 public:
-    vector<vector<int>> palindromePairs(vector<string>& words) {
+    vector<vector<int>> palindromePairs(vector<string> &words) {
 
         int n = words.size();
         unordered_set<tuple<int, int>, tuple_hash> seen;
