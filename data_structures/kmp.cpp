@@ -24,5 +24,6 @@ vector<int> kmp(string& s) {
 
 int main() {
 
+
     return 0;
 }
