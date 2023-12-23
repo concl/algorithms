@@ -13,6 +13,7 @@ int gcd(int a, int b) {
     return a;
 }
 
+
 class Solution {
 public:
     void rotate(vector<int>& nums, int k) {

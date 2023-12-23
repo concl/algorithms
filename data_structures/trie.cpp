@@ -28,13 +28,13 @@ class Trie {
         void add_string(string s) {
 
             int index = 0;
-            for (auto x : s) {
-                if (trie[index].edges[cindex(x)] == -1) {
+            for (char c : s) {
+                if (trie[index].edges[cindex(c)] == -1) {
                     trie.push_back(Vertex());
-                    trie[index].edges[cindex(x)] = trie.size() - 1;
+                    trie[index].edges[cindex(c)] = trie.size() - 1;
                     index = trie.size() - 1;
                 } else {
-                    index = trie[index].edges[cindex(x)];
+                    index = trie[index].edges[cindex(c)];
                 }
             }
             trie[index].end = true;
@@ -43,11 +43,11 @@ class Trie {
         bool match(string s) {
 
             int index = 0;
-            for (auto x : s) {
-                if (trie[index].edges[cindex(x)] == -1){
+            for (char c : s) {
+                if (trie[index].edges[cindex(c)] == -1){
                     return false;
                 } else {
-                    index = trie[index].edges[cindex(x)];
+                    index = trie[index].edges[cindex(c)];
                 }
             }
             return trie[index].end;
