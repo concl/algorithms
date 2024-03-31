@@ -1,4 +1,7 @@
 
+// 336. Palindrome Pairs [hard]
+// Link: https://leetcode.com/problems/palindrome-pairs/
+
 #include <bits/stdc++.h>
 
 using namespace std;

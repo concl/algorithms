@@ -51,7 +51,7 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
     return cout << "(" << p.F << ", " << p.S << ")";
 }
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
+    cout << "["; for(int i = 0; i < (int)v.size(); i++){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
 
 template<typename K, typename V>

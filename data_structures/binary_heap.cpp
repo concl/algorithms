@@ -94,6 +94,50 @@ int heappop(vector<int>& arr) {
     return out;
 }
 
+template <typename T>
+void heappush(vector<T>& arr, T x) {
+    int pos = arr.size();
+    arr.push_back(x);
+
+    while (pos != 0 && arr[pos] < arr[(pos - 1) / 2]) {
+        swap(arr[pos], arr[(pos - 1) / 2]);
+        pos = (pos - 1) / 2;
+    }
+}
+
+template <typename T>
+T heappop(vector<T>& arr) {
+    T out = arr[0];
+    T sift = arr.back();
+    arr.pop_back();
+
+    if (!arr.empty()) {
+        arr[0] = sift;
+        int pos = 0;
+        int n = arr.size();
+
+        while (true) {
+            int smallest = pos;
+            int left = 2 * pos + 1;
+            int right = 2 * pos + 2;
+
+            if (left < n && arr[left] < arr[smallest])
+                smallest = left;
+
+            if (right < n && arr[right] < arr[smallest])
+                smallest = right;
+
+            if (smallest != pos) {
+                swap(arr[pos], arr[smallest]);
+                pos = smallest;
+            } else {
+                break;
+            }
+        }
+    }
+    return out;
+}
+
 }
 
 
