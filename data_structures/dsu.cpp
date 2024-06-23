@@ -30,5 +30,13 @@ void union_sets(vector<int>& dsu, vector<int>& sizes, int a, int b) {
 
 int main() {    
     
+    int n = 10000;
+    vector<int> dsu(n);
+    vector<int> sizes(n, 1);
+    for (int i = 0; i < n; i++) {
+        dsu[i] = i;
+    }
+
+
     return 0;
 }
