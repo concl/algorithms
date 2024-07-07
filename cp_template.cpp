@@ -3,26 +3,27 @@
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 
-#define ll long long
-#define ld long double
-#define ull unsigned long long
 #define pb push_back
 #define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define vi vector<int>
-#define vll vector<ll>
-#define vvi vector<vi>
-#define vvl vector<vll>
 #define endl "\n"
 #define all(x) (x).begin(), (x).end()
 #define elif else if
 #define hash_table gp_hash_table
 #define forn(i,n) for(int i=0;(i)<(n);i++)
+#define rep(i,a,b) for(int i=a;(i)<(b);i++)
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+typedef vector<vi> vvi;
+typedef vector<vll> vvl;
 
 using namespace std;
 using namespace __gnu_pbds;
-
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
@@ -51,7 +52,7 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
     return cout << "(" << p.F << ", " << p.S << ")";
 }
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; for(int i = 0; i < (int)v.size(); i++){ if (i) cout << ", "; cout << v[i];} return cout << "]";
+    cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
 
 template<typename K, typename V>
