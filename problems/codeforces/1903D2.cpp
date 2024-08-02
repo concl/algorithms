@@ -2,32 +2,32 @@
 // Problem 1903D2
 // Rating: 2708
 
-
-
 /* #region cp template */
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 
-#define ll long long
-#define ld long double
-#define ull unsigned long long
 #define pb push_back
 #define mp make_pair
-#define pii pair<int, int>
-#define pll pair<ll, ll>
-#define vi vector<int>
-#define vll vector<ll>
-#define vvi vector<vi>
-#define vvl vector<vll>
 #define endl "\n"
 #define all(x) (x).begin(), (x).end()
 #define elif else if
 #define hash_table gp_hash_table
 #define forn(i,n) for(int i=0;(i)<(n);i++)
+#define rep(i,a,b) for(int i=a;(i)<(b);i++)
+
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+typedef vector<int> vi;
+typedef vector<ll> vll;
+typedef vector<vi> vvi;
+typedef vector<vll> vvl;
+typedef unordered_map<int, int> mii;
 
 using namespace std;
 using namespace __gnu_pbds;
-
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
@@ -112,9 +112,20 @@ const ll INF = 1e18;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
+        
+    int n, q;
+    cin >> n >> q;
+
+    vi arr(n);
+    forn(_, n) cin >> arr[_];
+
+    mii counts;
+    forn(i, n) counts[arr[i]]++;
+
+    vi num_subsets(1 << 20);
     
     
     return 0;
 }
+// python tester.py cp_template input -v testpy.py
 // python tester.py 1903D2 input -v testpy.py
