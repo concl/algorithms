@@ -1,3 +1,7 @@
+
+# 118. Pascal's Triangle
+# Link: https://leetcode.com/problems/pascals-triangle/
+
 class Solution:
     def generate(self, numRows):
         output = [[1]]  # define the first row
@@ -13,3 +17,5 @@ class Solution:
             output.append(current_row)
         
         return output
+    
+
