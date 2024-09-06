@@ -108,8 +108,7 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     
-    // 
+    
     
     return 0;
 }
-// python tester.py cp_template input -v testpy.py

@@ -116,7 +116,6 @@
             "    ",
             "    return 0;",
             "}",
-            "// python tester.py cp_template input -v testpy.py",
             "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
     },
