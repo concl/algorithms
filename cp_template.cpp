@@ -2,6 +2,9 @@
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 
+using namespace std;
+using namespace __gnu_pbds;
+
 #define pb push_back
 #define mp make_pair
 #define endl "\n"
@@ -20,9 +23,6 @@ typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef vector<vi> vvi;
 typedef vector<vll> vvl;
-
-using namespace std;
-using namespace __gnu_pbds;
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
