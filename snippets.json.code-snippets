@@ -116,7 +116,8 @@
             "    ",
             "    return 0;",
             "}",
-            "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py"
+            "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py",
+            "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
     },
     "Clean Template": {
@@ -141,7 +142,8 @@
             "",
             "    return 0;",
             "}",
-            "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py"
+            "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py",
+            "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
     }
 }
