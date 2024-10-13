@@ -10,7 +10,7 @@ with open("snippets.json.code-snippets","w") as json_file:
 
     with open("cp_template.cpp") as template:
         
-        lines = [x.rstrip("\n") for x in template.readlines()] + [r"// python tester.py ${TM_FILENAME_BASE} input -v testpy.py"]
+        lines = [x.rstrip("\n") for x in template.readlines()] + [r"// python tester.py ${TM_FILENAME_BASE} input -v testpy.py", r"// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"]
 
         # add $0
         starting_point = lines.index(r"int main() {") + 3
