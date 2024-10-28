@@ -2,9 +2,9 @@
 import json
 
 
-snippets_base = json.load(open("snippets.json.code-snippets","r"))
+snippets_base = json.load(open("snippets.code-snippets","r"))
 
-with open("snippets.json.code-snippets","w") as json_file:
+with open("snippets.code-snippets","w") as json_file:
 
     snippets_base["C++ Competitive Programming Template"] = {"prefix": "cp_setup"}
 
