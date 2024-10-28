@@ -47,13 +47,17 @@ using safe_set = unordered_set<X, custom_hash>;
 template <typename X, typename Y>
 using safe_hash_table = hash_table<X, Y, custom_hash>;
 
+// print pairs
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p) {
     return cout << "(" << p.F << ", " << p.S << ")";
 }
+
+// print vectors
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
     cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
 
+// print maps
 template<typename K, typename V>
 ostream& operator<< (ostream &cout, unordered_map<K, V> const &m) {
     cout << "{";
@@ -74,6 +78,7 @@ ostream& operator<< (ostream &cout, map<K, V> const &m) {
     return cout << "}";
 }
 
+// print sets
 template<typename A>
 ostream& operator<< (ostream &cout, unordered_set<A> const &s) {
     cout << "{";
