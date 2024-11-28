@@ -1,7 +1,5 @@
-
-// Problem 1903D2
-// Rating: 2708
-// Link: https://codeforces.com/problemset/problem/1903/D2
+// Problem 1995C
+// Link: https://codeforces.com/problemset/problem/1995/C
 
 /* #region cp template */
 #include <bits/stdc++.h>
@@ -28,7 +26,6 @@ typedef vector<int> vi;
 typedef vector<ll> vll;
 typedef vector<vi> vvi;
 typedef vector<vll> vvl;
-typedef unordered_map<int, int> mii;
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
@@ -113,20 +110,67 @@ const ll INF = 1e18;
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-        
-    int n, q;
-    cin >> n >> q;
-
-    vi arr(n);
-    forn(_, n) cin >> arr[_];
-
-    mii counts;
-    forn(i, n) counts[arr[i]]++;
-
-    vi num_subsets(1 << 20);
     
-    
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+
+        vll arr(n);
+        forn(i, n) cin >> arr[i];
+
+        ll out = 0;
+        ll prev = 0;
+        ll squares = 0;
+
+        for (int i = 0; i < n; i++) {
+            // 1 squared is 1
+            if (arr[i] == 1) {
+                if (arr[i] < prev) {
+                    out = -1;
+                    break;
+                } else {
+                    prev = arr[i];
+                    continue;
+                }
+            }
+
+            if (arr[i] > prev) {
+                if (prev <= 1) {
+                    squares = 0;
+                } else {
+
+                    int squares_to_equalize = 0; // number of times you must square prev for it to be just less than or equal to arr[i]
+                    ll temp = prev;
+                    while (temp <= arr[i]) {
+                        temp *= temp;
+                        squares_to_equalize++;
+                    }
+                    squares_to_equalize--;
+
+                    int extra = squares - squares_to_equalize;
+                    squares = max(0, extra);
+                }
+            } else {
+
+                int squares_to_equalize = 0; // number of times you must square arr[i] for it to be greater than prev
+                ll temp = arr[i];
+                while (temp < prev) {
+                    temp *= temp;
+                    squares_to_equalize++;
+                }
+                squares = squares + squares_to_equalize;
+            }
+            prev = arr[i];
+            out += squares;
+        }
+
+        cout << out << endl;
+
+    }
     return 0;
 }
-// python tester.py cp_template input -v testpy.py
-// python tester.py 1903D2 input -v testpy.py
+// python tester.py B input -v testpy.py
+
