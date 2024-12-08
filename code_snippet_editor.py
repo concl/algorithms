@@ -13,7 +13,7 @@ with open("snippets.code-snippets","w") as json_file:
         lines = [x.rstrip("\n") for x in template.readlines()] + [r"// python tester.py ${TM_FILENAME_BASE} input -v testpy.py", r"// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"]
 
         # add $0
-        starting_point = lines.index(r"int main() {") + 3
+        starting_point = lines.index(r"int main() {") + 4
         lines[starting_point] += "$0"
 
         # add snippets

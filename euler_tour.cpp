@@ -11,6 +11,13 @@ using namespace std;
 
 // returns the path taken in euler tour
 vector<int> euler_tour(vector<vector<int>>& graph) {
+    int n = graph.size();
+
+    int odds = 0;
+    vector<int> degrees;
+    for (int i = 0; i < n; i++) {
+        
+    }
 
 }
 
