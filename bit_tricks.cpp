@@ -37,8 +37,9 @@ unsigned long long next_power_of_two(unsigned long long n) {
 }
 
 // Returns the floor of the base 2 logarithm of x
-int log2_floor(unsigned long long x) {
-    return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
+long long log2_floor(unsigned long long x) {
+    // __builtin_clzll is built in count leading zeros for long long
+    return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1; 
 }
 
 
