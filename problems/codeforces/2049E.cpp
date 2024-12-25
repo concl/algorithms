@@ -1,3 +1,6 @@
+// Problem 2049E
+// Link: https://codeforces.com/problemset/problem/2049/E
+
 /* #region cp template */
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
@@ -102,24 +105,122 @@ ostream& operator<< (ostream &cout, set<A> const &s) {
     return cout << "}";
 }
 
-template<typename... Args>
-void print(Args&&... args) {
-    ((cout << args << " "), ...) << endl;
-}
-
 /* #endregion */
 
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
 const ll INF = 1e18;
 
+// there is no one here
+void solve_small(int lo, int hi) {
 
+    int start = lo;
+    int mid = (hi + lo) / 2;
 
+    while (hi > lo) {
+
+        cout << "? " << start << " " << mid << endl;
+        cout.flush();
+        int test; cin >> test;
+
+        if (test == 1) {
+            hi = mid;
+        } else if (test == 0) {
+            lo = mid + 1;
+        }
+        mid = (hi + lo) / 2;
+    }
+    cout << "! " << mid - start + 1 << endl;
+}
+
+void solve_big(int lo, int hi, int end) {
+    int mid = (hi + lo) / 2 + (hi + lo) % 2;
+    while (hi > lo) {
+
+        cout << "? " << mid << " " << end << endl;
+        cout.flush();
+        int test; cin >> test;
+
+        if (test == 1) {
+            hi = mid - 1;
+        } else if (test == 0) {
+            lo = mid;
+        }
+        mid = (hi + lo) / 2 + (hi + lo) % 2;
+    }
+
+    cout << "! " << end - mid + 1 << endl;
+}
+
+void solve_big2(int lo, int hi) {
+    int start = 1;
+    int mid = (hi + lo) / 2;
+    while (hi > lo) {
+
+        cout << "? " << start << " " << mid << endl;
+        cout.flush();
+        int test; cin >> test;
+
+        if (test == 1) {
+            lo = mid + 1;
+        } else if (test == 0) {
+            hi = mid;
+        }
+        mid = (hi + lo) / 2;
+    }
+
+    cout << "! " << mid << endl;
+}
 
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
     
+    int t; cin >> t;
+    while(t--) {
+
+        int n; cin >> n;
+        
+        int size = n / 4;
+
+        int start1 = 1;
+        int end1 = 1 + size - 1;
+
+        int start2 = end1 + 1;
+        int end2 = end1 + size;
+
+        cout << "? " << start1 << " " << end1 << endl;
+        cout.flush();
+        int test1; cin >> test1;
+
+        cout << "? " << start2 << " " << end2 << endl;
+        cout.flush();
+        int test2; cin >> test2;
+
+        if (test1 == test2) {
+
+            cout << "? " << start1 << " " << end2 << endl;
+            cout.flush();
+            int test3; cin >> test3;
+
+            if (test3 == 1) {
+                solve_small(start1, end2);
+            } else {
+                solve_big(start1, end2 + 1, n);
+            }
+        } else {
+
+            cout << "? " << end2 + 1 << " " << n << endl;
+            cout.flush();
+            int test3; cin >> test3;
+
+            if (test3 == 1) {
+                solve_small(end2 + 1, n);
+            } else {
+                solve_big2(end2 + 1, n);
+            }
+
+        }
+        
+    }
     
     
     return 0;
@@ -132,3 +233,5 @@ int main() {
 // * Do you need to clear state between test cases?
 // * 1 based or 0 based indexing?
 // * In interactive problems, delete fast io
+// python tester.py E input -v testpy.py
+// python3 tester.py E input -v testpy.py
