@@ -7,7 +7,6 @@ using namespace __gnu_pbds;
 
 #define pb push_back
 #define mp make_pair
-#define endl "\n"
 #define all(x) (x).begin(), (x).end()
 #define elif else if
 #define hash_table gp_hash_table
