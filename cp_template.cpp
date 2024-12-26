@@ -102,6 +102,16 @@ ostream& operator<< (ostream &cout, set<A> const &s) {
     return cout << "}";
 }
 
+template<typename A>
+ostream& operator<< (ostream &cout, multiset<A> const &s) {
+    cout << "{";
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        if (it != s.begin()) cout << ", ";
+        cout << *it;
+    }
+    return cout << "}";
+}
+
 template<typename... Args>
 void print(Args&&... args) {
     ((cout << args << " "), ...) << endl;
