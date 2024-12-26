@@ -113,7 +113,7 @@ ostream& operator<< (ostream &cout, multiset<A> const &s) {
 
 template<typename... Args>
 void print(Args&&... args) {
-    ((cout << args << " "), ...) << endl;
+    ((cout << args << " "), ...) << "\n";
 }
 
 /* #endregion */
