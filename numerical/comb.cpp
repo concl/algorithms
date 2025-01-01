@@ -1,6 +1,7 @@
 
 #include <bits/stdc++.h>
-#define ll long long
+
+typedef long long ll;
 
 using namespace std;
 

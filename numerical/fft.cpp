@@ -1,9 +1,11 @@
 
 #include <bits/stdc++.h>
-#define ll long long
+
 #define Poly vector<complex<double>>
 #define Comp complex<double>
-#define forn(i,n) for(int i=0;(i)<(n);i++) 
+#define forn(i,n) for(int i=0;(i)<(n);i++)
+
+typedef long long ll;
 
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
     cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
