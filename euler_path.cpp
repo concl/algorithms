@@ -51,7 +51,7 @@ vector<int> euler_path(unordered_map<int, unordered_set<int>>& graph) {
     return path;
 }
 
-// finds an euler path for a directed graph
+// finds an euler path for a directed graph. currently assumes that there exists a path
 vector<int> euler_path_directed(unordered_map<int, unordered_set<int>>& graph) {
     int n = graph.size();
 
@@ -62,7 +62,7 @@ vector<int> euler_path_directed(unordered_map<int, unordered_set<int>>& graph) {
             deg[x] -= 1;
         }
     }
-
+    
     int start = deg.begin()->first;
     int end = deg.begin()->first;
     for (auto kv : deg) {
