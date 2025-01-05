@@ -17,7 +17,7 @@ vector<int> make_prefix_sum(vector<int>& arr) {
 }
 
 // sum of the elements from l to r inclusive, given a prefix sum
-int rsum(vector<int>& pref_sum, int l, int r) {
+int query(vector<int>& pref_sum, int l, int r) {
     if (l == 0) {
         return pref_sum[r];
     }
