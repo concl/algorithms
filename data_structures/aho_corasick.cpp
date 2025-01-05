@@ -6,10 +6,6 @@ using namespace std;
 
 const int alphabet_size = 26;
 
-int cindex(char c) {
-    return c - 'a';
-}
-
 // Aho-Corasick Vertex
 struct Vertex {
     int edges[alphabet_size], fail;
@@ -27,15 +23,18 @@ public:
     AhoCorasick() {
         trie = vector<Vertex>(1);
     }
+    int c_index(char c) {
+        return c - 'a';
+    }
 
     void add_string(string s) {
         int index = 0;
         for (auto x : s) {
-            if (trie[index].edges[cindex(x)] == -1) {
+            if (trie[index].edges[c_index(x)] == -1) {
                 trie.push_back(Vertex());
-                trie[index].edges[cindex(x)] = trie.size() - 1;
+                trie[index].edges[c_index(x)] = trie.size() - 1;
             }
-            index = trie[index].edges[cindex(x)];
+            index = trie[index].edges[c_index(x)];
         }
         trie[index].end = true;
     }
@@ -80,10 +79,10 @@ public:
     bool match(string s) {
         int index = 0;
         for (auto x : s) {
-            if (trie[index].edges[cindex(x)] == -1){
+            if (trie[index].edges[c_index(x)] == -1){
                 return false;
             } else {
-                index = trie[index].edges[cindex(x)];
+                index = trie[index].edges[c_index(x)];
             }
         }
         return trie[index].end;
@@ -94,7 +93,7 @@ public:
         vector<int> result;
         int u = 0;
         for (int i = 0; i < s.size(); i++) {
-            u = trie[u].edges[cindex(s[i])];
+            u = trie[u].edges[c_index(s[i])];
             if (trie[u].end) {
                 result.push_back(i);
             }

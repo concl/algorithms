@@ -44,6 +44,6 @@ long long log2_floor(unsigned long long x) {
 
 
 // Returns the number of 1-bits in x
-int one_bits(uint32_t x) {
+int bit_count(uint32_t x) {
     return __builtin_popcount(x);
 }

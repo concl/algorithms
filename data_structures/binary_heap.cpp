@@ -211,7 +211,7 @@ int heappop(vector<int>& arr) {
 using namespace min_heap;
 
 // sorts elements in ascending order (not completely optimized)
-void heapSort(vector<int>& arr) {
+void heap_sort(vector<int>& arr) {
     vector<int> heap = arr;
     build_heap(heap);
 
@@ -221,7 +221,7 @@ void heapSort(vector<int>& arr) {
     }
 }
 
-void testBuildHeap() {
+void test_build_heap() {
     vector<int> arr = {3, 2, 5, 1, 4};
     build_heap(arr);
 
@@ -242,7 +242,7 @@ void testBuildHeap() {
     cout << "build_heap passed all tests.\n";
 }
 
-void testHeappush() {
+void test_heappush() {
     vector<int> arr;
 
     // Push elements and check if the smallest is always at the root
@@ -254,7 +254,7 @@ void testHeappush() {
     cout << "heappush passed all tests.\n";
 }
 
-void testHeappop() {
+void test_heappop() {
     vector<int> arr;
 
     // Build a heap
@@ -270,7 +270,7 @@ void testHeappop() {
     cout << "heappop passed all tests.\n";
 }
 
-void testHeapSort() {
+void test_heap_sort() {
     // Test with several different vectors
     vector<vector<int>> testCases = {
         {},
@@ -285,7 +285,7 @@ void testHeapSort() {
         vector<int> sorted(arr);
         sort(sorted.begin(), sorted.end());
 
-        heapSort(arr);
+        heap_sort(arr);
 
         // Check if the array is sorted correctly
         assert(arr == sorted);
@@ -296,10 +296,10 @@ void testHeapSort() {
 
 
 int main() {
-    testBuildHeap();
-    testHeappush();
-    testHeappop();
-    testHeapSort();
+    test_build_heap();
+    test_heappush();
+    test_heappop();
+    test_heap_sort();
 
     return 0;
 }

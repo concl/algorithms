@@ -6,7 +6,6 @@ using namespace std;
 vector<int> kmp(string& s) {
 
     int n = s.size();
-
     int fail = 0;
     vector<int> output(n,0);
 

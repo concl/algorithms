@@ -12,12 +12,12 @@ class SegmentTree {
 public:
     vector<T> tree;
     vector<T> arr;
-    T neutralValue;
-    function<T(T, T)> mergeFunction;
+    T neutral;
+    function<T(T, T)> merge;
     int n;
 
     SegmentTree(const vector<T> &array, T neutral, function<T(T, T)> func)
-        : arr(array), neutralValue(neutral), mergeFunction(func) {
+        : arr(array), neutral(neutral), merge(func) {
         n = arr.size();
         tree.resize(4 * n);
         build(1, 0, n - 1);
@@ -30,7 +30,7 @@ public:
             int mid = (start + end) / 2;
             build(2 * node, start, mid);
             build(2 * node + 1, mid + 1, end);
-            tree[node] = mergeFunction(tree[2 * node], tree[2 * node + 1]);
+            tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
         }
     }
 
@@ -45,13 +45,13 @@ public:
             } else {
                 update(2 * node + 1, mid + 1, end, idx, val);
             }
-            tree[node] = mergeFunction(tree[2 * node], tree[2 * node + 1]);
+            tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
         }
     }
 
     T query(int node, int start, int end, int l, int r) {
         if (r < start || end < l) {
-            return neutralValue;
+            return neutral;
         }
         if (l <= start && end <= r) {
             return tree[node];
@@ -59,7 +59,7 @@ public:
         int mid = (start + end) / 2;
         T p1 = query(2 * node, start, mid, l, r);
         T p2 = query(2 * node + 1, mid + 1, end, l, r);
-        return mergeFunction(p1, p2);
+        return merge(p1, p2);
     }
 
     // User-friendly update and query methods
@@ -76,7 +76,7 @@ class SegmentTreeAdd {
 public:
     vector<ll> tree;
     vector<ll> arr;
-    ll neutralValue = 0;
+    ll neutral = 0;
     int n;
 
     SegmentTreeAdd(const vector<ll> &array)
@@ -114,7 +114,7 @@ public:
 
     ll query(int node, int start, int end, int l, int r) {
         if (r < start || end < l) {
-            return neutralValue;
+            return neutral;
         }
         if (l <= start && end <= r) {
             return tree[node];

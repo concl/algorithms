@@ -112,6 +112,22 @@ Poly idft(Poly& transformed, vector<Comp>& lookup) {
 }
 
 
+Poly multiply(Poly& polynomial1, Poly& polynomial2) {
+    int n = polynomial1.size() + polynomial2.size() - 1;
+    int new_size = next_power_of_two(n);
+    vector<Comp> lookup = preprocessing(polynomial1, new_size);
+    preprocessing(polynomial2, new_size);
+
+    Poly d1 = dft(polynomial1, lookup);
+    Poly d2 = dft(polynomial2, lookup);
+
+    Poly con;
+    for (int i = 0; i < d1.size(); i++) {
+        con.push_back(d1[i] * d2[i]);
+    }
+
+    return idft(con, lookup);
+}
 
 
 int main() {
@@ -119,33 +135,9 @@ int main() {
 
     Poly polynomial1 = {1, 2};
     Poly polynomial2 = {2, 3};
-    vector<Comp> lookup = preprocessing(polynomial1);
-    preprocessing(polynomial2);
-
-    cout << polynomial1 << endl;
-    cout << polynomial2 << endl;
-    cout << lookup << endl;
     
-    
-    Poly d1 = dft(polynomial1, lookup);
-    Poly d2 = dft(polynomial2, lookup);
-
-    cout << endl;
-    cout << d1 << endl;
-    cout << d2 << endl;
-    
-    Poly con;
-    for (int i = 0; i < d1.size(); i++) {
-        con.push_back(d1[i] * d2[i]);
-    }
-
-    Poly test = {2, 7, 6, 0};
-    cout << dft(test, lookup) << endl;
-    cout << con << endl;
-
-    cout << idft(con, lookup) << endl;
-
-
+    Poly result = multiply(polynomial1, polynomial2);
+    cout << result << endl;
 
     return 0;
 }

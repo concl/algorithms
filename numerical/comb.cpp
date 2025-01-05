@@ -42,6 +42,7 @@ ll fact(ll n) {
 
 ll inv_fact(ll n) {
     if (n == 0) return 1;
+    if (n > biggest) fact(n);
     return inv_factorial[n];
 }
 

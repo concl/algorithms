@@ -161,6 +161,7 @@ int main() {
 // * Modulo
 // * Overflow (for powers of 2, use 1LL << x instead of 1 << x)
 // * Edge cases
+// * unordered_map and unordered_set is unsafe
 // * Did you skip taking in input by breaking out of a test case early?
 // * Do you need to clear state between test cases?
 // * 1 based or 0 based indexing?
