@@ -3,13 +3,12 @@
 #include <ext/pb_ds/assoc_container.hpp>
 
 using namespace std;
-using namespace __gnu_pbds;
+using namespace __gnu_pbds; // includes gp_hash_table
 
 #define pb push_back
 #define mp make_pair
 #define all(x) (x).begin(), (x).end()
 #define elif else if
-#define hash_table gp_hash_table
 #define forn(i,n) for(int i=0;(i)<(n);i++)
 #define rep(i,a,b) for(int i=a;(i)<(b);i++)
 
@@ -70,11 +69,26 @@ template <typename X>
 using u_set = unordered_set<X, custom_hash>;
 
 template <typename X, typename Y>
-using u_hash_table = hash_table<X, Y, custom_hash>;
+using hash_table = gp_hash_table<X, Y, custom_hash>;
+
+// concatenate vectors
+template<typename T>
+vector<T> operator+(const vector<T>& a, const vector<T>& b) {
+    vector<T> res = a;
+    res.insert(res.end(), b.begin(), b.end());
+    return res;
+}
+
+template<typename T>
+vector<T>& operator+=(vector<T>& a, const vector<T>& b) {
+    a.insert(a.end(), b.begin(), b.end());
+    return a;
+}
+
 
 // print pairs
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p) {
-    return cout << "(" << p.F << ", " << p.S << ")";
+    return cout << "(" << p.first << ", " << p.second << ")";
 }
 
 // print vectors
@@ -145,8 +159,6 @@ void print(Args&&... args) {
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
 const ll INF = 1e18;
-
-
 
 
 int main() {
