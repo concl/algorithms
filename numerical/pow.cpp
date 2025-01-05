@@ -22,7 +22,7 @@ int pow(int a, int b) {
 }
 
 // this isnt safe if m is close to the max 64 bit int and a ** b is larger than 2**63 - 1
-ll pow(ll a, ll b, ll m) {
+ll modpow(ll a, ll b, ll m) {
 
     ll output = 1;
     while (b > 0) {
@@ -43,7 +43,7 @@ int main() {
     // tests work
     cout << pow(2,8) << endl;
     cout << pow(3,5) << endl;
-    cout << pow((int) 5,2, 123483) << endl;
+    cout << modpow((int) 5,2, 123483) << endl;
 
     // test with lists
     vector<int> v = {1,2,3,4,5};
@@ -58,7 +58,7 @@ int main() {
     // asserts
     assert(pow(2,8) == 256);
     assert(pow(3,5) == 243);
-    assert(pow((int) 5,2, 123483) == 25);
+    assert(modpow((int) 5,2, 123483) == 25);
     
 
     return 0;

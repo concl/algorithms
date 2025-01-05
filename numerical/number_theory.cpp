@@ -3,6 +3,25 @@
 
 using namespace std;
 
+typedef long long ll;
+
+ll modpow(ll a, ll b, ll m) {
+
+    ll output = 1;
+    while (b > 0) {
+        if (b & 1) {
+            output *= a;
+            output %= m;
+        }
+
+        a *= a;
+        a %= m;
+        b >>= 1;
+    }
+    return output;
+
+}
+
 int gcd(int a, int b) {
 
     while (b % a != 0) {
@@ -37,21 +56,102 @@ vector<int> sieve_of_eratosthenes(int n) {
 
 }
 
-// pretty print vectors
-#define forn(i,n) for(int i=0;(i)<(n);i++)
-template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
+// Returns a vector of primes up to n
+vector<int> primes(int n) {
+    vector<bool> prime(n + 1, true);
+    prime[0] = prime[1] = 0;
+    for (int i = 2; i * i <= n; i++) {
+        if (prime[i]) {
+            for (int j = i * i; j <= n; j += i) {
+                prime[j] = 0;
+            }
+        }
+    }
+    vector<int> out;
+    for (int i = 2; i <= n; i++) {
+        if (prime[i]) {
+            out.push_back(i);
+        }
+    }
+    return out;
 }
 
-int main() {
 
-    printf("%d\n",gcd(21,14));
-    printf("%d\n",gcd(23,105));
-    printf("%d\n",gcd(105,25));
+class Mint {
+public:
+    ll val;
+    static const ll MOD = 1e9 + 7;
 
-    cout << sieve_of_eratosthenes(100);
+    Mint(ll val) : val(val) {
+        val = val % MOD;
+        if (val < 0) val += MOD; // handle negative values
+    }
 
-    return 0;
+    Mint inv() const {
+        return modpow(val, MOD - 2, MOD);
+    }
 
-}
+    Mint operator+(const Mint& other) const {
+        return Mint(val + other.val);
+    }
+
+    Mint operator-(const Mint& other) const {
+        return Mint(val - other.val);
+    }
+
+    Mint operator*(const Mint& other) const {
+        return Mint(val * other.val);
+    }
+
+    Mint operator/(const Mint& other) const {
+        return Mint(val * other.inv().val);
+    }
+
+    Mint& operator+=(const Mint& other) {
+        val += other.val;
+        val %= MOD;
+        return *this;
+    }
+
+    Mint& operator-=(const Mint& other) {
+        val -= other.val;
+        val %= MOD;
+        return *this;
+    }
+
+    Mint& operator*=(const Mint& other) {
+        val *= other.val;
+        val %= MOD;
+        return *this;
+    }
+
+    Mint& operator/=(const Mint& other) {
+        val *= other.inv().val;
+        val %= MOD;
+        return *this;
+    }
+
+    Mint operator-() const {
+        return Mint(-val);
+    }
+
+    bool operator==(const Mint& other) const {
+        return val == other.val;
+    }
+
+    bool operator!=(const Mint& other) const {
+        return val != other.val;
+    }
+
+    friend ostream& operator<<(ostream& os, const Mint& mint) {
+        os << mint.val;
+        return os;
+    }
+
+    friend istream& operator>>(istream& is, Mint& mint) {
+        is >> mint.val;
+        return is;
+    }
+};
+
 
