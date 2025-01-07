@@ -13,7 +13,7 @@ vector<int> z_function(string s) {
     int p2 = 1;
     // i is the index of the thing we are solving for
     for (int i = 1; i < n; i++) {
-        if (i > p2) {
+        if (i >= p2) {
             p1 = i;
             p2 = i;
         }
@@ -23,6 +23,7 @@ vector<int> z_function(string s) {
             output[i] = output[check];
             continue;
         }
+        p1 = i;
 
         while (p2 < n && s[p2] == s[p2 - i]) {
             p2++;
