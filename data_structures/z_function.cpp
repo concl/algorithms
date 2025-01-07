@@ -10,7 +10,7 @@ vector<int> z_function(string s) {
     vector<int> output(n,0);
     
     int p1 = 1;
-    int p2 = 1;
+    int p2 = 1; // potential boundary of prefix
     // i is the index of the thing we are solving for
     for (int i = 1; i < n; i++) {
         if (i >= p2) {
