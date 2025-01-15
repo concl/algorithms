@@ -2,52 +2,52 @@
 
 use std::collections::HashMap;
 
+const ALPHABET_SIZE: usize = 26;
 
 fn char_to_index(c: char) -> usize {
     (c as usize) - ('a' as usize)
 }
 
-
 struct TrieNode {
-    children: [Option<Box<TrieNode>>; 26], // Array to hold children
-    is_end: bool,
+    children: [Option<usize>; ALPHABET_SIZE], // Array to hold children
+    end: bool,
 }
 
 impl TrieNode {
     // Create a new TrieNode
     fn new() -> Self {
         TrieNode {
-            children: Default::default(), // Initialize all elements to None
-            is_end: false,
+            children: [None; ALPHABET_SIZE],
+            end: false,
         }
     }
 }
 
 struct Trie {
-    root: TrieNode,
+    tree: Vec<TrieNode>,
 }
 
 impl Trie {
     fn new() -> Self {
         Trie {
-            root: TrieNode::new(),
+            tree: vec![TrieNode::new()],
         }
     }
     fn insert(&mut self, word: &str) {
-        let mut current = &mut self.root;
+        let mut current = 0;
         for c in word.chars() {
             let index = char_to_index(c);
-            match current.children[index] {
-                Some(ref mut node) => {
+            match self.tree[current].children[index] {
+                Some(node) => {
                     current = node;
                 }
                 None => {
-                    current.children[index] = Some(Box::new(TrieNode::new()));
-                    current = current.children[index].as_mut().unwrap();
+                    self.tree[current].children[index] = Some(self.tree.len());
+                    self.tree.push(TrieNode::new());
+                    current = self.tree.len() - 1;
                 }
             }
         }
-        current.is_end = true;
+        self.tree[current].end = true;
     }
-
 }
