@@ -1,12 +1,13 @@
 
 #include <bits/stdc++.h>
+
 using namespace std;
 
 typedef long long ll;
 
 // Constants
-const ll MOD = 1e9 + 7;  // Prime modulus for modular arithmetic
-const int N = 5000001;      // Maximum size for precomputed arrays
+const ll MOD = 1e9 + 7;    // Prime modulus for modular arithmetic
+const int N = 5000001;     // Maximum size for precomputed arrays
 
 // Precomputed arrays for factorials
 ll factorial[N], inv_factorial[N];
@@ -23,9 +24,8 @@ ll modpow(ll a, ll b) {
     return res;
 }
 
-ll add(ll a, ll b) {
-    return (a + b) % MOD;
-}
+// Functions for modular arithmetic
+ll add(ll a, ll b) { return (a + b) % MOD; }
 
 ll sub(ll a, ll b) {
     ll out = (a - b) % MOD;
@@ -33,17 +33,13 @@ ll sub(ll a, ll b) {
     return out;
 }
 
-ll mul(ll a, ll b) {
-    return (a * b) % MOD;
-}
+ll mul(ll a, ll b) { return (a * b) % MOD; }
 
-ll inv(ll x) {
-    return modpow(x, MOD - 2);
-}
+ll inv(ll x) { return modpow(x, MOD - 2); }
 
 // Combination function: Computes nCr % MOD
 ll comb(int n, int r) {
-    if (r > n || r < 0) return 0; // Return 0 for invalid inputs
+    if (r > n || r < 0) return 0;    // Return 0 for invalid inputs
     return mul(mul(factorial[n], inv_factorial[r]), inv_factorial[n - r]);
 }
 
@@ -51,133 +47,166 @@ void preprocess() {
     // Step 1: Precompute factorials and modular inverses
     factorial[0] = inv_factorial[0] = 1;
     for (int i = 1; i < N; i++) {
-        factorial[i] = factorial[i - 1] * i % MOD;               // Factorial % MOD
-        inv_factorial[i] = inv(factorial[i]);        // Modular inverse using Fermat's theorem
+        factorial[i] = factorial[i - 1] * i % MOD;    // Factorial % MOD
+        inv_factorial[i] = inv(factorial[i]);    // Modular inverse using Fermat's theorem
     }
 }
 
-
 int main() {
-
     int N, pos, val;
     cin >> N >> pos >> val;
 
+    // Edge Case: Grid has no intersections
+    if (N == 1) {
+        cout << 1 << endl;
+        return 0;
+    }
+
+    // Precompute factorials
     preprocess();
+
     ll out = 0;
     
-    // top left
+    // Top left
     vector<ll> prefsum(N);
     prefsum[0] = 1;
     for (int i = 1; i < N; i++) {
+
+        // Selecting i extra points from the bottom right quadrant
         prefsum[i] = mul(comb(N - val, i), comb(N - pos, i));
         prefsum[i] = add(prefsum[i], prefsum[i - 1]);
     }
 
     for (int i = 1; i <= min(val - 1, pos - 1); i++) {
+
+        // Selecting i - 1 points from the top left quadrant
         ll addition = mul(comb(pos - 2, i - 1), comb(val - 2, i - 1));
         int l = N + 1 + i - val - pos;
-        int r = N - 1 - i;
+        int r = min({N - 1 - i, N - pos, N - val});
+        if (l > r) {
+            continue;
+        }
+
+        // Selecting extra points
         addition = l > 0 ? mul(addition, sub(prefsum[r], prefsum[l - 1])) : mul(addition, prefsum[r]);
-
         out = add(out, addition);
     }
 
-    // bottom right
-    vector<ll> prefsum2(N);
-    prefsum2[0] = 1;
-    for (int i = 1; i < N; i++) {
-        prefsum2[i] = mul(comb(N - val - 1, i), comb(N - pos - 1, i));
-        prefsum2[i] = add(prefsum2[i], prefsum2[i - 1]);
-    }
-
-    for (int i = 1; i <= min(val, pos); i++) {
-        ll addition = mul(comb(pos - 1, i - 1), comb(val - 1, i - 1));
-        int l = N - 1 + i - val - pos;
-        int r = N - 1 - i;
-        addition = l > 0 ? mul(addition, sub(prefsum2[r], prefsum2[l - 1])) : mul(addition, prefsum2[r]);
-
-        out = add(out, addition);
-    }
-
-    // both
-    for (int i = 1; i <= min(val - 1, pos - 1); i++) {
-        ll addition = mul(comb(pos - 2, i - 1), comb(val - 2, i - 1));
-        int l = N - 1 + i - val - pos;
-        int r = N - 1 - i - 1;
-        addition = l > 0 ? mul(addition, sub(prefsum2[r], prefsum2[l - 1])) : mul(addition, prefsum2[r]);
-
-        out = sub(out, addition);
-    }
-    
-
-    // top right
+    // Bottom right
     prefsum[0] = 1;
     for (int i = 1; i < N; i++) {
+
+        // Selecting i extra points from the top left quadrant
+        prefsum[i] = mul(comb(val - 1, i), comb(pos - 1, i));
+        prefsum[i] = add(prefsum[i], prefsum[i - 1]);
+    }
+
+    for (int i = 1; i <= min(N - val, N - pos); i++) {
+
+        // Selecting i - i points from the bottom right quadrant
+        ll addition = mul(comb(N - 1 - val, i - 1), comb(N - 1 - pos, i - 1));
+        int l = val + pos - N + i - 1;
+        int r = min({N - 1 - i, pos - 1, val - 1});
+        if (l > r) {
+            continue;
+        }
+
+        // Selecting extra points
+        addition = l > 0 ? mul(addition, sub(prefsum[r], prefsum[l - 1])) : mul(addition, prefsum[r]);
+        out = add(out, addition);
+    }
+
+    // Inclusion-exclusion principle
+    if (val < N && pos < N) {
+        for (int i = 1; i <= min(val - 1, pos - 1); i++) {
+
+            // Selecting i - 1 points from the top left quadrant
+            ll addition = mul(comb(pos - 2, i - 1), comb(val - 2, i - 1));
+
+            // Multiplying by the counts of selecting points from the bottom left and top right quadrants
+            addition = mul(addition, mul(comb(N - 1 - pos, val - 1 - i), comb(N - 1 - val, pos - 1 - i)));
+
+            // Exclude
+            out = sub(out, addition);
+        }
+    }
+
+    // Top right
+    prefsum[0] = 1;
+    for (int i = 1; i < N; i++) {
+
+        // Selecting i extra points from the bottom left quadrant
         prefsum[i] = mul(comb(N - pos, i), comb(val - 1, i));
         prefsum[i] = add(prefsum[i], prefsum[i - 1]);
     }
 
     for (int i = 1; i <= min(pos - 1, N - val); i++) {
-        ll addition = mul(comb(pos - 2, i - 1), comb(N - val - 1, i - 1));
-        int l = i;
-        int r = N - 1 - i;
-        addition = l > 0 ? mul(addition, sub(prefsum[r], prefsum[l - 1])) : mul(addition, prefsum[r]);
 
+        // Selecting i - 1 points from the top right quadrant
+        ll addition = mul(comb(pos - 2, i - 1), comb(N - 1 - val, i - 1));
+        int l = val - pos + i;
+        int r = min({N - 1 - i, N - pos, val - 1});
+        if (l > r) {
+            continue;
+        }
+
+        // Selecting extra points
+        addition = l > 0 ? mul(addition, sub(prefsum[r], prefsum[l - 1])) : mul(addition, prefsum[r]);
         out = add(out, addition);
     }
 
-    // bottom right
-    prefsum2[0] = 1;
+    // Bottom left
+    prefsum[0] = 1;
     for (int i = 1; i < N; i++) {
-        prefsum2[i] = mul(comb(N - pos - 1, i), comb(val - 1, i));
-        prefsum2[i] = add(prefsum2[i], prefsum2[i - 1]);
+
+        // Selecting i extra points from the top right quadrant
+        prefsum[i] = mul(comb(N - val, i), comb(pos - 1, i));
+        prefsum[i] = add(prefsum[i], prefsum[i - 1]);
     }
 
-    for (int i = 1; i <= min(pos, N - val + 1); i++) {
-        ll addition = mul(comb(pos - 1, i - 1), comb(N - val, i - 1));
-        int l = i - 2;
-        int r = N - 1 - i;
-        addition = l > 0 ? mul(addition, sub(prefsum2[r], prefsum2[l - 1])) : mul(addition, prefsum2[r]);
+    for (int i = 1; i <= min(val - 1, N - pos); i++) {
 
-        out = add(out, addition);
-    }
+        // Selecting i - 1 points from the bottom left quadrant
+        ll addition = mul(comb(val - 2, i - 1), comb(N - 1 - pos, i - 1));
+        int l = pos - val + i;
+        int r = min({N - 1 - i, N - val, pos - 1});
+        if (l > r) {
+            continue;
+        }
 
-    // both
-    for (int i = 1; i <= min(pos - 1, N - val); i++) {
-        ll addition = mul(comb(pos - 2, i - 1), comb(N - val - 1, i - 1));
-        int l = i - 2;
-        int r = N - 1 - i - 1;
-        addition = l > 0 ? mul(addition, sub(prefsum2[r], prefsum2[l - 1])) : mul(addition, prefsum2[r]);
-
-        out = sub(out, addition);
-    }
-
-    prefsum[0] = N - 1 - pos;
-    for (int i = 1; i < N - 1; i++) {
-        prefsum[i] = add(prefsum[i - 1], mul(comb(N - 1 - val, i), comb(N - 1 - pos, i + 1)));
-    }
-
-    // remaining top bottom blue
-    for (int i = 1; i <= min(pos - 2, val - 2); i++) {
-        ll addition = mul(comb(pos - 2, i - 1), comb(val - 2, i));
-        int l = N + i - val - pos;
-        int r = N - 1 - i - 1;
+        // Selecting extra points
         addition = l > 0 ? mul(addition, sub(prefsum[r], prefsum[l - 1])) : mul(addition, prefsum[r]);
-        
         out = add(out, addition);
     }
 
-    prefsum2[0] = N - 1 - val;
-        for (int i = 1; i < N; i++) {
-        prefsum2[i] = add(prefsum2[i - 1], mul(comb(N - 1 - val, i + 1), comb(N - 1 - pos, i)));
+    // Inclusion-exclusion principle
+    if (val - 1 > 0 && N - pos > 0) {
+        for (int i = 1; i <= min(pos - 1, N - val); i++) {
+
+            // Selecting i - 1 points from the top right quadrant
+            ll addition = mul(comb(pos - 2, i - 1), comb(N - 1 - val, i - 1));
+
+            // Multiplying by the counts of selecting points from the top left and bottom right quadrants
+            addition = mul(addition, mul(comb(val - 2, pos - 1 - i), comb(N - 1 - pos, N - val - i)));
+
+            // Exclude
+            out = sub(out, addition);
+        }
     }
-    // remaining left right blue
-    for (int i = 1; i <= min(pos - 2, val - 2); i++) {
+
+    // Selecting the top and bottom grid lines only
+    for (int i = 1; i <= min(pos - 1, val - 2); i++) {
+        ll addition = mul(comb(pos - 2, i - 1), comb(val - 2, i));
+        addition = mul(addition, mul(comb(N - 1 - pos, val - i - 1), comb(N - 1 - val, pos - i - 2)));
+
+        out = add(out, addition);
+    }
+
+    // Selecting the left and right grid lines only
+    for (int i = 1; i <= min(pos - 2, val - 1); i++) {
         ll addition = mul(comb(pos - 2, i), comb(val - 2, i - 1));
-        int l = N + i - val - pos;
-        int r = N - 1 - i - 1;
-        addition = l > 0 ? mul(addition, sub(prefsum2[r], prefsum2[l - 1])) : mul(addition, prefsum2[r]);
-        
+        addition = mul(addition, mul(comb(N - 1 - val, pos - i - 1), comb(N - 1 - pos, val - i - 2)));
+
         out = add(out, addition);
     }
 
