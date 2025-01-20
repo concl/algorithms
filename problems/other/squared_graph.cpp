@@ -81,7 +81,7 @@ int main() {
         union_sets(dsu, sizes, u, v);
     }
 
-    // Find the total number of components, including splits.
+    // Find the total number of components, including splits and individual components
     unordered_set<int> seen;
     ll components = 0;
     ll splits = 0;
@@ -109,15 +109,26 @@ int main() {
         }
         seen.insert(rep);
 
+        // The subgraph is bipartite
         if (sizes[rep] > 1 && splittable(adj, rep)) {
+
+            // Add the number of components and splits, as the subgraph is bipartite
             output += components + splits;
+
+            // Add extra for individual components in the second position, and subtract out the extra addition
             output += sizes[rep] * individual - individual;
             
         } else if (sizes[rep] == 1) {
+
+            // Any second position works
             output += N;
 
         } else {
+
+            // All other components
             output += components;
+
+            // Add extra for individual components in the second position, and subtract out the extra addition
             output += sizes[rep] * individual - individual;
         }
     }
