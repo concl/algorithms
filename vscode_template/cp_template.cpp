@@ -93,7 +93,7 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
 
 // print vectors
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; for (auto x : v){ if (i) cout << ", "; cout << v[i];} return cout << "]";
+    cout << "["; for (auto x : v){ if (i) cout << ", "; cout << x;} return cout << "]";
 }
 
 // print maps
