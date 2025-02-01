@@ -91,9 +91,10 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
     return cout << "(" << p.first << ", " << p.second << ")";
 }
 
+
 // print vectors
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; for (auto x : v){ if (i) cout << ", "; cout << x;} return cout << "]";
+    cout << "["; for (int i = 0; i < v.size(); i++){ if (i) cout << ", "; cout << v[i];} return cout << "]";
 }
 
 // print maps
