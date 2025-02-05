@@ -86,6 +86,13 @@ vector<T>& operator+=(vector<T>& a, const vector<T>& b) {
 }
 
 
+template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p);
+template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v);
+template<typename K, typename V> ostream& operator<< (ostream &cout, unordered_map<K, V> const &m);
+template<typename K, typename V> ostream& operator<< (ostream &cout, map<K, V> const &m);
+template<typename A> ostream& operator<< (ostream &cout, unordered_set<A> const &s);
+template<typename A> ostream& operator<< (ostream &cout, multiset<A> const &s);
+
 // print pairs
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p) {
     return cout << "(" << p.first << ", " << p.second << ")";
