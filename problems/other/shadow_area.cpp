@@ -3,6 +3,7 @@
 
 using namespace std;
 
+const double PI = acos(-1);
 
 struct Point {
     double x;
@@ -39,6 +40,18 @@ Arc merge(Arc a, Arc b) {
 }
 
 
+// Assumes that theta will not be too big or too negative
+double normalize(double theta) {
+    if (theta < 0) {
+        return theta + 2 * PI;
+    } else if (theta > 2 * PI) {
+        return theta - 2 * PI;
+    } else {
+        return theta;
+    }
+}
+
+
 class ShadowArea {
 
 public:
@@ -69,18 +82,35 @@ public:
 
         // Blocked arcs
         vector<Arc> arcs;
+
+        // Area of light
+        double area = 0;
+
+        // Relevant segments are processed by considering the arcs that cast a shadow on them
+        auto process_segment = [&] (Point p1, Point p2) {
+
+            if (p1.)
+
+        };
         
         // Find relevant line segments
         for (int i = 0; i < posts.size() - 1; i++) {
             
-            if ()
+            // Same row or column, only one line segment of interest
+            if (posts[i].first == light_cell.first) {
+
+            } else if (posts[i].second == light_cell.second) {
+
+
+            } else {
+                if 
+
+            }
 
         }
 
-
-
-
-        return 0.0;
+        double total_area = room.size() * room[0].size() - posts.size();
+        return total_area - area;
     }
 
 
