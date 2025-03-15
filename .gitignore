@@ -75,3 +75,4 @@ dist/
 *.sublime-workspace
 workspace/
 input
+trash/
