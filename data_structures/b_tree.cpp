@@ -3,24 +3,31 @@
 
 using namespace std;
 
-const int NUM_KEYS = 8; // Maximum number of keys in a B-Tree node
+const int M = 8; // Maximum number of children for each B-Tree node
 
 // B-Tree Node
 template <typename K, typename T>
 class BTreeMapNode {
 private:
-    K keys[NUM_KEYS]; // Array of keys
-    T values[NUM_KEYS]; // Array of values associated with the keys
-    BTreeNode* children[NUM_KEYS + 1]; // Array of child pointers
-    BTreeNode* parent; // Pointer to the parent node
-    int num_keys; // Current number of keys in the node
+    vector<K> keys; // Vector to store keys
+    vector<T> values; // Vector to store values corresponding to keys
+    vector<BTreeMapNode<K, T>*> children; // Pointers to child nodes
     bool is_leaf; // Flag to check if the node is a leaf
 
-public:
-    BTreeNode(bool leaf = true) : parent(nullptr), num_keys(0), is_leaf(leaf) {
-        fill(begin(keys), end(keys), T());
-        fill(begin(children), end(children), nullptr);
-    }
 };
 
-class 
+template <typename K, typename V>
+class BTreeMap {
+
+private:
+
+    BTreeMapNode<K, V>* root; // Pointer to the root node of the B-Tree
+    int min_keys; // Minimum number of keys in a non-root node
+
+    void splitChild(BTreeMapNode<K, V>* parent, int index) {
+        // Implementation of child splitting logic
+    }
+
+    void insertNonFull(BTreeMapNode<K, V>* node, const K& key, const V& value) {
+        // Implementation of inserting a key-value pair into a non-full node
+    }
