@@ -1,6 +1,7 @@
 /* #region cp template */
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
+#include <ext/pb_ds/tree_policy.hpp>
 
 using namespace std;
 using namespace __gnu_pbds; // includes gp_hash_table
@@ -71,6 +72,18 @@ using u_set = unordered_set<X, custom_hash>;
 
 template <typename X, typename Y>
 using hash_table = gp_hash_table<X, Y, custom_hash>;
+
+template<
+    typename T,
+    typename Compare = std::less<T>
+>
+using OST = tree<
+    T,
+    null_type,
+    Compare,
+    rb_tree_tag,
+    tree_order_statistics_node_update
+>;
 
 // concatenate vectors
 template<typename T>
@@ -150,6 +163,16 @@ ostream& operator<< (ostream &cout, set<A> const &s) {
 
 template<typename A>
 ostream& operator<< (ostream &cout, multiset<A> const &s) {
+    cout << "{";
+    for (auto it = s.begin(); it != s.end(); ++it) {
+        if (it != s.begin()) cout << ", ";
+        cout << *it;
+    }
+    return cout << "}";
+}
+
+template<typename A>
+ostream& operator<< (ostream &cout, OST<A> const &s) {
     cout << "{";
     for (auto it = s.begin(); it != s.end(); ++it) {
         if (it != s.begin()) cout << ", ";
