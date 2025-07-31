@@ -76,3 +76,4 @@ dist/
 workspace/
 input
 trash/
+.venv/
