@@ -73,13 +73,15 @@ using u_set = unordered_set<X, custom_hash>;
 template <typename X, typename Y>
 using hash_table = gp_hash_table<X, Y, custom_hash>;
 
+// Ordered set with order statistics
 template<
-    typename T,
-    typename Compare = std::less<T>
+    typename K,
+    typename V = null_type,
+    typename Compare = std::less<K>
 >
 using OST = tree<
-    T,
-    null_type,
+    K,
+    V,
     Compare,
     rb_tree_tag,
     tree_order_statistics_node_update
