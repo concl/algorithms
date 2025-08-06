@@ -135,6 +135,48 @@ public:
     }
 };
 
+void tests() {
+    // Example test cases for SegmentTree
+    vector<int> array = {1, 2, 3, 4, 5};
+    SegmentTree<int> st(array, 0, [](int a, int b) { return a + b; });
+
+    assert(st.query(0, 4) == 15); // Sum of entire array
+    assert(st.query(1, 3) == 9); // Sum from index 1 to 3
+    st.update(2, 10); // Update index 2 to value 10
+    assert(st.query(1, 3) == 16); // Sum after update
+
+
+    // Test 2: different array sizes
+    vector<ll> long_array(1000, 1);
+    SegmentTreeAdd st_add(long_array);
+
+    assert(st_add.query(0, 999) == 1000); // Sum of entire array
+    st_add.update(500, 10); // Update index 500 to value 10
+    assert(st_add.query(0, 999) == 1009); // Sum after update
+
+    vector<ll> long_array2(1234, 2);
+    SegmentTreeAdd st_add2(long_array2);
+    assert(st_add2.query(0, 1233) == 2468); // Sum of entire array
+    st_add2.update(100, 5); // Update index 100 to value
+    assert(st_add2.query(0, 1233) == 2471); // Sum after update
+
+    for (int length = 1; length <= 100; length++) {
+        vector<int> test_array(length, 1);
+        SegmentTree<int> test_st(test_array, 0, [](int a, int b) { return a + b; });
+
+        // test range queries
+        for (int start = 0; start < length; start++) {
+            for (int end = start; end < length; end++) {
+                int expected_sum = end - start + 1;
+                assert(test_st.query(start, end) == expected_sum);
+            }
+        }
+    }
+
+    cout << "All tests passed!" << endl;
+}
+
+
 // Example usage
 int main() {
     vector<int> array = {1, 2, 3, 4, 5};
@@ -143,5 +185,9 @@ int main() {
     cout << "Sum of range [1, 3]: " << st.query(1, 3) << endl;
     st.update(2, 10);
     cout << "Sum of range [1, 3] after update: " << st.query(1, 3) << endl;
+
+
+    // Run tests
+    tests();
     return 0;
 }
