@@ -20,7 +20,7 @@ public:
         : arr(array), neutral(neutral), merge(func) {
         n = arr.size();
         tree.resize(4 * n);
-        build(1, 0, n - 1);
+        build(0, 0, n - 1);
     }
 
     void build(int node, int start, int end) {
@@ -28,9 +28,9 @@ public:
             tree[node] = arr[start];
         } else {
             int mid = (start + end) / 2;
-            build(2 * node, start, mid);
-            build(2 * node + 1, mid + 1, end);
-            tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
+            build(2 * node + 1, start, mid);
+            build(2 * node + 2, mid + 1, end);
+            tree[node] = merge(tree[2 * node + 1], tree[2 * node + 2]);
         }
     }
 
@@ -41,11 +41,11 @@ public:
         } else {
             int mid = (start + end) / 2;
             if (start <= idx && idx <= mid) {
-                update(2 * node, start, mid, idx, val);
+                update(2 * node + 1, start, mid, idx, val);
             } else {
-                update(2 * node + 1, mid + 1, end, idx, val);
+                update(2 * node + 2, mid + 1, end, idx, val);
             }
-            tree[node] = merge(tree[2 * node], tree[2 * node + 1]);
+            tree[node] = merge(tree[2 * node + 1], tree[2 * node + 2]);
         }
     }
 
@@ -57,18 +57,18 @@ public:
             return tree[node];
         }
         int mid = (start + end) / 2;
-        T p1 = query(2 * node, start, mid, l, r);
-        T p2 = query(2 * node + 1, mid + 1, end, l, r);
+        T p1 = query(2 * node + 1, start, mid, l, r);
+        T p2 = query(2 * node + 2, mid + 1, end, l, r);
         return merge(p1, p2);
     }
 
     // User-friendly update and query methods
     void update(int idx, T val) {
-        update(1, 0, n - 1, idx, val);
+        update(0, 0, n - 1, idx, val);
     }
 
     T query(int l, int r) {
-        return query(1, 0, n - 1, l, r);
+        return query(0, 0, n - 1, l, r);
     }
 };
 
@@ -83,7 +83,7 @@ public:
         : arr(array) {
         n = arr.size();
         tree.resize(4 * n);
-        build(1, 0, n - 1);
+        build(0, 0, n - 1);
     }
 
     void build(int node, int start, int end) {
@@ -91,9 +91,9 @@ public:
             tree[node] = arr[start];
         } else {
             int mid = (start + end) / 2;
-            build(2 * node, start, mid);
-            build(2 * node + 1, mid + 1, end);
-            tree[node] = tree[2 * node] + tree[2 * node + 1];
+            build(2 * node + 1, start, mid);
+            build(2 * node + 2, mid + 1, end);
+            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
         }
     }
 
@@ -104,11 +104,11 @@ public:
         } else {
             int mid = (start + end) / 2;
             if (start <= idx && idx <= mid) {
-                update(2 * node, start, mid, idx, val);
+                update(2 * node + 1, start, mid, idx, val);
             } else {
-                update(2 * node + 1, mid + 1, end, idx, val);
+                update(2 * node + 2, mid + 1, end, idx, val);
             }
-            tree[node] = tree[2 * node] + tree[2 * node + 1];
+            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
         }
     }
 
@@ -120,18 +120,18 @@ public:
             return tree[node];
         }
         int mid = (start + end) / 2;
-        ll p1 = query(2 * node, start, mid, l, r);
-        ll p2 = query(2 * node + 1, mid + 1, end, l, r);
+        ll p1 = query(2 * node + 1, start, mid, l, r);
+        ll p2 = query(2 * node + 2, mid + 1, end, l, r);
         return p1 + p2;
     }
 
     // User-friendly update and query methods
     void update(int idx, ll val) {
-        update(1, 0, n - 1, idx, val);
+        update(0, 0, n - 1, idx, val);
     }
 
     ll query(int l, int r) {
-        return query(1, 0, n - 1, l, r);
+        return query(0, 0, n - 1, l, r);
     }
 };
 
