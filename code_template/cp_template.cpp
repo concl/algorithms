@@ -1,4 +1,5 @@
-/* #region cp template */
+
+#pragma region cp template
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
 #include <ext/pb_ds/tree_policy.hpp>
@@ -189,11 +190,10 @@ void print(Args&&... args) {
     ((cout << args << " "), ...) << "\n";
 }
 
-/* #endregion */
+#pragma endregion
 
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
-const ll INF = 1e18;
 
 
 int main() {
