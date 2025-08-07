@@ -108,6 +108,7 @@ template<typename K, typename V> ostream& operator<< (ostream &cout, unordered_m
 template<typename K, typename V> ostream& operator<< (ostream &cout, map<K, V> const &m);
 template<typename A> ostream& operator<< (ostream &cout, unordered_set<A> const &s);
 template<typename A> ostream& operator<< (ostream &cout, multiset<A> const &s);
+template<typename A> ostream& operator<< (ostream &cout, OST<A> const &s);
 
 // print pairs
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p) {
