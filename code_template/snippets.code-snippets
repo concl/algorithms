@@ -239,12 +239,23 @@
             "    ios_base::sync_with_stdio(false);",
             "    cin.tie(NULL);",
             "    ",
-            "    ",
+            "    $0",
             "",
             "    return 0;",
             "}",
             "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py",
             "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
+        ]
+    },
+
+    "Codeforces Test Cases": {
+        "prefix": "cf_test",
+        "body": [
+            "int t;",
+            "cin >> t;",
+            "while (t--) {",
+            "    $0",
+            "}"
         ]
     }
 }
