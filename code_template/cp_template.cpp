@@ -213,3 +213,4 @@ int main() {
 // * Do you need to clear state between test cases?
 // * 1 based or 0 based indexing?
 // * In interactive problems, delete fast io
+// * Are you comparing indices or values?

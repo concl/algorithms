@@ -217,6 +217,7 @@
             "// * Do you need to clear state between test cases?",
             "// * 1 based or 0 based indexing?",
             "// * In interactive problems, delete fast io",
+            "// * Are you comparing indices or values?",
             "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py",
             "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
@@ -247,7 +248,6 @@
             "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
     },
-
     "Codeforces Test Cases": {
         "prefix": "cf_test",
         "body": [
