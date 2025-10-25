@@ -226,7 +226,7 @@ ostream& operator<< (ostream &cout, OST<A> const &s) {
 
 template<typename... Args>
 void print(Args&&... args) {
-    ((cout << args << " "), ...) << "\n";
+    ((cout << args << " "), ...) << endl;
 }
 
 #pragma endregion

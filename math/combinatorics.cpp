@@ -6,9 +6,9 @@ typedef long long ll;
 using namespace std;
 
 const ll MOD = 1e9+7;
-const ll N = 1000000;
-// const ll MOD = 998244353;
 
+
+const ll N = 1000000;
 ll modpow(ll a, ll b, ll m) {
 
     ll output = 1;
