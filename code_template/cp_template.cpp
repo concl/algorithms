@@ -63,6 +63,45 @@ struct custom_hash {
         }
         return static_cast<size_t>(result);
     }
+
+    // For pairs
+    template <typename T1, typename T2>
+    size_t operator()(const std::pair<T1, T2> &p) const {
+        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
+        uint64_t h1 = (*this)(p.first);
+        uint64_t h2 = (*this)(p.second);
+        
+        // Combine hashes using a method similar to boost::hash_combine
+        uint64_t seed = 0xcbf29ce484222325ULL ^ FIXED_RANDOM;
+        seed ^= h1 + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2);
+        seed ^= h2 + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2);
+        
+        return static_cast<size_t>(seed);
+    }
+
+    // For tuples - using recursion
+    template <typename... Types>
+    size_t operator()(const std::tuple<Types...> &t) const {
+        return hash_tuple_impl(t, std::index_sequence_for<Types...>{});
+    }
+
+private:
+    // Helper for tuple hashing using recursion
+    template <typename Tuple, size_t... Indices>
+    size_t hash_tuple_impl(const Tuple &t, std::index_sequence<Indices...>) const {
+        static const uint64_t FIXED_RANDOM = std::chrono::steady_clock::now().time_since_epoch().count();
+        uint64_t seed = 0xcbf29ce484222325ULL ^ FIXED_RANDOM;
+        
+        // Fold expression to combine all element hashes
+        ((seed = combine_hashes(seed, (*this)(std::get<Indices>(t)))), ...);
+        
+        return static_cast<size_t>(seed);
+    }
+
+    // Helper function to combine two hashes
+    uint64_t combine_hashes(uint64_t seed, uint64_t hash) const {
+        return seed ^ (hash + 0x9e3779b97f4a7c15ULL + (seed << 6) + (seed >> 2));
+    }
 };
 
 template <typename X, typename Y>
