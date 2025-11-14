@@ -1,4 +1,5 @@
 
+#pragma region clean_template
 #include <bits/stdc++.h>
 
 using namespace std;
@@ -12,6 +13,8 @@ using namespace std;
 typedef long long ll;
 typedef vector<int> vi;
 typedef pair<int,int> pii;
+
+#pragma endregion
 
 int main() {
     ios_base::sync_with_stdio(false);
