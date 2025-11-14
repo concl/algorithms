@@ -9,10 +9,11 @@ using namespace __gnu_pbds; // includes gp_hash_table
 
 #define pb push_back
 #define mp make_pair
-#define all(x) (x).begin(), (x).end()
 #define elif else if
 #define forn(i,n) for(int i=0;(i)<(n);i++)
 #define rep(i,a,b) for(int i=a;(i)<(b);i++)
+#define all(x) (x).begin(), (x).end()
+#define len(x) (int) x.size()
 
 
 typedef long long ll;
