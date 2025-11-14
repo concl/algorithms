@@ -21,5 +21,3 @@ int main() {
 
     return 0;
 }
-// python tester.py clean_template input -v testpy.py
-// python3 tester.py clean_template input -v testpy.py

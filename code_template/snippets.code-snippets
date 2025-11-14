@@ -289,8 +289,6 @@
             "",
             "    return 0;",
             "}",
-            "// python tester.py clean_template input -v testpy.py",
-            "// python3 tester.py clean_template input -v testpy.py",
             "// python tester.py ${TM_FILENAME_BASE} input -v testpy.py",
             "// python3 tester.py ${TM_FILENAME_BASE} input -v testpy.py"
         ]
