@@ -7,6 +7,7 @@ using namespace std;
 #define pb push_back
 #define mp make_pair
 #define rep(i, a, b) for (int i = a; i < (b); i++)
+#define forn(i,n) for(int i=0; (i)<(n); i++)
 #define all(x) begin(x), end(x)
 #define len(x) (int) x.size()
 
