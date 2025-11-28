@@ -11,11 +11,11 @@ vector<vector<pii>> subtree_sizes(vector<vector<int>>& adj) {
     int n = adj.size();
     vector<vector<pii>> subtree(n);
 
-    function<int(int, int)> dfs1 = [&](int node, int parent) {   
+    function<int(int, int)> dfs = [&](int node, int parent) {   
         int res = 1;
         for (int v : adj[node]) {
             if (v == parent) continue;
-            int child_size = dfs1(v, node);
+            int child_size = dfs(v, node);
             res += child_size;
             subtree[node].push_back({v, child_size});
         }
@@ -24,7 +24,7 @@ vector<vector<pii>> subtree_sizes(vector<vector<int>>& adj) {
         }
         return res;
     };
-    dfs1(0, -1);
+    dfs(0, -1);
     return subtree;
 }
 
