@@ -253,13 +253,14 @@ int main() {
 }
 // Things to check:
 // * Reading Comprehension
-// * multiset vs set (Don't use set as a priority queue when you need to store duplicates!)
-// * Modulo
 // * Overflow (for powers of 2, use 1LL << x instead of 1 << x)
 // * Edge cases
+//     * Double counting? (Consider all edge cases)
+// * multiset vs set (Don't use set as a priority queue when you need to store duplicates!)
+// * Modulo
 // * unordered_map and unordered_set is unsafe (on cf especially)
 // * Did you skip taking in input by breaking out of a test case early?
-// * Do you need to clear state between test cases?
+// * Do you need to clear state between test cases or queries?
 // * 1 based or 0 based indexing?
 // * In interactive problems, delete fast io
 // * Are you comparing indices or values?
