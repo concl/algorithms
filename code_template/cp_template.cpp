@@ -15,7 +15,6 @@ using namespace __gnu_pbds; // includes gp_hash_table
 #define all(x) (x).begin(), (x).end()
 #define len(x) (int) x.size()
 
-
 typedef long long ll;
 typedef unsigned long long ull;
 typedef long double ld;

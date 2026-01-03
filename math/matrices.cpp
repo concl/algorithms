@@ -13,50 +13,27 @@ class Matrix {
 
     public:
         int rows, cols;
-        vector<vector<T>> mat;
+        vector<T> mat;
 
-        Matrix() {
-            rows = 0;
-            cols = 0;
+        Matrix(int rows, int cols):
+            rows(rows), cols(cols)
+        {
+            mat.resize(rows * cols);
         }
 
-        Matrix(int rows, int cols) {
-            this->rows = rows;
-            this->cols = cols;
-            mat.resize(rows, vector<T>(cols));
+        Matrix(int rows, int cols, T initial):
+            rows(rows), cols(cols)
+        {
+            mat.resize(rows * cols, initial);
         }
 
-        Matrix(int rows, int cols, T initial) {
-            this->rows = rows;
-            this->cols = cols;
-            mat.resize(rows, vector<T>(cols, initial));
-        }
-
-        Matrix(int rows, int cols, vector<vector<T>> mat) {
-            this->rows = rows;
-            this->cols = cols;
-            this->mat = mat;
-        }
-
-        static Matrix column_vector(vector<T> v) {
-            Matrix output(v.size(), 1);
-            for (int i = 0; i < v.size(); i++) {
-                output.mat[i][0] = v[i];
-            }
-            return output;
-        }
-
-        static Matrix row_vector(vector<T> v) {
-            Matrix output(1, v.size());
-            for (int i = 0; i < v.size(); i++) {
-                output.mat[0][i] = v[i];
-            }
-            return output;
+        Matrix(int rows, int cols, T initial):
+            rows(rows), cols(cols)
+        {
+            mat.resize(rows * cols, initial);
         }
 
         Matrix operator+(Matrix &other) {
-            if (rows != other.rows || cols != other.cols)
-                throw invalid_argument("Matrices are not the same size");
 
             Matrix output(rows, cols);
             for (int i = 0; i < rows; i++) {
@@ -149,9 +126,9 @@ class Matrix {
             return output;
         }
 
-        void print() {
-            for (int i = 0; i < rows; i++) {
-                for (int j = 0; j < cols; j++) {
+        friend std::ostream& operator<<(std::ostream& os, const Matrix& p) {
+            for (int i = 0; i < p.rows; i++) {
+                for (int j = 0; j < p.cols; j++) {
                     cout << mat[i][j] << "\t";
                 }
                 cout << endl;
@@ -185,11 +162,8 @@ Matrix<T> pow(Matrix<T> mat, ll p) {
 
 int main() {
 
-    Matrix<int> mat(2, 2, {{1, 1}, {1, 0}});
-
+    Matrix<int> mat(2, 2);
     Matrix<int> mat2 = mat * mat;
-
-    mat2.print();
 
     Matrix<ll> fib(2, 2, {{1, 1}, {1, 0}});
 
