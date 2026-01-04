@@ -1,6 +1,5 @@
 
 
-
 const MOD: i64 = 1_000_000_007;
 
 fn pow_mod(base: i64, exp: i64, modulus: i64) -> i64 {
