@@ -4,6 +4,9 @@
 \usepackage{pdflscape}
 \usepackage{parskip}
 \usepackage{geometry}
+\usepackage{multicol}
+\usepackage{lipsum}
+
 \geometry{a4paper, margin=1in}
 
 \begin{document}
@@ -12,11 +15,13 @@
 \begin{landscape}
 \thispagestyle{empty}
 
-Hello, world!
-test
-my name is \textbf{John Doe}. jeffery john davis is a software engineer.
+\begin{multicols}{2}
 
-my name isnt \textbf{John Doe}. jeffery john davis is not a software engineer.
+Hello, world!
+
+test
+
+my name is \textbf{John Doe}. jeffery john davis is a software engineer.
 
 \begin{proof}
     This is a proof.
@@ -25,6 +30,23 @@ my name isnt \textbf{John Doe}. jeffery john davis is not a software engineer.
         E = mc^2
     \]
 \end{proof}
+
+\columnbreak
+
+my name isnt \textbf{John Doe}. jeffery john davis is not a software engineer.
+
+\lipsum[1-10]
+
+\begin{proof}
+    This is a proof.
+    Example of an equation:
+    \[
+        E = mc^2
+    \]
+\end{proof}
+
+\end{multicols}
+
 
 \end{landscape}
 
