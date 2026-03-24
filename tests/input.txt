@@ -1,0 +1,13 @@
+10
+3 4 7 5 2 2 6 22 20 14
+10
+query 3 4
+query 3 5
+range_update 6 10 6
+query 1 4
+query 3 5
+range_update 8 9 1
+range_update 7 9 8
+query 0 5
+query 3 4
+query 2 5
