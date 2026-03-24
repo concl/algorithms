@@ -1,18 +1,19 @@
 
-def find(parent, i):
-    if parent[i] == i:
-        return i
-    parent[i] = find(parent, parent[i])
-    return parent[i]
 
-def union_sets(parent, sizes, x, y):
-    x = find(parent, x)
-    y = find(parent, y)
+def find(parent, a):
+    if parent[a] != a:
+        parent[a] = find(parent, parent[a])
+    return parent[a]
 
-    if x == y: return
+def union_sets(parent, sizes, a, b):
 
-    if sizes[x] < sizes[y]:
-        x, y = y, x
-    parent[y] = x
-    sizes[x] += sizes[y]
+    a = find(parent, a)
+    b = find(parent, b)
+    if a == b:
+        return
+    if sizes[a] < sizes[b]:
+        a, b = b, a
+    parent[b] = a
+    sizes[a] += sizes[b]
+
 
