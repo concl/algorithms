@@ -13,19 +13,18 @@ template <typename T>
 class SegmentTree {
 public:
     vector<T> tree;
-    vector<T> arr;
     T identity;
     function<T(T, T)> merge;
     int n;
 
-    SegmentTree(const vector<T> &array, T identity, function<T(T, T)> func)
-        : arr(array), identity(identity), merge(func) {
+    SegmentTree(const vector<T>& arr, T identity, function<T(T, T)> func)
+        : identity(identity), merge(func) {
         n = arr.size();
         tree = vector<T>(2 * n, identity);
-        build();
+        build(arr);
     }
 
-    void build() {
+    void build(const vector<T>& arr) {
         for (int i = 0; i < n; i++) {
             tree[i + n] = arr[i];
             int node = (i + n) / 2;

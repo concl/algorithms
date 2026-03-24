@@ -108,78 +108,78 @@ vector<int> primes(int n) {
 }
 
 
-class Mint {
+class ModInt {
 public:
     ll val;
     static const ll MOD = 1e9 + 7;
 
-    Mint(ll val) : val(val) {
+    ModInt(ll val) : val(val) {
         val = val % MOD;
         if (val < 0) val += MOD; // handle negative values
     }
 
-    Mint inv() const {
+    ModInt inv() const {
         return modpow(val, MOD - 2, MOD);
     }
 
-    Mint operator+(const Mint& other) const {
-        return Mint(val + other.val);
+    ModInt operator+(const ModInt& other) const {
+        return ModInt(val + other.val);
     }
 
-    Mint operator-(const Mint& other) const {
-        return Mint(val - other.val);
+    ModInt operator-(const ModInt& other) const {
+        return ModInt(val - other.val);
     }
 
-    Mint operator*(const Mint& other) const {
-        return Mint(val * other.val);
+    ModInt operator*(const ModInt& other) const {
+        return ModInt(val * other.val);
     }
 
-    Mint operator/(const Mint& other) const {
-        return Mint(val * other.inv().val);
+    ModInt operator/(const ModInt& other) const {
+        return ModInt(val * other.inv().val);
     }
 
-    Mint& operator+=(const Mint& other) {
+    ModInt& operator+=(const ModInt& other) {
         val += other.val;
         val %= MOD;
         return *this;
     }
 
-    Mint& operator-=(const Mint& other) {
+    ModInt& operator-=(const ModInt& other) {
         val -= other.val;
         val %= MOD;
         return *this;
     }
 
-    Mint& operator*=(const Mint& other) {
+    ModInt& operator*=(const ModInt& other) {
         val *= other.val;
         val %= MOD;
         return *this;
     }
 
-    Mint& operator/=(const Mint& other) {
+    ModInt& operator/=(const ModInt& other) {
         val *= other.inv().val;
         val %= MOD;
         return *this;
     }
 
-    Mint operator-() const {
-        return Mint(-val);
+    ModInt operator-() const {
+        return ModInt(-val);
     }
 
-    bool operator==(const Mint& other) const {
+    bool operator==(const ModInt& other) const {
         return val == other.val;
     }
 
-    bool operator!=(const Mint& other) const {
+    bool operator!=(const ModInt& other) const {
         return val != other.val;
     }
 
-    friend ostream& operator<<(ostream& os, const Mint& mint) {
+    friend ostream& operator<<(ostream& os, const ModInt& mint) {
         os << mint.val;
         return os;
     }
 
-    friend istream& operator>>(istream& is, Mint& mint) {
+    friend istream& operator>>(istream& is, ModInt& mint) {
         is >> mint.val;
         return is;
     }
