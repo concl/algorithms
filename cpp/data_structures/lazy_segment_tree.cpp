@@ -1,12 +1,13 @@
 /*
 * Author: concl
-* Status: Untested
+* Status: Tested on random data
 */
 
 #include <bits/stdc++.h>
-using namespace std;
 
-typedef long long ll;
+using namespace std;
+using ll = long long;
+
 
 // Lazy Segment Tree for range sum queries and range updates
 class LazySegmentTree {
@@ -54,15 +55,17 @@ public:
         }
 
         int mid = (tl + tr) / 2;
+        // split into [tl, mid) and [mid, tr)
         if (r <= mid) {
             _range_update(l, r, idx * 2 + 1, tl, mid, val);
-            return;
         } else if (l >= mid) {
             _range_update(l, r, idx * 2 + 2, mid, tr, val);
-            return;
+        } else {
+            _range_update(l, mid, idx * 2 + 1, tl, mid, val);
+            _range_update(mid, r, idx * 2 + 2, mid, tr, val);
         }
-        _range_update(l, mid, idx * 2 + 1, tl, mid, val);
-        _range_update(mid, r, idx * 2 + 2, mid, tr, val);
+        tree[idx] = tree[idx * 2 + 1] + tree[idx * 2 + 2];
+        tree[idx] += lazy[idx * 2 + 1] * (mid - tl) + lazy[idx * 2 + 2] * (tr - mid);
     }
 
     // Adds val to every element in [l, r)
@@ -71,10 +74,7 @@ public:
     // [tl, tr) should always be a superset of [l, r)
     ll _query(int l, int r, int idx, int tl, int tr) {
         if (tl >= tr) return 0;
-        if (tl == tr - 1) {
-            return tree[idx];
-        }
-
+        if (tl == tr - 1) return tree[idx];
         if (tl == l && tr == r) return tree[idx] + lazy[idx] * (tr - tl);
 
         ll extra = lazy[idx] * (r - l);
@@ -84,7 +84,6 @@ public:
         } else if (l >= mid) {
             return extra + _query(l, r, idx * 2 + 2, mid, tr);
         }
-
         return extra + _query(l, mid, idx * 2 + 1, tl, mid) + _query(mid, r, idx * 2 + 2, mid, tr);
     }
 
@@ -94,6 +93,8 @@ public:
 
 // Standard io interface
 int main() {
+    ios_base::sync_with_stdio(false);
+    cin.tie(NULL);
 
     int n; cin >> n;
     vector<ll> arr(n);
