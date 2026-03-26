@@ -75,5 +75,6 @@ dist/
 *.sublime-workspace
 workspace/
 input
+input.txt
 trash/
 .venv/
