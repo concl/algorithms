@@ -1,4 +1,3 @@
-
 /*
 * Author: concl
 * Status: Tested on https://leetcode.com/problems/range-sum-query-mutable/

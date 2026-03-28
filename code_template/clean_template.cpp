@@ -2,18 +2,15 @@
 #pragma region clean_template
 #include <bits/stdc++.h>
 
-using namespace std;
-
 #define pb push_back
-#define mp make_pair
 #define rep(i, a, b) for (int i = a; i < (b); i++)
-#define forn(i,n) for(int i=0; (i)<(n); i++)
 #define all(x) begin(x), end(x)
-#define len(x) (int) x.size()
+#define sz(x) (int) x.size()
 
-typedef long long ll;
-typedef vector<int> vi;
-typedef pair<int,int> pii;
+using namespace std;
+using ll = long long;
+using vi = vector<int>;
+using pii = pair<int, int>;
 
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p);
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v);

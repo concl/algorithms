@@ -30,6 +30,7 @@ vector<int> z_function(string s) {
         }
         output[i] = p2 - i;
     }
+    output[0] = n;
     return output;
 }
 
