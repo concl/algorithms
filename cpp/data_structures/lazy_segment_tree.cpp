@@ -1,13 +1,12 @@
-/*
-* Author: concl
-* Status: Tested on random data
-*/
+/**
+ * Author: concl
+ * Status: Tested on random data
+ */
 
 #include <bits/stdc++.h>
 
 using namespace std;
 using ll = long long;
-
 
 // Lazy Segment Tree for range sum queries and range updates
 class LazySegmentTree {
@@ -16,11 +15,11 @@ public:
     vector<ll> lazy;
     int n;
 
-    LazySegmentTree(const vector<ll>& arr) {
+    LazySegmentTree(const vector<ll> &arr) {
         n = arr.size();
         tree = vector<ll>(4 * n - 1, 0);
         lazy = vector<ll>(4 * n, 0);
-        build(arr); 
+        build(arr);
     }
 
     void _insert(int pos, int idx, int tl, int tr, ll val) {
@@ -38,13 +37,14 @@ public:
         tree[idx] = tree[2 * idx + 1] + tree[2 * idx + 2];
     }
 
-    void build(const vector<ll>& arr) {
-        for (int i = 0; i < n; i++) 
+    void build(const vector<ll> &arr) {
+        for (int i = 0; i < n; i++)
             _insert(i, 0, 0, n, arr[i]);
     }
 
     void _range_update(int l, int r, int idx, int tl, int tr, ll val) {
-        if (tl >= tr) return;
+        if (tl >= tr)
+            return;
         if (tl == tr - 1) {
             tree[idx] += val;
             return;
@@ -73,9 +73,12 @@ public:
 
     // [tl, tr) should always be a superset of [l, r)
     ll _query(int l, int r, int idx, int tl, int tr) {
-        if (tl >= tr) return 0;
-        if (tl == tr - 1) return tree[idx];
-        if (tl == l && tr == r) return tree[idx] + lazy[idx] * (tr - tl);
+        if (tl >= tr)
+            return 0;
+        if (tl == tr - 1)
+            return tree[idx];
+        if (tl == l && tr == r)
+            return tree[idx] + lazy[idx] * (tr - tl);
 
         ll extra = lazy[idx] * (r - l);
         int mid = (tl + tr) / 2;
@@ -96,7 +99,8 @@ int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
 
-    int n; cin >> n;
+    int n;
+    cin >> n;
     vector<ll> arr(n);
     for (int i = 0; i < n; i++) {
         cin >> arr[i];
@@ -104,12 +108,15 @@ int main() {
 
     LazySegmentTree tree(arr);
 
-    int q; cin >> q;
+    int q;
+    cin >> q;
     for (int _ = 0; _ < q; _++) {
 
-        string query_type; cin >> query_type;
+        string query_type;
+        cin >> query_type;
         if (query_type == "range_update") {
-            int l, r; ll val;
+            int l, r;
+            ll val;
             cin >> l >> r >> val;
             tree.range_update(l, r, val);
         } else if (query_type == "query") {

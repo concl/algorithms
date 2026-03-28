@@ -1,3 +1,7 @@
+/**
+ * Author: concl
+ * Status: Untested
+ */
 
 #include <bits/stdc++.h>
 
@@ -6,9 +10,8 @@ using namespace std;
 // Passed all tests from GFG
 vector<int> topological_sort(vector<vector<int>> &graph) {
     int n = graph.size();
-    
-    vector<int> output;
 
+    vector<int> output;
     unordered_set<int> roots;
     for (int x = 0; x < n; x++) {
         roots.insert(x);
@@ -21,12 +24,12 @@ vector<int> topological_sort(vector<vector<int>> &graph) {
             }
         }
     }
-    
-    vector<pair<int,int>> stack;
+
+    vector<pair<int, int>> stack;
     for (int root : roots) {
         stack.push_back({root, 0});
     }
-    
+
     unordered_set<int> visited;
     for (int root : roots) {
         visited.insert(root);
@@ -45,13 +48,12 @@ vector<int> topological_sort(vector<vector<int>> &graph) {
             stack.push_back({graph[stack.back().first][stack.back().second - 1], 0});
         }
     }
-    
+
     reverse(output.begin(), output.end());
     return output;
 }
 
 int main() {
-    
 
     return 0;
 }

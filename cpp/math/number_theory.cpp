@@ -1,3 +1,7 @@
+/**
+ * Author: concl
+ * Status: Untested
+ */
 
 #include <bits/stdc++.h>
 
@@ -202,7 +206,6 @@ int main() {
             else cout << "diff" << endl;
         }
     }
-
 }
 
 

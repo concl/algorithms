@@ -1,3 +1,7 @@
+/**
+ * Author: concl
+ * Status: Somewhat tested
+ */
 
 #include <bits/stdc++.h>
 
@@ -8,9 +12,7 @@ int log2_floor(unsigned long long x) {
     return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
 }
 
-// min or max element in range [l, r]
 class SparseTable {
-
 public:
     vector<vector<int>> table;
     function<int(int, int)> f; // min or max
@@ -32,18 +34,11 @@ public:
         }
     }
 
+    /**
+     * Returns the min or max element in range [l, r]
+     */
     int query(int l, int r) {
         int j = log2_floor(r - l + 1);
         return f(table[l][j], table[r - (1 << j) + 1][j]);
     }
-
 };
-
-int main() {
-
-
-    return 0;
-
-
-}
-

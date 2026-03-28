@@ -1,3 +1,7 @@
+/**
+ * Author: concl
+ * Status: Untested
+ */
 
 #include <bits/stdc++.h>
 #include <ext/pb_ds/assoc_container.hpp>
@@ -8,7 +12,6 @@
 #define hash_table gp_hash_table
 using namespace std;
 using namespace __gnu_pbds;
-
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
@@ -26,7 +29,7 @@ struct custom_hash {
     size_t operator()(const std::string &s) const {
         static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
         // Start with an offset (FNV offset basis + a bit of randomness)
-        uint64_t result = 0xcbf29ce484222325ULL ^ FIXED_RANDOM; 
+        uint64_t result = 0xcbf29ce484222325ULL ^ FIXED_RANDOM;
         // A typical FNV-like loop
         for (unsigned char c : s) {
             result ^= c;
@@ -38,7 +41,7 @@ struct custom_hash {
     template <typename T>
     size_t operator()(const std::vector<T> &v) const {
         static const uint64_t FIXED_RANDOM = chrono::steady_clock::now().time_since_epoch().count();
-        uint64_t result = 0xcbf29ce484222325ULL ^ FIXED_RANDOM; 
+        uint64_t result = 0xcbf29ce484222325ULL ^ FIXED_RANDOM;
         // Combine the hash of each element
         for (auto &elem : v) {
             // Recursively call our custom hash on the element
@@ -53,14 +56,14 @@ struct custom_hash {
 // for tuples
 namespace {
     template <class T>
-    inline void hash_combine(std::size_t& seed, T const& v) {
+    inline void hash_combine(std::size_t &seed, T const &v) {
         custom_hash hasher;
         seed ^= hasher(v) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
     }
 
     template <class Tuple, size_t Index = std::tuple_size<Tuple>::value - 1>
     struct HashValueImpl {
-        static void apply(size_t& seed, Tuple const& tuple) {
+        static void apply(size_t &seed, Tuple const &tuple) {
             HashValueImpl<Tuple, Index - 1>::apply(seed, tuple);
             hash_combine(seed, std::get<Index>(tuple));
         }
@@ -68,17 +71,16 @@ namespace {
 
     template <class Tuple>
     struct HashValueImpl<Tuple, 0> {
-        static void apply(size_t& seed, Tuple const& tuple) {
+        static void apply(size_t &seed, Tuple const &tuple) {
             hash_combine(seed, std::get<0>(tuple));
         }
     };
 }
 
-
 // combine hash values of all elements in tuple if all elements are numeric
 struct tuple_hash {
-    template <typename ... TT>
-    size_t operator()(std::tuple<TT...> const& tt) const {
+    template <typename... TT>
+    size_t operator()(std::tuple<TT...> const &tt) const {
         size_t seed = 0;
         HashValueImpl<std::tuple<TT...>>::apply(seed, tt);
         return seed;
