@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Untested
+ * Note: VERY VERY SLOW, FIX ASAP WITH PRECOMPUTATION
  */
 
 #include <bits/stdc++.h>
