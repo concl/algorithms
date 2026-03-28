@@ -1,5 +1,5 @@
 
-#include "../data_structures/segment_tree.cpp"
+#include "../cpp/data_structures/segment_tree.cpp"
 #include <cassert>
 
 void test_segment_tree() {
