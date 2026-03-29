@@ -13,7 +13,6 @@ const ll MOD = 1e9+7;
 const ll N = 1000000;
 
 ll modpow(ll a, ll b, ll m) {
-
     ll output = 1;
     while (b > 0) {
         if (b & 1) {
@@ -26,7 +25,6 @@ ll modpow(ll a, ll b, ll m) {
         b >>= 1;
     }
     return output;
-
 }
 
 ll dp[N] = {1};
@@ -52,7 +50,7 @@ ll inv_fact(ll n) {
 
 ll comb(ll n, ll k) {
     if (k > n) return 0;
-    return (fact(n) * inv_fact(k) % MOD * inv_fact(n - k) % MOD) % MOD;
+    return fact(n) * inv_fact(k) % MOD * inv_fact(n - k) % MOD;
 }
 
 ll permutations(ll n, vector<ll> split) {
