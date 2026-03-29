@@ -6,7 +6,7 @@ import subprocess
 
 PATH = os.path.abspath(os.path.dirname(__file__))
 CODE_FILE = "../cpp/data_structures/lazy_segment_tree.cpp"
-EXECUTABLE_FILE = "../builds/lazy_segment_tree"
+EXECUTABLE_FILE = "../build/lazy_segment_tree"
 
 
 def run_case(arr, queries, expected_answers):
