@@ -1,11 +1,7 @@
 # algorithms
 This repository contains various algorithms and data structures implementations
 
-Main Directory: General algorithms/other programs useful for various tasks.
-
-data_structures: self-explanatory
-
-numerical: Algorithms that do tasks primarily related to arithmetic.
+Main Directory: General programs useful for various tasks, pdf template.
 
 problems: Solutions to previous competitive programming problems.
 
