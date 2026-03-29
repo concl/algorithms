@@ -11,7 +11,7 @@ def run_program(executable, input_file):
         print(f"Error during program execution: {e}")
         return None
     except FileNotFoundError:
-        print(f"Executable '{executable}' not found.")
+        print(f"Executable (or input file) '{executable}' not found.")
         return None
 
 def verify_output(verifier_script, output):
