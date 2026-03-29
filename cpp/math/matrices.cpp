@@ -26,17 +26,23 @@ public:
         mat.resize(rows * cols, initial);
     }
 
-    Matrix(int rows, int cols, T initial) : rows(rows), cols(cols) {
-        mat.resize(rows * cols, initial);
+    Matrix(vector<vector<T>> matrix) {
+        rows = matrix.size();
+        cols = matrix[0].size();
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                mat[i * rows + j] = matrix[i][j];
+            }
+        }
     }
 
     Matrix operator+(Matrix &other) {
-
+        if (rows != other.rows || cols != other.cols)
+            throw invalid_argument("Matrices are not the same size");
+        
         Matrix output(rows, cols);
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; i++) {
-                output.mat[i][j] = mat[i][j] + other.mat[i][j];
-            }
+        for (int i = 0; i < rows * cols; i++) {
+            output.mat[i] = mat[i] + other.mat[i];
         }
         return output;
     }
@@ -46,16 +52,13 @@ public:
             throw invalid_argument("Matrices are not the same size");
 
         Matrix output(rows, cols);
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; i++) {
-                output.mat[i][j] = mat[i][j] - other.mat[i][j];
-            }
+        for (int i = 0; i < rows * cols; i++) {
+            output.mat[i] = mat[i] - other.mat[i];
         }
         return output;
     }
 
     Matrix operator*(Matrix &other) {
-        // return output;
         if (cols != other.rows)
             throw invalid_argument("Matrices are not conformable for multiplication");
 
@@ -64,7 +67,7 @@ public:
         for (int i = 0; i < rows; i++) {
             for (int k = 0; k < cols; k++) {
                 for (int j = 0; j < other.cols; j++) {
-                    output.mat[i][j] += mat[i][k] * other.mat[k][j]
+                    output.mat[i * rows + j] += mat[i * rows + k] * other.mat[k * other.rows + j];
                 }
             }
         }
@@ -131,11 +134,11 @@ int main() {
     Matrix<int> mat(2, 2);
     Matrix<int> mat2 = mat * mat;
 
-    Matrix<ll> fib(2, 2, {{1, 1}, {1, 0}});
+    Matrix<ll> fib({{1, 1}, {1, 0}});
 
     for (int i = 0; i < 250; i++) {
         cout << i << endl;
-        pow(fib, i).print();
+        cout << pow(fib, i) << endl;
     }
 
     return 0;

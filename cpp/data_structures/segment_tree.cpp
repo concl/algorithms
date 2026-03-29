@@ -4,9 +4,9 @@
  */
 
 #include <bits/stdc++.h>
-using namespace std;
 
-typedef long long ll;
+using namespace std;
+using ll = long long;
 
 template <typename T>
 class SegmentTree {

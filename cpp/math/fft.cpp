@@ -7,12 +7,19 @@
 
 #define Poly vector<complex<double>>
 #define Comp complex<double>
-#define forn(i,n) for(int i=0;(i)<(n);i++)
+#define forn(i, n) for (int i = 0; (i) < (n); i++)
 
 typedef long long ll;
 
-template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
-    cout << "["; forn(i,(int)v.size()){ if (i) cout << ", "; cout << v[i];} return cout << "]";
+template <typename A>
+ostream &operator<<(ostream &cout, vector<A> const &v) {
+    cout << "[";
+    forn(i, (int)v.size()) {
+        if (i)
+            cout << ", ";
+        cout << v[i];
+    }
+    return cout << "]";
 }
 
 const double PI = acos(-1);
@@ -22,7 +29,7 @@ using namespace std;
 // Returns the floor of the base 2 logarithm of x
 long long log2_floor(unsigned long long x) {
     // __builtin_clzll is built in count leading zeros for long long
-    return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1; 
+    return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
 }
 
 // Returns the number of 1-bits in x
@@ -31,15 +38,15 @@ int one_bits(uint32_t x) {
 }
 
 int next_power_of_two(int n) {
-    if (one_bits(n) <= 1) return n << 1;
+    if (one_bits(n) <= 1)
+        return n << 1;
     else {
         return 1 << (log2_floor(n) + 2);
     }
 }
 
-
 // extends polynomial to next power of two and returns the lookup table
-vector<Comp> preprocessing(Poly& polynomial, int new_size) {
+vector<Comp> preprocessing(Poly &polynomial, int new_size) {
 
     int n = polynomial.size();
     for (int i = n; i < new_size; i++) {
@@ -51,23 +58,22 @@ vector<Comp> preprocessing(Poly& polynomial, int new_size) {
     double root_angle = 2 * PI / new_size;
     double angle = 0;
     for (int i = 0; i < new_size; i++) {
-        lookup[i] = Comp(cos(angle),sin(angle));
+        lookup[i] = Comp(cos(angle), sin(angle));
         angle = root_angle * (i + 1);
     }
 
     return lookup;
 }
-vector<Comp> preprocessing(Poly& polynomial) {
+vector<Comp> preprocessing(Poly &polynomial) {
     int n = polynomial.size();
     int new_size = next_power_of_two(n);
     return preprocessing(polynomial, new_size);
 }
 
-
 // input must be of power of 2 size
 // lookup is an array of all the roots of unity
 // ind is the index of the primitive root of unity for the given dft
-Poly dft(Poly& polynomial, vector<Comp>& lookup, int ind) {
+Poly dft(Poly &polynomial, vector<Comp> &lookup, int ind) {
     int n = polynomial.size();
     if (n == 1) {
         return {polynomial[0]};
@@ -76,7 +82,7 @@ Poly dft(Poly& polynomial, vector<Comp>& lookup, int ind) {
     Poly even;
     Poly odd;
 
-    for (int i = 0; i < n; i+=2) {
+    for (int i = 0; i < n; i += 2) {
         even.push_back(polynomial[i]);
         odd.push_back(polynomial[i + 1]);
     }
@@ -99,14 +105,14 @@ Poly dft(Poly& polynomial, vector<Comp>& lookup, int ind) {
         current += ind + n;
         current %= n;
     }
-    return transformed;    
+    return transformed;
 }
 
-Poly dft(Poly& polynomial, vector<Comp>& lookup) {
+Poly dft(Poly &polynomial, vector<Comp> &lookup) {
     return dft(polynomial, lookup, 1);
 }
 
-Poly idft(Poly& transformed, vector<Comp>& lookup) {
+Poly idft(Poly &transformed, vector<Comp> &lookup) {
     int n = transformed.size();
     Poly polynomial = dft(transformed, lookup, -1);
     for (int i = 0; i < n; i++) {
@@ -115,8 +121,7 @@ Poly idft(Poly& transformed, vector<Comp>& lookup) {
     return polynomial;
 }
 
-
-Poly multiply(Poly& polynomial1, Poly& polynomial2) {
+Poly multiply(Poly &polynomial1, Poly &polynomial2) {
     int n = polynomial1.size() + polynomial2.size() - 1;
     int new_size = next_power_of_two(n);
     vector<Comp> lookup = preprocessing(polynomial1, new_size);
@@ -133,13 +138,11 @@ Poly multiply(Poly& polynomial1, Poly& polynomial2) {
     return idft(con, lookup);
 }
 
-
 int main() {
-
 
     Poly polynomial1 = {1, 2};
     Poly polynomial2 = {2, 3};
-    
+
     Poly result = multiply(polynomial1, polynomial2);
     cout << result << endl;
 

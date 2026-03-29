@@ -10,7 +10,6 @@
 using namespace std;
 
 class BIT {
-
 public:
     vector<int> tree;
     int n;

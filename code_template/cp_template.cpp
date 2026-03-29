@@ -15,15 +15,15 @@ using namespace __gnu_pbds; // includes gp_hash_table
 #define all(x) (x).begin(), (x).end()
 #define len(x) (int) x.size()
 
-typedef long long ll;
-typedef unsigned long long ull;
-typedef long double ld;
-typedef pair<int, int> pii;
-typedef pair<ll, ll> pll;
-typedef vector<int> vi;
-typedef vector<ll> vll;
-typedef vector<vi> vvi;
-typedef vector<vll> vvl;
+using ll = long long;
+using ull = unsigned long long;
+using vi = vector<int>;
+using pii = pair<int, int>;
+using ld = long double;
+using pll = pair<ll, ll>;
+using vll = vector<ll>;
+using vvi = vector<vi>;
+using vvl = vector<vll>;
 
 struct custom_hash {
     static uint64_t splitmix64(uint64_t x) {
