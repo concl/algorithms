@@ -144,9 +144,9 @@ vector<T>& operator+=(vector<T>& a, const vector<T>& b) {
 
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p);
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v);
-template<typename K, typename V> ostream& operator<< (ostream &cout, unordered_map<K, V> const &m);
+template<typename K, typename V, typename Hash> ostream& operator<< (ostream &cout, unordered_map<K, V, Hash> const &m);
 template<typename K, typename V> ostream& operator<< (ostream &cout, map<K, V> const &m);
-template<typename A> ostream& operator<< (ostream &cout, unordered_set<A> const &s);
+template<typename A, typename Hash> ostream& operator<< (ostream &cout, unordered_set<A, Hash> const &s);
 template<typename A> ostream& operator<< (ostream &cout, set<A> const &s);
 template<typename A> ostream& operator<< (ostream &cout, multiset<A> const &s);
 template<typename K, typename V = null_type> ostream& operator<<(ostream &os, OST<K,V> const& s);
@@ -163,8 +163,8 @@ template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
 }
 
 // print maps
-template<typename K, typename V>
-ostream& operator<< (ostream &cout, unordered_map<K, V> const &m) {
+template<typename K, typename V, typename Hash>
+ostream& operator<< (ostream &cout, unordered_map<K, V, Hash> const &m) {
     cout << "{";
     for (auto it = m.begin(); it != m.end(); ++it) {
         if (it != m.begin()) cout << ", ";
@@ -184,8 +184,8 @@ ostream& operator<< (ostream &cout, map<K, V> const &m) {
 }
 
 // print sets
-template<typename A>
-ostream& operator<< (ostream &cout, unordered_set<A> const &s) {
+template<typename A, typename Hash>
+ostream& operator<< (ostream &cout, unordered_set<A, Hash> const &s) {
     cout << "{";
     for (auto it = s.begin(); it != s.end(); ++it) {
         if (it != s.begin()) cout << ", ";
