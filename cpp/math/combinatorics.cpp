@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Was previously very slow, but after fixing it works on all problems tried on
  */
 
 #include <bits/stdc++.h>
@@ -27,7 +27,7 @@ ll modpow(ll a, ll b, ll m) {
     return output;
 }
 
-ll dp[N] = {1};
+ll factorial[N] = {1};
 ll inv_factorial[N] = {1};
 ll biggest = 0;
 ll fact(ll n) {
@@ -35,11 +35,11 @@ ll fact(ll n) {
         return 1;
 
     for (ll i = biggest + 1; i <= n; i++) {
-        dp[i] = (dp[i - 1] * i) % MOD;
-        inv_factorial[i] = modpow(dp[i], MOD - 2, MOD);
+        factorial[i] = (factorial[i - 1] * i) % MOD;
+        inv_factorial[i] = modpow(factorial[i], MOD - 2, MOD);
     }
     biggest = max(n, biggest);
-    return dp[n];
+    return factorial[n];
 }
 
 ll inv_fact(ll n) {

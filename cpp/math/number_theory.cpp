@@ -111,15 +111,14 @@ vector<int> primes(int n) {
     return out;
 }
 
-
 class ModInt {
 public:
     ll val;
     static const ll MOD = 1e9 + 7;
 
     ModInt(ll val) : val(val) {
-        val = val % MOD;
-        if (val < 0) val += MOD; // handle negative values
+        this->val = val % MOD;
+        if (val < 0) this->val += MOD; // handle negative values
     }
 
     ModInt inv() const {
@@ -151,6 +150,7 @@ public:
     ModInt& operator-=(const ModInt& other) {
         val -= other.val;
         val %= MOD;
+        if (val < 0) val += MOD;
         return *this;
     }
 
@@ -185,9 +185,12 @@ public:
 
     friend istream& operator>>(istream& is, ModInt& mint) {
         is >> mint.val;
+        mint.val %= MOD;
+        if (mint.val < 0) mint.val += MOD;
         return is;
     }
 };
+
 
 int main() {
 

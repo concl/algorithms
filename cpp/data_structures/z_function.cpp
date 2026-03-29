@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Somewhat tested, works on all problems tried on
  */
 
 #include <bits/stdc++.h>

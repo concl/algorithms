@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Untested
+ * TODO: implement inverse, determinant, and RREF with both double and modular arithmetic
  */
 
 #include <bits/stdc++.h>
@@ -9,7 +10,7 @@ typedef long long ll;
 
 using namespace std;
 
-// unfinished by a long shot
+// unfinished
 const long long MOD = 1000000007;
 
 template <typename T>
