@@ -1,7 +1,6 @@
 /**
  * Author: concl
  * Status: Untested
- * Note: VERY VERY SLOW, FIX ASAP WITH PRECOMPUTATION
  */
 
 #include <bits/stdc++.h>
@@ -11,9 +10,8 @@ typedef long long ll;
 using namespace std;
 
 const ll MOD = 1e9+7;
-
-
 const ll N = 1000000;
+
 ll modpow(ll a, ll b, ll m) {
 
     ll output = 1;
@@ -41,7 +39,7 @@ ll fact(ll n) {
         dp[i] = (dp[i-1] * i) % MOD;
         inv_factorial[i] = modpow(dp[i], MOD-2, MOD);
     }
-    biggest = n;
+    biggest = max(n, biggest);
     return dp[n];
 }
 
