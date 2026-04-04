@@ -7,11 +7,6 @@
 
 using namespace std;
 
-// Returns the floor of the base 2 logarithm of x
-int log2_floor(unsigned long long x) {
-    return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
-}
-
 class SparseTable {
 public:
     vector<vector<int>> table;
@@ -34,9 +29,12 @@ public:
         }
     }
 
-    /**
-     * Returns the min or max element in range [l, r]
-     */
+    // Returns the floor of the base 2 logarithm of x
+    int log2_floor(unsigned long long x) {
+        return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1;
+    }
+
+    // Returns the min or max element in range [l, r]
     int query(int l, int r) {
         int j = log2_floor(r - l + 1);
         return f(table[l][j], table[r - (1 << j) + 1][j]);
