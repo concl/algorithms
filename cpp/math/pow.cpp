@@ -24,7 +24,7 @@ int pow(int a, int b) {
 
 }
 
-// this isnt safe if m is close to the max 64 bit int and a ** b is larger than 2**63 - 1
+// possible overflow issues
 ll modpow(ll a, ll b, ll m) {
     ll output = 1;
     while (b > 0) {
