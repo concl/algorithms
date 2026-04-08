@@ -9,6 +9,8 @@ using namespace std;
 
 using ll = long long;
 
+const ll INF = LLONG_MAX;
+
 /**
  * Description: Uses Dijkstra's algorithm to find the distance of the shortest path between
  * a given node and all other nodes in a graph. For nodes that are unreachable, the distance
@@ -88,4 +90,34 @@ ll distance(vector<map<int, ll>> &graph, int start, int target) {
     }
 
     return -1;
+}
+
+/**
+ * Description: Returns a matrix[i][j] that stores the shortest path from any node i
+ * to any node j, using the Floyd-Warshall algorithm.
+ */
+vector<vector<ll>> all_pairs_shortest_distances(vector<map<int, ll>> &graph) {
+    
+    int n = graph.size();
+    
+    vector<vector<ll>> res(n, vector<ll>(n, INF));
+    
+    for (int i = 0; i < n; i++) {
+        res[i][i] = 0;
+        for (const auto& [nbr, weight] : graph[i]) {
+            res[i][nbr] = weight;
+        }
+    }
+    
+    for (int k = 0; k < n; k++) {
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (res[i][k] != INF && res[k][j] != INF) {
+                    res[i][j] = min(res[i][j], res[i][k] + res[k][j]);
+                }
+            }
+        }
+    }
+    
+    return res;
 }
