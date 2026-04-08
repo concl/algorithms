@@ -241,6 +241,10 @@ void print(Args&&... args) {
 const ll MOD = 1e9+7;
 // const ll MOD = 998244353;
 
+void solve() {
+    
+
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
