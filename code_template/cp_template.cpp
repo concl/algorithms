@@ -252,6 +252,7 @@ int main() {
     cin.tie(NULL);
     
     
+    solve();
     
     return 0;
 }
