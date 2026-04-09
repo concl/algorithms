@@ -3,11 +3,12 @@
  * Status: Untested
  */
 
- #include <bits/stdc++.h>
-
-typedef long long ll;
+#include <bits/stdc++.h>
 
 using namespace std;
+
+using ll = long long;
+
 int int_sqrt(int n) {
   // Base case
   if (n < 2) {
