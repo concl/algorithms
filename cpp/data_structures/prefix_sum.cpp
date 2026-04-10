@@ -2,6 +2,7 @@
  * Author: concl
  * Status: Untested
  * Description: Exposes a simple class for prefix sums, which can be used to answer range sum queries in O(1) time after O(n) preprocessing time.
+ * Tags: prefix sums, range queries
  */
 
 #include <bits/stdc++.h>
