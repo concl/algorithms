@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Untested
+ * Tags: root finding, Newton's method, numerical methods
  */
 
 #include <bits/stdc++.h>

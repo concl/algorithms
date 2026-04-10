@@ -1,7 +1,9 @@
 /**
  * Author: concl
- * Status: RREF is somewhat tested with random matrices
+ * Status: RREF is somewhat tested with random matrices.
+ * Matrix exponentiation is somewhat tested on Fibonacci numbers.
  * TODO: implement and test inverse, determinant, and RREF with both double and modular arithmetic
+ * Tags: matrices, linear algebra, RREF, matrix exponentiation
  */
 
 #include <bits/stdc++.h>
@@ -84,7 +86,7 @@ public:
         for (int i = 0; i < rows; i++) {
             for (int k = 0; k < cols; k++) {
                 for (int j = 0; j < other.cols; j++) {
-                    output.get(i, j) += mat.get(i, k) * other.get(k, j);
+                    output.get(i, j) += get(i, k) * other.get(k, j);
                 }
             }
         }
@@ -232,18 +234,3 @@ Matrix<T> pow(Matrix<T> mat, ll p) {
 
     return output;
 }
-
-// int main() {
-
-//     Matrix<int> mat(2, 2);
-//     Matrix<int> mat2 = mat.matmul(mat);
-
-//     Matrix<ll> fib({{1, 1}, {1, 0}});
-
-//     for (int i = 0; i < 250; i++) {
-//         cout << i << endl;
-//         cout << pow(fib, i) << endl;
-//     }
-
-//     return 0;
-// }

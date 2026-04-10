@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Somewhat tested on GFG
  */
 
 #include <bits/stdc++.h>
@@ -8,6 +8,7 @@
 using namespace std;
 
 // Passed all tests from GFG
+// Uses DFS
 vector<int> topological_sort(vector<vector<int>> &graph) {
     int n = graph.size();
 

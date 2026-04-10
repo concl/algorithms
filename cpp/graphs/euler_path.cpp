@@ -1,25 +1,20 @@
 /**
  * Author: concl
  * Status: Untested
+ * Tags: graphs, euler path, euler tour, hierholzer's algorithm
  */
 
 #include <bits/stdc++.h>
 
-#define pb push_back
-#define mp make_pair
-
-typedef long long ll;
-typedef vector<int> vi;
-
 using namespace std;
 
 // returns the path taken in euler path for an undirected graph
-vector<int> euler_path(unordered_map<int, unordered_set<int>>& graph) {
+vector<int> euler_path(unordered_map<int, unordered_set<int>> &graph) {
     int n = graph.size();
-    
+
     int start_node = 0; // will be set to one of the nodes with odd degree if applicable, otherwise to some node with edges
     int odds = 0;
-    for (auto& kv : graph) {
+    for (auto &kv : graph) {
         if (kv.second.size() % 2 == 1) {
             start_node = kv.first;
             odds++;
@@ -51,22 +46,22 @@ vector<int> euler_path(unordered_map<int, unordered_set<int>>& graph) {
         }
     }
 
-    reverse(path.begin(),path.end());
+    reverse(path.begin(), path.end());
     return path;
 }
 
 // finds an euler path for a directed graph. currently assumes that there exists a path
-vector<int> euler_path_directed(unordered_map<int, unordered_set<int>>& graph) {
+vector<int> euler_path_directed(unordered_map<int, unordered_set<int>> &graph) {
     int n = graph.size();
 
-    unordered_map<int,int> deg;
+    unordered_map<int, int> deg;
     for (auto kv : graph) {
         deg[kv.first] += kv.second.size();
         for (int x : kv.second) {
             deg[x] -= 1;
         }
     }
-    
+
     int start = deg.begin()->first;
     int end = deg.begin()->first;
     for (auto kv : deg) {
@@ -94,15 +89,13 @@ vector<int> euler_path_directed(unordered_map<int, unordered_set<int>>& graph) {
         }
     }
 
-    reverse(path.begin(),path.end());
+    reverse(path.begin(), path.end());
     return path;
 }
 
 int main() {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    
-    
 
     return 0;
 }

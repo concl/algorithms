@@ -1,31 +1,30 @@
 /**
  * Author: concl
  * Status: Untested
+ * Description: Exposes a simple class for prefix sums, which can be used to answer range sum queries in O(1) time after O(n) preprocessing time.
  */
 
 #include <bits/stdc++.h>
 
 using namespace std;
 
-// make sure arr isn't empty
-vector<int> make_prefix_sum(vector<int> &arr) {
-    int n = arr.size();
-    vector<int> out(n);
-    out[0] = arr[0];
+template <typename T>
+class PrefixSum {
+public:
+    vector<T> prefix_sum;
 
-    for (int i = 1; i < n; i++) {
-        out[i] = arr[i] + out[i - 1];
+    PrefixSum(const vector<T> &array) {
+        prefix_sum.resize(array.size() + 1);
+        for (int i = 0; i < array.size(); i++) {
+            prefix_sum[i + 1] = prefix_sum[i] + array[i];
+        }
     }
-    return out;
-}
 
-// sum of the elements from l to r inclusive, given a prefix sum
-int query(vector<int> &pref_sum, int l, int r) {
-    if (l == 0) {
-        return pref_sum[r];
+    // returns the sum of the subarray from [start, end)
+    T query(int start, int end) {
+        return prefix_sum[end] - prefix_sum[start];
     }
-    return pref_sum[r] - pref_sum[l];
-}
+};
 
 int main() {
 

@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Untested
+ * Tags: modular arithmetic, modular inverse, modular exponentiation, gcd, lcm
  */
 
 #include <bits/stdc++.h>

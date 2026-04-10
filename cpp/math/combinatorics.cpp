@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Was previously very slow, but after fixing it works on all problems tried on
+ * Tags: combinatorics, modular arithmetic, binomial coefficients, permutations
  */
 
 #include <bits/stdc++.h>

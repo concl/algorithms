@@ -1,6 +1,7 @@
 /**
  * Author: concl
  * Status: Untested
+ * Tags: prime sieve, sieve of eratosthenes, prime factorization
  */
 
 #include <bits/stdc++.h>
