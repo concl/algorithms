@@ -1,6 +1,8 @@
 /**
  * Author: concl
  * Status: Somewhat tested
+ * Description: Implements a sparse table for idempotent functions, which can be used to answer range queries in O(1) time after O(n log n) preprocessing time.
+ * Tags: sparse table, range queries, idempotent functions, static RMQ
  */
 
 #include <bits/stdc++.h>

@@ -3,6 +3,7 @@
  * Status: Untested
  * Description: Implements a binary indexed tree for
  * range queries with a left endpoint of 0, e.g. [0, k]
+ * Tags: fenwick tree, binary indexed tree, range queries, point updates, BIT
  */
 
 #include <bits/stdc++.h>

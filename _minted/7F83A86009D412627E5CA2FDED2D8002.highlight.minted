@@ -1,0 +1,33 @@
+\begin{MintedVerbatim}[commandchars=\\\{\}]
+\PYG{c+cm}{/**}
+\PYG{c+cm}{ * Author: concl}
+\PYG{c+cm}{ * Status: Untested}
+\PYG{c+cm}{ */}
+
+\PYG{c+cp}{\PYGZsh{}include}\PYG{+w}{ }\PYG{c+cpf}{\PYGZlt{}bits/stdc++.h\PYGZgt{}}
+
+\PYG{k}{using}\PYG{+w}{ }\PYG{k}{namespace}\PYG{+w}{ }\PYG{n+nn}{std}\PYG{p}{;}
+
+\PYG{k}{const}\PYG{+w}{ }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{M}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m+mi}{8}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Maximum number of children for each B\PYGZhy{}Tree node}
+
+\PYG{c+c1}{// B\PYGZhy{}Tree Node}
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{K}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{T}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{BTreeMapNode}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+\PYG{k}{private}\PYG{o}{:}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{K}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{keys}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Vector to store keys}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{T}\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{values}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Vector to store values corresponding to keys}
+\PYG{+w}{    }\PYG{n}{vector}\PYG{o}{\PYGZlt{}}\PYG{n}{BTreeMapNode}\PYG{o}{\PYGZlt{}}\PYG{n}{K}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{T}\PYG{o}{\PYGZgt{}*\PYGZgt{}}\PYG{+w}{ }\PYG{n}{children}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Pointers to child nodes}
+\PYG{+w}{    }\PYG{k+kt}{bool}\PYG{+w}{ }\PYG{n}{is\PYGZus{}leaf}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Flag to check if the node is a leaf}
+
+\PYG{p}{\PYGZcb{};}
+
+\PYG{k}{template}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{K}\PYG{p}{,}\PYG{+w}{ }\PYG{k}{typename}\PYG{+w}{ }\PYG{n+nc}{V}\PYG{o}{\PYGZgt{}}
+\PYG{k}{class}\PYG{+w}{ }\PYG{n+nc}{BTreeMap}\PYG{+w}{ }\PYG{p}{\PYGZob{}}
+
+\PYG{k}{private}\PYG{o}{:}
+
+\PYG{+w}{    }\PYG{n}{BTreeMapNode}\PYG{o}{\PYGZlt{}}\PYG{n}{K}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{V}\PYG{o}{\PYGZgt{}*}\PYG{+w}{ }\PYG{n}{root}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Pointer to the root node of the B\PYGZhy{}Tree}
+\PYG{+w}{    }\PYG{k+kt}{int}\PYG{+w}{ }\PYG{n}{min\PYGZus{}keys}\PYG{p}{;}\PYG{+w}{ }\PYG{c+c1}{// Minimum number of keys in a non\PYGZhy{}root node}
+
+\PYG{p}{\PYGZcb{};}
+\end{MintedVerbatim}
