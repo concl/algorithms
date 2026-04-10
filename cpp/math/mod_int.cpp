@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Somewhat tested
  */
 
 #include <bits/stdc++.h>
@@ -11,7 +11,9 @@ using ll = long long;
 
 /**
  * Class for modular arithmetic with a prime modulus.
- */
+ * 
+ * Rename to "Mint" or "Mod" for more a concise name.
+ */ 
 class ModInt {
 public:
     ll val;
@@ -100,6 +102,22 @@ public:
 
     bool operator!=(const ModInt& other) const {
         return val != other.val;
+    }
+
+    friend bool operator==(const ModInt& lhs, ll rhs) {
+        return lhs == ModInt(rhs);
+    }
+
+    friend bool operator==(ll lhs, const ModInt& rhs) {
+        return ModInt(lhs) == rhs;
+    }
+
+    friend bool operator!=(const ModInt& lhs, ll rhs) {
+        return !(lhs == rhs);
+    }
+
+    friend bool operator!=(ll lhs, const ModInt& rhs) {
+        return !(lhs == rhs);
     }
 
     friend ostream& operator<<(ostream& os, const ModInt& mint) {
