@@ -1,4 +1,3 @@
-
 #include "../cpp/data_structures/segment_tree.cpp"
 #include <cassert>
 

@@ -1,7 +1,7 @@
 /**
  * Author: concl
- * Status: Untested
- * TODO: implement inverse, determinant, and RREF with both double and modular arithmetic
+ * Status: RREF is somewhat tested with random matrices
+ * TODO: implement and test inverse, determinant, and RREF with both double and modular arithmetic
  */
 
 #include <bits/stdc++.h>
@@ -29,9 +29,10 @@ public:
     Matrix(vector<vector<T>> matrix) {
         rows = matrix.size();
         cols = matrix[0].size();
+        mat.resize(rows * cols);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                mat.get(i, j) = matrix[i][j];
+                get(i, j) = matrix[i][j];
             }
         }
     }
@@ -90,12 +91,66 @@ public:
 
         return output;
     }
+    
+    /**
+     * Concatenates two matrices along the specified dim.
+     *
+     * dim = 0: concatenate vertically (along the row axis)
+     * dim = 1: concatenate horizontally (along the column axis)
+     */
+    Matrix concat(Matrix& other, int dim=0) const {
+        if (dim == 0) {
+            if (cols != other.cols)
+                throw invalid_argument("Matrices are not conformable for concatenation");
+
+            Matrix output(rows + other.rows, cols);
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    output.get(i, j) = get(i, j);
+                }
+            }
+            for (int i = 0; i < other.rows; i++) {
+                for (int j = 0; j < other.cols; j++) {
+                    output.get(rows + i, j) = other.get(i, j);
+                }
+            }
+            return output;
+        } else if (dim == 1) {
+            if (rows != other.rows)
+                throw invalid_argument("Matrices are not conformable for concatenation");
+
+            Matrix output(rows, cols + other.cols);
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    output.get(i, j) = get(i, j);
+                }
+            }
+            for (int i = 0; i < other.rows; i++) {
+                for (int j = 0; j < other.cols; j++) {
+                    output.get(i, cols + j) = other.get(i, j);
+                }
+            }
+            return output;
+        } else {
+            throw invalid_argument("Axis must be 0 or 1");
+        }
+    }
+    
+    Matrix submatrix(int row_start, int row_end, int col_start, int col_end) const {
+        Matrix output(row_end - row_start, col_end - col_start);
+        for (int i = row_start; i < row_end; i++) {
+            for (int j = col_start; j < col_end; j++) {
+                output.get(i - row_start, j - col_start) = get(i, j);
+            }
+        }
+        return output;
+    }
 
     Matrix transpose() const {
         Matrix output(cols, rows);
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                output.get(j, i) = mat.get(i, j);
+                output.get(j, i) = get(i, j);
             }
         }
         return output;
@@ -110,11 +165,11 @@ public:
 
         for (int ro = 0; ro < rows; ro++) {
 
-            T curr = mat.get(ro, ro);
+            T curr = get(ro, ro);
             int idx = ro;
             for (int lower = ro + 1; lower < rows; lower++) {
-                if (abs(mat.get(lower, ro)) > abs(curr)) {
-                    curr = mat.get(lower, ro);
+                if (abs(get(lower, ro)) > abs(curr)) {
+                    curr = get(lower, ro);
                     idx = lower;
                 }
             }
@@ -124,20 +179,20 @@ public:
             // swap rows
             if (idx != ro) {
                 for (int co = 0; co < cols; co++)
-                    swap(mat.get(ro, co), mat.get(idx, co));
+                    swap(get(ro, co), get(idx, co));
             }
 
             for (int other = 0; other < rows; other++) {
                 if (other == ro) continue;
 
-                T factor = mat.get(other, ro) / mat.get(ro, ro);
+                T factor = get(other, ro) / get(ro, ro);
                 for (int co = ro; co < cols; co++)
-                    mat.get(other, co) -= factor * mat.get(ro, co);
+                    get(other, co) -= factor * get(ro, co);
             }
 
-            T pivot = mat.get(ro, ro);
+            T pivot = get(ro, ro);
             for (int co = ro; co < cols; co++) {
-                mat.get(ro, co) /= pivot;
+                get(ro, co) /= pivot;
             }
         }
     }
@@ -149,6 +204,7 @@ public:
             }
             cout << endl;
         }
+        return os;
     }
 };
 
@@ -177,17 +233,17 @@ Matrix<T> pow(Matrix<T> mat, ll p) {
     return output;
 }
 
-int main() {
+// int main() {
 
-    Matrix<int> mat(2, 2);
-    Matrix<int> mat2 = mat.matmul(mat);
+//     Matrix<int> mat(2, 2);
+//     Matrix<int> mat2 = mat.matmul(mat);
 
-    Matrix<ll> fib({{1, 1}, {1, 0}});
+//     Matrix<ll> fib({{1, 1}, {1, 0}});
 
-    for (int i = 0; i < 250; i++) {
-        cout << i << endl;
-        cout << pow(fib, i) << endl;
-    }
+//     for (int i = 0; i < 250; i++) {
+//         cout << i << endl;
+//         cout << pow(fib, i) << endl;
+//     }
 
-    return 0;
-}
+//     return 0;
+// }
