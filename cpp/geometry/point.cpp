@@ -3,9 +3,14 @@
  * Status: The cross product is tested
  */
 
+#pragma once
 #include <bits/stdc++.h>
 
 using namespace std;
+
+using ll = long long;
+
+const double EPS = 1e-9;
 
 /**
  * Implements a Point in 2D space (2D vector) with useful properties.
