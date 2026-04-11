@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Untested, Unfinished
  * Description: Returns the intersection point of 2 line segments if it exists
  * If the line segments are collinear, returns the endpoints of the intersection segment
  */
