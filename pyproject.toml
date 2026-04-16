@@ -1,0 +1,10 @@
+[project]
+name = "algorithms"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "latexminted>=0.7.1",
+    "pygments>=2.20.0",
+]
