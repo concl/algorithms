@@ -5,6 +5,8 @@
 \usepackage{titlesec}
 \usepackage{minted}
 \usepackage[strings]{underscore}
+\usepackage[normalem]{ulem}
+\renewcommand{\ULdepth}{1.8pt}
 
 \setlength{\columnsep}{0.35cm}
 \setlength{\columnseprule}{0.2pt}
@@ -14,31 +16,28 @@
     breaklines,
     breakanywhere,
     tabsize=4,
-    linenos,
     numbersep=2pt,
     frame=lines,
     framesep=1.5mm,
-    xleftmargin=8pt
+    % xleftmargin=8pt
 }
 
 \titleformat{\section}[block]{\normalfont\Large\bfseries}{}{0pt}{}
 
 \newcommand{\IncludeCode}[1]{
-\vspace{0.15cm}
-\noindent\textbf{File:} \texttt{\detokenize{#1}}
-\vspace{-0.1cm}
+\noindent{\fontsize{7pt}{8.4pt}\selectfont \textbf{File:} \texttt{\detokenize{#1}}}
 \expandafter\inputminted\expandafter{cpp}{\detokenize{#1}}
 }
 
 \begin{document}
 \begin{multicols*}{3}
 
-\section{General}
+\section{\uline{General}}
 \IncludeCode{code_template/clean_template.cpp}
 \IncludeCode{cpp/binary_search.cpp}
 \IncludeCode{cpp/bit_tricks.cpp}
 
-\section{Data Structures}
+\section{\uline{Data Structures}}
 \IncludeCode{cpp/data_structures/dsu.cpp}
 \IncludeCode{cpp/data_structures/fenwick_tree.cpp}
 \IncludeCode{cpp/data_structures/lazy_segment_tree.cpp}
@@ -46,21 +45,22 @@
 \IncludeCode{cpp/data_structures/segment_tree.cpp}
 \IncludeCode{cpp/data_structures/sparse_table.cpp}
 
-\section{Geometry}
+\section{\uline{Geometry}}
 \IncludeCode{cpp/geometry/point.hpp}
 
-\section{Graphs}
+\section{\uline{Graphs}}
 \IncludeCode{cpp/graphs/basic_graph.cpp}
 \IncludeCode{cpp/graphs/shortest_paths.cpp}
 \IncludeCode{cpp/graphs/euler_path.cpp}
 \IncludeCode{cpp/graphs/topological_sort.cpp}
 
-\section{Math}
+\section{\uline{Math}}
 \IncludeCode{cpp/math/combinatorics.cpp}
 \IncludeCode{cpp/math/fft.cpp}
 \IncludeCode{cpp/math/number_theory.cpp}
+\IncludeCode{cpp/math/matrices.cpp}
 
-\section{Strings}
+\section{\uline{Strings}}
 \IncludeCode{cpp/strings/aho_corasick.cpp}
 \IncludeCode{cpp/strings/kmp.cpp}
 \IncludeCode{cpp/strings/z_function.cpp}

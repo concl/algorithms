@@ -7,11 +7,11 @@
 
 using namespace std;
 
-bool is_power_of_two(unsigned long long n) {
+bool is_power_of_two(uint64_t n) {
     return (n & (n - 1)) == 0;
 }
 
-unsigned int next_power_of_two(unsigned int n) {
+uint32_t next_power_of_two(uint32_t n) {
     if (n <= 1) return 2;
 
     // Set all bits after the highest set bit
@@ -25,7 +25,7 @@ unsigned int next_power_of_two(unsigned int n) {
     return n + 1;
 }
 
-unsigned long long next_power_of_two(unsigned long long n) {
+uint64_t next_power_of_two(uint64_t n) {
     if (n <= 1) return 2;
 
     // Set all bits after the highest set bit
@@ -41,7 +41,7 @@ unsigned long long next_power_of_two(unsigned long long n) {
 }
 
 // Returns the floor of the base 2 logarithm of x
-long long log2_floor(unsigned long long x) {
+int64_t log2_floor(int64_t x) {
     // __builtin_clzll is built in count leading zeros for long long
     return x ? __builtin_clzll(1) - __builtin_clzll(x) : -1; 
 }
