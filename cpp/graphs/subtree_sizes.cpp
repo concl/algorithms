@@ -7,14 +7,12 @@
 
 using namespace std;
 
-typedef pair<int, int> pii;
-
 // given an adjacency list for a graph, for each node,
 // treats it as a root and finds the size of the subtree
 // rooted at each child.
-vector<vector<pii>> subtree_sizes(vector<vector<int>> &adj) {
+vector<vector<pair<int,int>>> subtree_sizes(vector<vector<int>> &adj) {
     int n = adj.size();
-    vector<vector<pii>> subtree(n);
+    vector<vector<pair<int,int>>> subtree(n);
 
     function<int(int, int)> dfs = [&](int node, int parent) {
         int res = 1;

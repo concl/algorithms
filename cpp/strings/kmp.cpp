@@ -24,8 +24,3 @@ vector<int> kmp(string &s) {
 
     return output;
 }
-
-int main() {
-
-    return 0;
-}

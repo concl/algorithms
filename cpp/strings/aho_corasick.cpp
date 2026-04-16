@@ -4,23 +4,22 @@
  */
 
 #include <bits/stdc++.h>
-#define ll long long
+
 using namespace std;
-
-const int alphabet_size = 26;
-
-// Aho-Corasick Vertex
-struct Vertex {
-    int edges[alphabet_size], fail;
-    bool end = false;
-    Vertex() {
-        fill(edges, edges + alphabet_size, -1);
-        fail = -1;
-    }
-};
 
 // Aho-Corasick wrapper
 class AhoCorasick {
+private:
+    static const int ALPHABET_SIZE = 26;
+    struct Vertex {
+        int edges[ALPHABET_SIZE], fail;
+        bool end = false;
+        Vertex() {
+            fill(edges, edges + ALPHABET_SIZE, -1);
+            fail = -1;
+        }
+    };
+
 public:
     vector<Vertex> trie;
     AhoCorasick() {
@@ -61,7 +60,7 @@ public:
             int u = q.front();
             q.pop();
 
-            for (int i = 0; i < alphabet_size; i++) {
+            for (int i = 0; i < ALPHABET_SIZE; i++) {
                 int &v = trie[u].edges[i];
 
                 if (v == -1) {
@@ -70,7 +69,8 @@ public:
                 }
 
                 int j = trie[u].fail;
-                while (trie[j].edges[i] == -1) j = trie[j].fail;
+                while (trie[j].edges[i] == -1)
+                    j = trie[j].fail;
                 trie[v].fail = trie[j].edges[i];
                 trie[v].end |= trie[trie[v].fail].end;
 
@@ -82,7 +82,7 @@ public:
     bool match(string s) {
         int index = 0;
         for (auto x : s) {
-            if (trie[index].edges[c_index(x)] == -1){
+            if (trie[index].edges[c_index(x)] == -1) {
                 return false;
             } else {
                 index = trie[index].edges[c_index(x)];
@@ -90,7 +90,7 @@ public:
         }
         return trie[index].end;
     }
-    
+
     // only finds end indices for matches (if multiple matches end at the same index, it will only return one of them)
     vector<int> matches(string s) {
         vector<int> result;
@@ -103,29 +103,4 @@ public:
         }
         return result;
     }
-
 };
-
-void tests() {
-    // asserts
-    AhoCorasick ac;
-    vector<string> test = {"he", "she", "his", "hers"};
-    ac.construct_automaton(test);
-    assert(ac.match("he") == true);
-    assert(ac.match("she") == true);
-
-    // tests
-    AhoCorasick ac2;
-    vector<string> test2 = {"he", "she", "his", "hers"};
-    ac2.construct_automaton(test2);
-    vector<int> ans = ac2.matches("ushershis");
-    for (auto x : ans) {
-        cout << x << " ";
-    }
-}
-
-
-int main() {
-    tests();
-    return 0;
-}

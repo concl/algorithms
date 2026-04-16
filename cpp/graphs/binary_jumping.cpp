@@ -54,8 +54,3 @@ vector<vector<int>> preprocessing(vector<vector<int>> &graph, int root) {
 
     return res;
 }
-
-int main() {
-
-    return 0;
-}

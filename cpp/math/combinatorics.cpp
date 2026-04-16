@@ -6,9 +6,9 @@
 
 #include <bits/stdc++.h>
 
-typedef long long ll;
-
 using namespace std;
+
+using ll = long long;
 
 const ll MOD = 1e9 + 7;
 const ll N = 1000000;

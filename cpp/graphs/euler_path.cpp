@@ -92,11 +92,3 @@ vector<int> euler_path_directed(unordered_map<int, unordered_set<int>> &graph) {
     reverse(path.begin(), path.end());
     return path;
 }
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-
-    return 0;
-}
-// python tester.py euler_tour input -v testpy.py

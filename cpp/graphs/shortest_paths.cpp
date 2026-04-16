@@ -16,7 +16,7 @@ const ll INF = LLONG_MAX;
  * Description: Uses Dijkstra's algorithm to find the distance of the shortest path between
  * a given node and all other nodes in a graph. For nodes that are unreachable, the distance
  * is set to be -1
- * 
+ *
  * graph[i] stores all neighbors to node i, graph[i][j] is the weight of the edge between
  * node i and j.
  *
@@ -61,7 +61,7 @@ vector<ll> shortest_distances(vector<map<int, ll>> &graph, int start) {
 ll distance(vector<map<int, ll>> &graph, int start, int target) {
 
     int n = graph.size();
-    
+
     unordered_set<int> seen;
     priority_queue<
         pair<ll, int>,
@@ -72,7 +72,7 @@ ll distance(vector<map<int, ll>> &graph, int start, int target) {
     pq.push({0, start});
 
     while (pq.size() > 0) {
-        
+
         auto [dist, node] = pq.top();
         pq.pop();
 
@@ -98,18 +98,18 @@ ll distance(vector<map<int, ll>> &graph, int start, int target) {
  * to any node j, using the Floyd-Warshall algorithm.
  */
 vector<vector<ll>> all_pairs_shortest_distances(vector<map<int, ll>> &graph) {
-    
+
     int n = graph.size();
-    
+
     vector<vector<ll>> res(n, vector<ll>(n, INF));
-    
+
     for (int i = 0; i < n; i++) {
         res[i][i] = 0;
-        for (const auto& [nbr, weight] : graph[i]) {
+        for (const auto &[nbr, weight] : graph[i]) {
             res[i][nbr] = weight;
         }
     }
-    
+
     for (int k = 0; k < n; k++) {
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
@@ -119,6 +119,6 @@ vector<vector<ll>> all_pairs_shortest_distances(vector<map<int, ll>> &graph) {
             }
         }
     }
-    
+
     return res;
 }

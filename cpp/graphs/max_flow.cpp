@@ -13,14 +13,3 @@ int solve(vector<vector<pair<int,int>>>& graph) {
     
 
 }
-
-
-int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    
-    
-    
-    return 0;
-}
-// python tester.py max_flow_ekff input -v testpy.py

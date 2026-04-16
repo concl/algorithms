@@ -26,8 +26,3 @@ public:
         return prefix_sum[end] - prefix_sum[start];
     }
 };
-
-int main() {
-
-    return 0;
-}

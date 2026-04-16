@@ -58,9 +58,3 @@ public:
         return trie[index].end;
     }
 };
-
-
-int main() {
-    
-    return 0;
-}

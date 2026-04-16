@@ -132,10 +132,3 @@ public:
         return is;
     }
 };
-
-
-int main() {    
-
-
-    return 0;
-}

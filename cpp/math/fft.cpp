@@ -2,6 +2,7 @@
  * Author: concl
  * Status: Untested
  * Tags: FFT, polynomial multiplication, convolution
+ * Notes: Needs to be redone from scratch
  */
 
 #include <bits/stdc++.h>

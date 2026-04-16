@@ -5,8 +5,8 @@
  * If the line segments are collinear, returns the endpoints of the intersection segment
  */
 
-#include "point.cpp"
-#include "orientation.cpp"
+#include "point.hpp"
+#include "orientation.hpp"
 
 using P = Point<double>;
 using LineSegment = pair<P, P>;

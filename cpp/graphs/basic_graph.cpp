@@ -54,21 +54,3 @@ bool dfs(vector<vector<int>> &graph, int source, int target) {
 
     return false;
 }
-
-// Constructs an undirected graph, given edges
-vector<vector<int>> construct_graph(int n, vector<vector<int>> &edges) {
-
-    vector<vector<int>> graph(n);
-
-    for (const auto &edge : edges) {
-        graph[edge[0]].push_back(edge[1]);
-        graph[edge[1]].push_back(edge[0]);
-    }
-
-    return graph;
-}
-
-int main() {
-
-    return 0;
-}

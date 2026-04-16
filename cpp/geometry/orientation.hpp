@@ -4,7 +4,7 @@
  * Description: Returns the orientation of 3 points (clockwise, counterclockwise, or collinear)
  */
 
-#include "point.cpp"
+#include "point.hpp"
  
 using P = Point<double>;
 

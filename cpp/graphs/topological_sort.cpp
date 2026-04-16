@@ -53,8 +53,3 @@ vector<int> topological_sort(vector<vector<int>> &graph) {
     reverse(output.begin(), output.end());
     return output;
 }
-
-int main() {
-
-    return 0;
-}

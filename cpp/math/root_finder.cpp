@@ -38,14 +38,3 @@ double newtons(function<double(double)> f, function<double(double)> f_prime, dou
     cerr << "Maximum iterations done without convergence" << endl;
     return x;
 }
-
-int main() {
-
-    auto f = [](double x) { return sin(x); };
-    auto f_prime = [](double x) { return cos(x); };
-
-    double root = newtons(f, f_prime, 1.571);
-
-    cout << setprecision(12) << newtons(f, f_prime, 1.571);
-    return 0;
-}
