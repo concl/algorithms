@@ -29,7 +29,7 @@ def verify_output(verifier_script, output):
 
 def compile_source(source_file, executable_file, is_windows):
     # Compile the source file using g++
-    compile_command = ['g++', source_file, '-o', executable_file]
+    compile_command = ['g++', "-D", "TTL", source_file, '-o', executable_file]
     platform = "Windows" if is_windows else "Unix-like system"
     print(f"Compiling {source_file} with g++ on {platform}...")
     result = subprocess.run(compile_command)

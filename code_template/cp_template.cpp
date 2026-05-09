@@ -143,6 +143,7 @@ vector<T>& operator+=(vector<T>& a, const vector<T>& b) {
 
 
 template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> const &p);
+template<typename... T> ostream& operator<< (ostream &cout, tuple<T...> const &t);
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v);
 template<typename K, typename V, typename Hash> ostream& operator<< (ostream &cout, unordered_map<K, V, Hash> const &m);
 template<typename K, typename V> ostream& operator<< (ostream &cout, map<K, V> const &m);
@@ -156,6 +157,15 @@ template<typename A, typename B> ostream& operator<< (ostream &cout, pair<A,B> c
     return cout << "(" << p.first << ", " << p.second << ")";
 }
 
+// print tuples
+template<typename... T> ostream& operator<< (ostream &cout, tuple<T...> const &t) {
+    cout << "(";
+    apply([&cout](const auto&... args) {
+        int n = 0;
+        ((cout << args << (++n != sizeof...(T) ? ", " : "")), ...);
+    }, t);
+    return cout << ")";
+}
 
 // print vectors
 template<typename A> ostream& operator<< (ostream &cout, vector<A> const&v) {
@@ -235,6 +245,17 @@ template<typename... Args>
 void print(Args&&... args) {
     ((cout << args << " "), ...) << endl;
 }
+
+template<typename... Args>
+void dbg_out(Args&&... args) {
+    ((cerr << args << " "), ...) << endl;
+}
+
+#ifdef TTL
+#define dbg(...) cerr << "(" << #__VA_ARGS__ << "): ", dbg_out(__VA_ARGS__)
+#else
+#define dbg(...)
+#endif
 
 #pragma endregion
 
