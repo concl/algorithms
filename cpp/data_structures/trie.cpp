@@ -3,18 +3,18 @@
  * Status: Untested
  */
 
- #include <bits/stdc++.h>
+#include <bits/stdc++.h>
 
 using namespace std;
 
-const int alphabet_size = 26;
+const int ALPHABET_SIZE = 26;
 
 // Trie vertex
 struct Vertex {
-    int edges[alphabet_size];
+    int edges[ALPHABET_SIZE];
     bool end = false;
     Vertex() {
-        fill(edges, edges + alphabet_size, -1);
+        fill(edges, edges + ALPHABET_SIZE, -1);
     }
 };
 
