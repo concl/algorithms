@@ -1,6 +1,7 @@
 import sys
 import subprocess
 import os
+import argparse
 
 def run_program(executable, input_file):
     try:
@@ -41,7 +42,6 @@ def compile_source(source_file, executable_file, is_windows):
         return True
 
 def main():
-    import argparse
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run and optionally compile a C++ program with input and verification.")

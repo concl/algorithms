@@ -2,9 +2,10 @@ import os
 import subprocess
 import tempfile
 import numpy as np
+from pathlib import Path
 
-PATH = os.path.abspath(os.path.dirname(__file__))
-HARNESS_SRC = os.path.join(PATH, "matrices_harness.cpp")
+PATH = Path(__file__).parent.resolve()
+HARNESS_SRC = PATH / "matrices_harness.cpp"
 
 
 def build_harness():

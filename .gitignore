@@ -73,7 +73,6 @@ dist/
 *.db
 *.sublime-project
 *.sublime-workspace
-workspace/
 input
 input.txt
 trash/
