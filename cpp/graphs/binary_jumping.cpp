@@ -1,6 +1,6 @@
 /**
  * Author: concl
- * Status: Untested
+ * Status: Tested on random trees against brute-force LCA.
  */
 
 #include <bits/stdc++.h>
@@ -52,6 +52,9 @@ int LCA(vector<vector<int>> &jumps, int root, int node1, int node2) {
         }
     }
     
+    // after equalizing depths, check if they're already the same node
+    if (node1 == node2) return node1;
+
     // find largest jump such that the node pointed to still differs between the 2
     curr_jump = 0;
     while (
@@ -74,7 +77,8 @@ int LCA(vector<vector<int>> &jumps, int root, int node1, int node2) {
         }
     }
     
-    return node1;
+    // node1 and node2 are now children of the LCA
+    return jumps[node1][1];
 }
 
 /**

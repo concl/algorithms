@@ -1,7 +1,7 @@
 [project]
 name = "algorithms"
 version = "0.1.0"
-description = "Add your description here"
+description = "Algorithms and data structures implementations with tests"
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
@@ -9,3 +9,13 @@ dependencies = [
     "numpy>=2.4.4",
     "pygments>=2.20.0",
 ]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = ["-v", "--tb=short", "--strict-markers"]

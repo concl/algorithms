@@ -1,15 +1,22 @@
+"""
+Run all tests using pytest.
 
+Usage:
+    python run_template_tests.py            # run all tests
+    python run_template_tests.py -k "segment"  # filter by keyword
+    python run_template_tests.py tests/math/   # run a specific directory
+"""
+
+import sys
 import subprocess
 import os
 
-PATH = os.path.dirname(__file__)
-TESTS = os.path.join(PATH, "tests/")
+PATH = os.path.dirname(os.path.abspath(__file__))
 
-for (dirpath, dirnames, filenames) in os.walk(TESTS):
-    for filename in filenames:
-        if filename.endswith(".py") and not filename.startswith("test_"):
-            continue
-        if filename.endswith(".py") and filename.startswith("test_"):
-            print(f"Running {filename}...")
-            subprocess.run(["python", os.path.join(dirpath, filename)], check=True)
+# Forward all arguments to pytest
+args = sys.argv[1:] if len(sys.argv) > 1 else []
+cmd = [sys.executable, "-m", "pytest", *args]
+print(f"Running: {' '.join(cmd)}")
+result = subprocess.run(cmd, cwd=PATH)
+sys.exit(result.returncode)
 
