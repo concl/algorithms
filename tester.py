@@ -2,6 +2,9 @@ import sys
 import subprocess
 import os
 import argparse
+from pathlib import Path
+
+WORKSPACE_PATH = Path(__file__).parent / "workspace"
 
 def run_program(executable, input_file):
     try:
@@ -115,7 +118,7 @@ def main():
                 print(verification_result)
 
         # Save output to a file
-        with open("output", "w") as file:
+        with open(WORKSPACE_PATH / "output.txt", "w") as file:
             file.write(output)
 
 if __name__ == "__main__":

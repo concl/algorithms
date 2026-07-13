@@ -43,7 +43,7 @@
         {
             "label": "Run c++ file with the tester.py script on testcases",
             "type": "shell",
-            "command": "python ${workspaceFolder}/tester.py ${file} ${workspaceFolder}/workspace/input"
+            "command": "python ${workspaceFolder}/tester.py ${file} ${workspaceFolder}/workspace/input.txt"
         }
     ]
 }
