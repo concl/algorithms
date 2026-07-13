@@ -116,10 +116,27 @@ def main():
             if verification_result is not None:
                 print("Verification result:")
                 print(verification_result)
-
+        
         # Save output to a file
         with open(WORKSPACE_PATH / "output.txt", "w") as file:
             file.write(output)
+            
+        # diff with sample output if it exists
+        sample_output_file = WORKSPACE_PATH / "sample_out.txt"
+        if is_windows:
+            result = subprocess.run(['fc', str(sample_output_file), str(WORKSPACE_PATH / "output.txt")], capture_output=True, text=True, shell=True)
+            if result.returncode == 0:
+                print("Output matches the sample output.")
+            else:
+                print("Output differs from the sample output:")
+                print(result.stdout)
+        else:
+            result = subprocess.run(['diff', str(sample_output_file), str(WORKSPACE_PATH / "output.txt")], capture_output=True, text=True, shell=True)
+            if result.returncode == 0:
+                print("Output matches the sample output.")
+            else:
+                print("Output differs from the sample output:")
+                print(result.stdout)
 
 if __name__ == "__main__":
     main()
