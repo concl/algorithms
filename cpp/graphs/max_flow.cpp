@@ -7,9 +7,24 @@
 
 using namespace std;
 
-// finds the max flow of a directed flow network with integer weights, given the adjacency matrix using the Edmond-Karp algorithm. Time Complexity: O(V * E^2)
-int solve(vector<vector<pair<int,int>>>& graph) {
+using ll = long long;
 
+class MaxFlow {
+public:
+    int n;
     
+    
+    MaxFlow (int n): n(n) {
+        
+    }
+    
+    void push_edge(int u, int v, ll c) {
+        
+    }
+    
+    ll solve() {
+        
+    }
+    
+};
 
-}
