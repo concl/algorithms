@@ -2,3 +2,6 @@
 
 using namespace std;
 
+using Complex = complex<double>;
+
+vector<Complex> 
