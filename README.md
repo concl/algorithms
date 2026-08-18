@@ -9,7 +9,7 @@ problems: Solutions to previous competitive programming problems.
 ## PDF code template
 
 To build the template, run:
-```
+```bash
 pdflatex -shell-escape template.tex
 ```
 The command might need to be run twice to produce the final template.
@@ -40,13 +40,13 @@ Test modules are grouped by category (`data_structures/`, `graphs/`, `math/`), m
 
 Requirements: `g++` on PATH and Python (>= 3.14). Install the test dependency:
 
-```
+```bash
 uv sync --extra test        # or: pip install -e ".[test]"
 ```
 
 Then run pytest — the root `pyproject.toml` already sets `testpaths`, discovery patterns, and default flags:
 
-```
+```bash
 pytest                      # full suite
 pytest tests/graphs         # one category
 pytest tests/data_structures/test_segment_tree.py -k random   # one file / filtered tests
@@ -64,7 +64,7 @@ pytest tests/data_structures/test_segment_tree.py -k random   # one file / filte
 Add `code_template/tasks.json` to .vscode to make the following keybinds work:
 
 `ctrl+alt+r` - Run the current C++ file with the tester.py script on testcases in the workspace/input folder.
-```
+```json
 {
     "key": "ctrl+alt+r",
     "command": "workbench.action.tasks.runTask",

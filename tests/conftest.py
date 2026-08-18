@@ -43,3 +43,11 @@ def binary_jumping_harness() -> Harness:
     h = Harness("binary_jumping_harness.cpp")
     h.compile()
     return h
+
+
+@pytest.fixture(scope="session")
+def fft_harness() -> Harness:
+    """FFT: forward DFT of a real vector, padded to the next power of two."""
+    h = Harness("fft_harness.cpp")
+    h.compile()
+    return h

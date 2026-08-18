@@ -1,7 +1,7 @@
 """Reset the contest workspace.
 
 Wipes everything in workspace/ (except .gitignore) and recreates the
-A-F.cpp problem files from the contest template, plus placeholder
+A-H.cpp problem files from the contest template, plus placeholder
 input/output files.  Only writes inside workspace/.
 
 By default the Codeforces test-case loop ("cf_test" snippet) is added to
