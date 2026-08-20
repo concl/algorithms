@@ -9,6 +9,7 @@ dependencies = [
     "latexminted>=0.7.1",
     "numpy>=2.4.4",
     "pygments>=2.20.0",
+    "pytest>=9.1.1",
 ]
 
 [project.optional-dependencies]

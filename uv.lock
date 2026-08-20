@@ -11,6 +11,7 @@ dependencies = [
     { name = "latexminted" },
     { name = "numpy" },
     { name = "pygments" },
+    { name = "pytest" },
 ]
 
 [package.optional-dependencies]
@@ -24,6 +25,7 @@ requires-dist = [
     { name = "latexminted", specifier = ">=0.7.1" },
     { name = "numpy", specifier = ">=2.4.4" },
     { name = "pygments", specifier = ">=2.20.0" },
+    { name = "pytest", specifier = ">=9.1.1" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=8" },
 ]
 provides-extras = ["test"]
