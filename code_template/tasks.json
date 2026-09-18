@@ -11,6 +11,14 @@
                 "-o",
                 "${fileDirname}/${fileBasenameNoExtension}.exe"
             ],
+            "linux": {
+                "args": [
+                    "-g",
+                    "${file}",
+                    "-o",
+                    "${fileDirname}/${fileBasenameNoExtension}"
+                ]
+            },
             "group": "build",
             "problemMatcher": [
                 "$gcc"
@@ -20,7 +28,13 @@
         {
             "label": "Run c++ file with the tester.py script on testcases",
             "type": "shell",
-            "command": "python ${workspaceFolder}/tester.py ${file} ${workspaceFolder}/workspace/input.txt"
+            "command": "python",
+            "args": [
+                "${workspaceFolder}/tester.py",
+                "${file}",
+                "${workspaceFolder}/workspace/input.txt"
+            ],
+            "problemMatcher": []
         }
     ]
 }
