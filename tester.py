@@ -6,14 +6,28 @@ from pathlib import Path
 
 WORKSPACE_PATH = Path(__file__).parent / "workspace"
 
-def run_program(executable, input_file):
+def run_program(executable, input_file, output_file=None):
     try:
         with open(input_file, 'r') as infile:
-            output = subprocess.check_output([executable], stdin=infile, text=True)
-        return output
-    except subprocess.CalledProcessError as e:
-        print(f"Error during program execution: {e}")
-        return None
+
+            # stdout goes into a pipe, so we can collect it as a string
+            process = subprocess.Popen([executable], stdin=infile, stdout=subprocess.PIPE, text=True)
+
+            if output_file:
+                # Tee: every line goes to the output file and into 'output'
+                with open(output_file, 'w') as outfile:
+                    output = ""
+                    for line in process.stdout:
+                        output += line
+                        outfile.write(line)
+            else:
+                output = process.stdout.read()
+
+            process.wait()
+            if process.returncode != 0:
+                print(f"Error during program execution: exit code {process.returncode}")
+                return None
+            return output
     except FileNotFoundError:
         print(f"Executable (or input file) '{executable}' not found.")
         return None
@@ -48,8 +62,9 @@ def main():
 
     # Set up argument parser
     parser = argparse.ArgumentParser(description="Run and optionally compile a C++ program with input and verification.")
-    parser.add_argument('executable_name', help="Name of the executable or C++ source file (with .cpp extension).")
+    parser.add_argument('executable_name', help="Name of the executable, C++ source file (with .cpp extension), or python script (with .py extension).")
     parser.add_argument('input_file', help="Path to the input file.")
+    parser.add_argument('-o', '--output', default=WORKSPACE_PATH / "output.txt", dest='output_file', help="Path to save the program output.")
     parser.add_argument('-v', '--verifier', dest='verifier_script', help="Path to the verifier script.")
     parser.add_argument('-s', '--skip-compile', action='store_true', help="Skip recompilation if executable exists.")
     
@@ -58,6 +73,7 @@ def main():
     executable_name = args.executable_name
     input_file = args.input_file
     verifier_script = args.verifier_script
+    output_file = args.output_file
     skip_compile = args.skip_compile
 
     # Determine the platform
@@ -86,7 +102,14 @@ def main():
             executable_path = executable_file
 
     # Handle compilation
-    if not skip_compile:
+    if skip_compile:
+        # Skip compilation, ensure executable exists
+        if not os.path.isfile(executable_file) or not os.access(executable_file, os.X_OK):
+            print(f"Executable '{executable_file}' not found or is not executable. Consider compiling it first.")
+            return
+        else:
+            print(f"Skipping compilation. Using existing executable '{executable_file}'.")
+    else:
         # Always compile the source file
         if not os.path.isfile(source_file):
             print(f"Source file '{source_file}' does not exist.")
@@ -95,16 +118,9 @@ def main():
         success = compile_source(source_file, executable_file, is_windows)
         if not success:
             return
-    else:
-        # Skip compilation, ensure executable exists
-        if not os.path.isfile(executable_file) or not os.access(executable_file, os.X_OK):
-            print(f"Executable '{executable_file}' not found or is not executable. Consider compiling it first.")
-            return
-        else:
-            print(f"Skipping compilation. Using existing executable '{executable_file}'.")
 
     # Run the program
-    output = run_program(executable_path, input_file)
+    output = run_program(executable_path, input_file, output_file)
 
     if output is not None:
         print("Program output:")
@@ -116,10 +132,6 @@ def main():
             if verification_result is not None:
                 print("Verification result:")
                 print(verification_result)
-        
-        # Save output to a file
-        with open(WORKSPACE_PATH / "output.txt", "w") as file:
-            file.write(output)
             
         # diff with sample output if it exists and is not empty
         sample_output_file = WORKSPACE_PATH / "sample_out.txt"
