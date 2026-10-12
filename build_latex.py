@@ -1,13 +1,15 @@
 
 import time
 import os
+from pathlib import Path
+import subprocess
 
-PATH = os.path.dirname(os.path.abspath(__file__))
-LATEX_FILE = os.path.join(PATH, "template.tex")
+PATH = Path(__file__).parent
+LATEX_FILE = PATH / "template.tex"
 
 
 def compile_latex():
-    os.system(f"pdflatex -interaction=nonstopmode {LATEX_FILE}")
+    subprocess.run(["pdflatex", "-interaction=nonstopmode", str(LATEX_FILE)])
 
 def main():
     # compile the LaTeX file periodically
