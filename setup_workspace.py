@@ -1,26 +1,27 @@
 """Reset the contest workspace.
 
-Wipes everything in workspace/ (except .gitignore) and recreates the
-A-H.cpp problem files from the contest template, plus placeholder
+Wipes everything in workspace/ (except .gitignore) and recreates the A-H
+problem files from the chosen language template, plus placeholder
 input/output files.  Only writes inside workspace/.
 
-By default the Codeforces test-case loop ("cf_test" snippet) is added to
-main() of each problem file; pass --no-cf-test to write the template
-verbatim.
+By default the C++ template gets the Codeforces test-case loop ("cf_test"
+snippet) inserted into main(); pass --no-cf-test to write it verbatim.
 """
 
 import argparse
 import shutil
+from dataclasses import dataclass
 from pathlib import Path
 
-WORKSPACE_PATH = Path(__file__).parent / "workspace"
-CP_TEMPLATE_PATH = Path(__file__).parent / "code_template" / "cp_template.cpp"
+ROOT = Path(__file__).parent
+WORKSPACE_PATH = ROOT / "workspace"
+TEMPLATE_DIR = ROOT / "code_template"
 
 # Files always kept during cleanup.
 KEEP = {".gitignore"}
 
-# Problem files created from the contest template.
-PROBLEM_FILES = ["A.cpp", "B.cpp", "C.cpp", "D.cpp", "E.cpp", "F.cpp", "G.cpp", "H.cpp"]
+# Problem files created from the template.
+PROBLEM_NAMES = "ABCDEFGH"
 
 # Placeholder files recreated after cleanup.
 PLACEHOLDER_FILES = [
@@ -40,19 +41,32 @@ CF_TEST_SNIPPET = [
 ]
 
 
-def build_source(template: str, cf_test: bool) -> str:
-    """Return the problem-file source: the template, optionally with the
-    cf-test loop inserted into main()."""
-    if not cf_test:
-        return template
-    lines = template.splitlines()
+@dataclass(frozen=True)
+class Language:
+    """A problem-file language: its template, extension, and features."""
+
+    template: Path
+    extension: str
+    cf_test: bool = False  # supports inserting the cf_test loop
+
+
+# To add a language, add a Language entry here and a template file.
+LANGUAGES = {
+    "cpp": Language(TEMPLATE_DIR / "cp_template.cpp", ".cpp", cf_test=True),
+    "python": Language(TEMPLATE_DIR / "py_cp_template.py", ".py"),
+}
+
+
+def insert_cf_test(source: str) -> str:
+    """Return the source with the cf-test loop inserted into main()."""
+    lines = source.splitlines()
     if "    int t;" in lines:
-        return template  # already inserted
+        return source  # already inserted
     try:
         idx = lines.index("    cin.tie(NULL);")
     except ValueError:
         print("warning: could not find 'cin.tie(NULL);' in the template; skipping cf-test snippet")
-        return template
+        return source
     # Insert mid-body: right after the fast-io setup, replacing the blank
     # lines that follow it.
     j = idx + 1
@@ -62,24 +76,39 @@ def build_source(template: str, cf_test: bool) -> str:
     return "\n".join(lines) + "\n"
 
 
+def build_source(language: Language, cf_test: bool) -> str:
+    """Return the problem-file source for a language."""
+    source = language.template.read_text(encoding="utf-8")
+    if language.cf_test and cf_test:
+        source = insert_cf_test(source)
+    return source
+
+
 def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--cf-test",
-        action=argparse.BooleanOptionalAction,
-        default=True,
-        help="add the Codeforces test-case loop to main() of each problem file (default: on)",
+        "-l",
+        "--lang",
+        choices=LANGUAGES,
+        default="cpp",
+        help="language for the problem files (default: cpp)",
+    )
+    parser.add_argument(
+        "--no-cf-test",
+        action="store_true",
+        help="do not insert the Codeforces test-case loop into the C++ template (default: off)",
     )
     return parser.parse_args(argv)
 
 
 def main() -> None:
     args = parse_args()
+    language = LANGUAGES[args.lang]
 
     if not WORKSPACE_PATH.is_dir():
         raise SystemExit(f"workspace directory not found: {WORKSPACE_PATH}")
-    if not CP_TEMPLATE_PATH.is_file():
-        raise SystemExit(f"template not found: {CP_TEMPLATE_PATH}")
+    if not language.template.is_file():
+        raise SystemExit(f"template not found: {language.template}")
 
     # Remove everything except the keep-list.  shutil.rmtree / Path.unlink
     # raise on failure, so errors are reported instead of silently swallowed.
@@ -92,21 +121,19 @@ def main() -> None:
             entry.unlink()
         print(f"removed {entry.name}")
 
-    source = build_source(CP_TEMPLATE_PATH.read_text(), args.cf_test)
+    source = build_source(language, cf_test=not args.no_cf_test)
 
     # Recreate the problem files from the template.
-    for name in PROBLEM_FILES:
-        path = WORKSPACE_PATH / name
-        if not path.exists():
-            path.write_text(source)
-            print(f"created {name}")
+    for name in PROBLEM_NAMES:
+        path = WORKSPACE_PATH / f"{name}{language.extension}"
+        path.write_text(source, encoding="utf-8")
+        print(f"created {path.name}")
 
     # Recreate the placeholder files (empty).
     for name in PLACEHOLDER_FILES:
         path = WORKSPACE_PATH / name
-        if not path.exists():
-            path.touch()
-            print(f"created {name}")
+        path.touch()
+        print(f"created {path.name}")
 
 
 if __name__ == "__main__":

@@ -40,6 +40,17 @@ with open(os.path.join(path, snippets),"w") as json_file:
         # add snippets
         snippets_base["Clean Template"]["body"] = lines
 
+    snippets_base["Python Competitive Programming Template"] = {"prefix": "py_cp_setup"}
+    with open(os.path.join(path, "py_cp_template.py")) as template:
+        lines = [x.rstrip("\n") for x in template.readlines()]
+        
+        # add $0
+        starting_point = lines.index(r"def solve():") + 1
+        lines[starting_point] += "$0"
+
+        # add snippets
+        snippets_base["Python Competitive Programming Template"]["body"] = lines
+
     json_file.write(json.dumps(snippets_base, indent=4))
     
 
