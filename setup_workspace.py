@@ -20,9 +20,6 @@ TEMPLATE_DIR = ROOT / "code_template"
 # Files always kept during cleanup.
 KEEP = {".gitignore"}
 
-# Problem files created from the template.
-PROBLEM_NAMES = "ABCDEFGH"
-
 # Placeholder files recreated after cleanup.
 PLACEHOLDER_FILES = [
     "input.txt",
@@ -98,8 +95,20 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
         action="store_true",
         help="do not insert the Codeforces test-case loop into the C++ template (default: off)",
     )
+    parser.add_argument(
+        "-f",
+        "--files",
+        help="range of problem files to create (default: A-H, e.g. A-D or C-F; can be a single letter). can be general ascii range, e.g. a-d or 1-5",
+        default="A-H",
+    )
     return parser.parse_args(argv)
 
+def parse_files_arg(files_arg: str) -> list[str]:
+    if "-" in files_arg:
+        start, end = files_arg.split("-")
+        return [chr(i) for i in range(ord(start), ord(end) + 1)]
+    else:
+        return [files_arg]
 
 def main() -> None:
     args = parse_args()
@@ -124,7 +133,7 @@ def main() -> None:
     source = build_source(language, cf_test=not args.no_cf_test)
 
     # Recreate the problem files from the template.
-    for name in PROBLEM_NAMES:
+    for name in parse_files_arg(args.files):
         path = WORKSPACE_PATH / f"{name}{language.extension}"
         path.write_text(source, encoding="utf-8")
         print(f"created {path.name}")
