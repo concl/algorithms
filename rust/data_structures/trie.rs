@@ -1,7 +1,5 @@
 
 
-use std::collections::HashMap;
-
 const ALPHABET_SIZE: usize = 26;
 
 fn char_to_index(c: char) -> usize {

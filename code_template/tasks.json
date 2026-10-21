@@ -35,6 +35,30 @@
                 "${workspaceFolder}/workspace/input.txt"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "build current file with rustc",
+            "type": "shell",
+            "command": "rustc",
+            "args": [
+                "-O",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}.exe"
+            ],
+            "linux": {
+                "args": [
+                    "-O",
+                    "${file}",
+                    "-o",
+                    "${fileDirname}/${fileBasenameNoExtension}"
+                ]
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$rustc"
+            ],
+            "detail": "Build the currently open Rust file"
         }
     ]
 }

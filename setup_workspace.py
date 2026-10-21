@@ -51,6 +51,7 @@ class Language:
 LANGUAGES = {
     "cpp": Language(TEMPLATE_DIR / "cp_template.cpp", ".cpp", cf_test=True),
     "python": Language(TEMPLATE_DIR / "py_cp_template.py", ".py"),
+    "rust": Language(TEMPLATE_DIR / "rust_cp_template.rs", ".rs"),
 }
 
 
