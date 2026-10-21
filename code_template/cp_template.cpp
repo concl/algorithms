@@ -245,13 +245,8 @@ void print(Args&&... args) {
     ((cout << args << " "), ...) << endl;
 }
 
-template<typename... Args>
-void dbg_out(Args&&... args) {
-    ((cerr << args << " "), ...) << endl;
-}
-
 #ifdef TTL
-#define dbg(...) cerr << "(" << #__VA_ARGS__ << "): ", dbg_out(__VA_ARGS__)
+#define dbg(...) cout << "(" << #__VA_ARGS__ << "): ", print(__VA_ARGS__)
 #else
 #define dbg(...)
 #endif
